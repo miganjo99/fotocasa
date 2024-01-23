@@ -238,33 +238,33 @@
                 <?php
                     $opcion=explode(":", $vivienda['opcion']);
                 ?>
-                <td><select multiple size="2" id="opcion[]" name="opcion[]" placeholder="opcion">
+                <td>
                     <?php
                         $busca_array=in_array("compra", $opcion);
                         if($busca_array){
                     ?>
-                        <option value="compra" selected>compra</option>
+                        <input type="checkbox" id= "opcion[]" name="opcion[]" value="compra" checked/>compra                      
                     <?php
                         }else{
                     ?>
-                        <option value="compra">compra</option>
+                        <input type="checkbox" id= "opcion[]" name="opcion[]" value="compra"/>compra                     
                     <?php
                         }
                     ?>
                     <?php
                         $busca_array=in_array("alquiler", $opcion);
                         if($busca_array){
-                    ?>
-                        <option value="alquiler" selected>alquiler</option>
+                        ?>
+                        <input type="checkbox" id= "opcion[]" name="opcion[]" value="alquiler" checked/>alquiler                      
                     <?php
                         }else{
                     ?>
-                        <option value="alquiler">alquiler</option>
+                        <input type="checkbox" id= "opcion[]" name="opcion[]" value="alquiler"/>alquiler                     
                     <?php
                         }
                     ?>
                    
-                    </select></td>
+                    </td>
                 <td><font color="red">
                     <span id="error_opcion" class="error">
                         

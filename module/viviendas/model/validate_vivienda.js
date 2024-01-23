@@ -29,15 +29,30 @@ function validate_num(texto){
     return false;
 }
 
-function validate_opcion(array){
-    var check=false;
-    for ( var i = 0, l = array.options.length, o; i < l; i++ ){
-        o = array.options[i];
-        if ( o.selected ){
-            check= true;
+// function validate_opcion(array){
+//     var check=false;
+//     for ( var i = 0, l = array.options.length, o; i < l; i++ ){
+//         o = array.options[i];
+//         if ( o.selected ){
+//             check= true;
+//         }
+//     }
+//     return check;
+// }
+function validate_opcion(array) {
+    var i;
+    var ok = 0;
+    for(i = 0; i < array.length; i++){
+        if(array[i].checked){
+            ok = 1;
         }
     }
-    return check;
+    if(ok == 1){
+        return true;
+    }
+    if(ok == 0){
+        return false;
+    }
 }
 
 function validate_radios(activo){
@@ -82,7 +97,7 @@ function validate_js(op){
     }
 
     //alert("op.1");
-    var v_opcion=document.getElementById('opcion[]');
+    var v_opcion=document.getElementsByName('opcion[]');
     //console.log(v_opcion);
     //alert("op.2");
 
@@ -123,10 +138,10 @@ function validate_js(op){
 
 
 
-    //alert("op.3");
+    // alert("op.3");
     var r_opcion= validate_opcion(v_opcion);
-    //console.log(r_opcion);
-    //alert("op.4");
+    // console.log(r_opcion);
+    // alert("op.4");
 
 
 

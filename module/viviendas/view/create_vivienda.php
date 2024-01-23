@@ -161,14 +161,18 @@
             </tr>
             <tr>
                 <td>Opcion: </td>
-                <td><select multiple size="2" id="opcion[]" name="opcion[]" placeholder="opcion">
-                    
-                    <option value="compra">compra</option>
-                    <option value="alquiler">alquiler</option>
-                    </select></td>
-                <td><font color="red">
-                    <p id="error_opcion" class="error">                      
-                    </p>
+                <td>
+                    <!-- <select multiple size="2" id="opcion[]" name="opcion[]" placeholder="opcion">                  -->
+                        <!-- <option value="compra">compra</option>
+                        <option value="alquiler">alquiler</option> -->
+                    <input type="checkbox" id= "opcion[]" name="opcion[]" placeholder= "opcion" value="comprar"/>comprar
+                    <input type="checkbox" id= "opcion[]" name="opcion[]" placeholder= "opcion" value="vender"/>vender
+                    <!-- </select> -->
+                </td>
+                <td>
+                    <font color="red">
+                        <p id="error_opcion" class="error">                      
+                        </p>
                     </font>
                 </td>
             </tr>                      
