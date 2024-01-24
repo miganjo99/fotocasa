@@ -73,6 +73,7 @@
                     <td width=125><b>referencia_catastral</b></td> -->
                     <td width=125><b>estado</b></td>
                     <td width=125><b>opcion</b></td>
+                    <td width=125><b>categoria</b></td>
                     <td width=350><b>accion</b></td>
                 </tr>
                 <?php
@@ -94,6 +95,7 @@
                     	   	// echo '<td width=125>'. $row['referencia_catastral'] . '</td>';
                     	   	echo '<td width=125>'. $row['Activo'] . '</td>';
                     	   	echo '<td width=125>'. $row['opcion'] . '</td>';
+                    	   	echo '<td width=125>'. $row['categoria'] . '</td>';
 
                     	   	echo '<td width=350>';
                             

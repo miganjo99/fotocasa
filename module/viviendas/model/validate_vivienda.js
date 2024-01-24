@@ -55,6 +55,22 @@ function validate_opcion(array) {
     }
 }
 
+function validate_categoria(array) {
+    var i;
+    var ok = 0;
+    for(i = 0; i < array.length; i++){
+        if(array[i].checked){
+            ok = 1;
+        }
+    }
+    if(ok == 1){
+        return true;
+    }
+    if(ok == 0){
+        return false;
+    }
+}
+
 function validate_radios(activo){
     if(activo == "On"){
         return true;
@@ -85,7 +101,7 @@ function validate_js(op){
     let v_ubicacion=document.getElementById('ubicacion').value;
     let v_num_habs=document.getElementById('num_habs').value;
     var radios = document.getElementsByName('Activo');
-
+    
     var v_Activo = null;
 
     for (var i = 0; i < radios.length; i++) {
@@ -98,7 +114,8 @@ function validate_js(op){
 
     //alert("op.1");
     var v_opcion=document.getElementsByName('opcion[]');
-    //console.log(v_opcion);
+    var v_categoria=document.getElementsByName('categoria[]');
+    //console.log(v_categoria);
     //alert("op.2");
 
 
@@ -140,6 +157,7 @@ function validate_js(op){
 
     // alert("op.3");
     var r_opcion= validate_opcion(v_opcion);
+    var r_categoria= validate_categoria(v_categoria);
     // console.log(r_opcion);
     // alert("op.4");
 
@@ -222,7 +240,12 @@ function validate_js(op){
         //alert("No pinta el error");
         document.getElementById('error_opcion').innerHTML = "";
     }
-    //alert("Saliendo a opcion validador");
+    if(!r_categoria){
+        document.getElementById('error_categoria').innerHTML = " * No has seleccionado ninguna categoria";
+        check=false;
+    }else{
+        document.getElementById('error_categoria').innerHTML = "";
+    }
 
 
     if (check){

@@ -271,6 +271,68 @@
                     </span>
                 </font></font></td>
             </tr>
+            <tr>
+                <td>Categoria: </td>
+                <?php
+                    $categoria=explode(":", $vivienda['categoria']);
+                ?>
+                <td>
+                    <?php
+                        $busca_array=in_array("lujo", $categoria);
+                        if($busca_array){
+                    ?>
+                        <input type="checkbox" id= "categoria[]" name="categoria[]" value="lujo" checked/>lujo                      
+                    <?php
+                        }else{
+                    ?>
+                        <input type="checkbox" id= "categoria[]" name="categoria[]" value="lujo"/>lujo                     
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        $busca_array=in_array("terraza", $categoria);
+                        if($busca_array){
+                        ?>
+                        <input type="checkbox" id= "categoria[]" name="categoria[]" value="terraza" checked/>terraza                      
+                    <?php
+                        }else{
+                    ?>
+                        <input type="checkbox" id= "categoria[]" name="categoria[]" value="terraza"/>terraza                     
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        $busca_array=in_array("balcon", $categoria);
+                        if($busca_array){
+                        ?>
+                        <input type="checkbox" id= "categoria[]" name="categoria[]" value="balcon" checked/>balcon                      
+                    <?php
+                        }else{
+                    ?>
+                        <input type="checkbox" id= "categoria[]" name="categoria[]" value="balcon"/>balcon                     
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        $busca_array=in_array("cochera", $categoria);
+                        if($busca_array){
+                        ?>
+                        <input type="checkbox" id= "categoria[]" name="categoria[]" value="cochera" checked/>cochera                      
+                    <?php
+                        }else{
+                    ?>
+                        <input type="checkbox" id= "categoria[]" name="categoria[]" value="cochera"/>cochera                     
+                    <?php
+                        }
+                    ?>
+                   
+                    </td>
+                <td><font color="red">
+                    <span id="error_categoria" class="error">
+                        
+                    </span>
+                </font></font></td>
+            </tr>
 
 
             <tr>

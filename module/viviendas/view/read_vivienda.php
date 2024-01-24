@@ -92,6 +92,14 @@
                 ?>
             </td>
         </tr>
+        <tr>
+            <td>Categoria: </td>
+            <td>
+                <?php
+                    echo $vivienda['categoria'];
+                ?>
+            </td>
+        </tr>
         
     </table>
     </p>

@@ -176,6 +176,23 @@
                     </font>
                 </td>
             </tr>                      
+            <tr>
+                <td>Categoria: </td>
+                <td>
+                    
+                    <input type="checkbox" id= "categoria[]" name="categoria[]" placeholder= "categoria" value="lujo"/>lujo
+                    <input type="checkbox" id= "categoria[]" name="categoria[]" placeholder= "categoria" value="terraza"/>terraza
+                    <input type="checkbox" id= "categoria[]" name="categoria[]" placeholder= "categoria" value="balcon"/>balcon
+                    <input type="checkbox" id= "categoria[]" name="categoria[]" placeholder= "categoria" value="cochera"/>cochera
+                    
+                </td>
+                <td>
+                    <font color="red">
+                        <p id="error_categoria" class="error">                      
+                        </p>
+                    </font>
+                </td>
+            </tr>                      
             
             <tr>
                 <td><input name="Submit" type="button" onclick="validate_js('create')" value="Enviar"/></td>
