@@ -4,9 +4,9 @@
 			$host = 'localhost';  
     		$user = "root";                     
     		$pass = "";                             
-    		$db = "fotocasa";                      
+    		$db = "fotocasav2";                      
     		$port = 3306;                           
-    		$tabla="vivenda";
+    		// $tabla="vivenda";
     		
     		$conexion = mysqli_connect($host, $user, $pass, $db, $port)or die(mysql_error());
 			return $conexion;

@@ -15,6 +15,7 @@
 	<!-- CUSTOM STYLE CSS -->
 	<link href="view/css/style.css" rel="stylesheet" />
 
+	<link rel="stylesheet" href="view/plugins/Glider/glider.css">
 	<!-- GOOGLE FONT -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
@@ -35,6 +36,7 @@
 			});
 		});
 	</script>
+
 	<link href="view/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="view/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="view/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
@@ -45,6 +47,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 	<script src="module/viviendas/model/validate_vivienda.js"></script>
+	
+	<script src="module/homepage/model/ctrl_home.js"></script>
 
 	<script src="view/js/promises.js"></script>
 
@@ -54,7 +58,7 @@
 	<script src="view/plugins/bootstrap.js"></script>
 	<!-- CUSTOM SCRIPTS  -->
 	<script src="view/js/custom.js"></script>
-
+	<script src="view/plugins/Glider/glider.js"></script>	
 
 </head>
 

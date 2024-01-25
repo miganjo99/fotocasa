@@ -2,7 +2,7 @@
 	if(isset($_GET['page'])){
 		switch($_GET['page']){
 			case "homepage";
-				include("module/homepage/".$_GET['page'].".php");
+				include("module/homepage/view/".$_GET['page'].".html");
 				break;
 			case "controller_vivienda";
 				include("module/viviendas/controller/".$_GET['page'].".php");

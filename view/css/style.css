@@ -4,7 +4,10 @@
     font-size: 10pt;
     font-style:italic;
 }
-
+.carousel__img{
+  width: 256px;
+  height: auto;
+}
 
 #contenido_delete {
   /* Estilos adicionales para tu div */
