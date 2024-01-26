@@ -1,8 +1,8 @@
 <?php
-    if ((isset($_GET['page'])) && ($_GET['page']==="controller_vivienda" ) || ($_GET['page']==="homepage") ){
-		include("view/inc/top_page_vivienda.php");
-	}else{
-		include("view/inc/top_page_vivienda.php");
+    if ((isset($_GET['page'])) && ($_GET['page']==="ctrl_home" ) || ($_GET['page']==="homepage") ){
+		include("view/inc/top_page_home.php");
+	}else {
+		include("view/inc/top_page_home.php");
 	}
 	session_start();
 ?>

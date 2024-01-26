@@ -35,37 +35,69 @@
             }
         break;
 
-        // case 'homePageCategoria';
-        //     try{
-        //         $daohome = new DAOHome();
-        //         $SelectCategory = $daohome->select_categorias();
-        //     } catch(Exception $e){
-        //         echo json_encode("error");
-        //     }
+        case 'homePageCategoria';
+            try{
+                $daohome = new DAOHome();
+                $SelectCategory = $daohome->select_categorias();
+            } catch(Exception $e){
+                echo json_encode("error");
+            }
             
-        //     if(!empty($SelectCategory)){
-        //         echo json_encode($SelectCategory); 
-        //     }
-        //     else{
-        //         echo json_encode("error");
-        //     }
-        // break;
+            if(!empty($SelectCategory)){
+                echo json_encode($SelectCategory); 
+            }
+            else{
+                echo json_encode("error");
+            }
+        break;
 
-        // case 'homePageType';
-        //     try{
-        //         $daohome = new DAOHome();
-        //         $SelectType = $daohome->select_type_motor();
-        //     } catch(Exception $e){
-        //         echo json_encode("error");
-        //     }
+        case 'homePageOperacion';
+            try{
+                $daohome = new DAOHome();
+                $SelectOperation = $daohome->select_operacion();
+            } catch(Exception $e){
+                echo json_encode("error");
+            }
             
-        //     if(!empty($SelectType)){
-        //         echo json_encode($SelectType); 
-        //     }
-        //     else{
-        //         echo json_encode("error");
-        //     }
-        // break;
+            if(!empty($SelectOperation)){
+                echo json_encode($SelectOperation); 
+            }
+            else{
+                echo json_encode("error");
+            }
+        break;
+
+        case 'homePageCiudad';
+            try{
+                $daohome = new DAOHome();
+                $SelectCity = $daohome->select_ciudad();
+            } catch(Exception $e){
+                echo json_encode("error");
+            }
+            
+            if(!empty($SelectCity)){
+                echo json_encode($SelectCity); 
+            }
+            else{
+                echo json_encode("error");
+            }
+        break;
+
+        case 'homePageRecomendaciones';
+            try{
+                $daohome = new DAOHome();
+                $SelectVivienda = $daohome->select_vivienda();
+            } catch(Exception $e){
+                echo json_encode("error");
+            }
+            
+            if(!empty($SelectVivienda)){
+                echo json_encode($SelectVivienda); 
+            }
+            else{
+                echo json_encode("error");
+            }
+        break;
 
         // default;
         //     include("module/exceptions/views/pages/error404.php");

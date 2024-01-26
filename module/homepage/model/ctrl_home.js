@@ -26,51 +26,100 @@ function carousel_tipo() {
         // });
 }
 
-// function loadCategories() {
-//     ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageCategory','GET', 'JSON')
+
+function loadCategorias() {
+    ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageCategoria','GET', 'JSON')
+    .then(function(data) {
+        for (row in data) {
+            $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].name_categoria }).appendTo('#containerCategories')
+                .html(
+                    "<li class='portfolio-item'>" +
+                    "<div class='item-main'>" +
+                    "<div class='portfolio-image'>" +
+                    "<img src = " + data[row].img_categoria + " alt='foto' </img> " +
+                    "</div>" +
+                    "<h5>" + data[row].name_categoria + "</h5>" +
+                    "</div>" +
+                    "</li>"
+                )
+        }
+    })
+   //.catch(function() {
+   //     window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
+   // });
+}   
+function loadOperacion() {
+    ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageOperacion','GET', 'JSON')
+    .then(function(data) {
+        for (row in data) {
+            $('<div></div>').attr('class', "div_operacion").attr({ 'id': data[row].name_operacion }).appendTo('#containerOperacion')
+                .html(
+                    "<li class='portfolio-item2'>" +
+                    "<div class='item-main2'>" +
+                    "<div class='portfolio-image2'>" +
+                    "<img src = " + data[row].img_operacion + " alt='foto'" +
+                    "</div>" +
+                    "<h5>" + data[row].name_operacion + "</h5>" +
+                    "</div>" +
+                    "</li>"
+                )
+
+        }
+    })
+    // .catch(function() {
+    //     window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Types_car HOME";
+    // });
+}
+function loadCiudad() {
+    ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageCiudad','GET', 'JSON')
+    .then(function(data) {
+        for (row in data) {
+            $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].name_ciudad }).appendTo('#containerCiudad')
+                .html(
+                    "<li class='portfolio-item'>" +
+                    "<div class='item-main'>" +
+                    "<div class='portfolio-image'>" +
+                    "<img src = " + data[row].img_ciudad + " alt='foto' </img> " +
+                    "</div>" +
+                    "<h5>" + data[row].name_ciudad + "</h5>" +
+                    "</div>" +
+                    "</li>"
+                )
+        }
+    })
+   //.catch(function() {
+   //     window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
+   // });
+}
+// function loadRecomendaciones() {
+//     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageRecomendaciones','GET', 'JSON')
 //     .then(function(data) {
 //         for (row in data) {
-//             $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].name_cat }).appendTo('#containerCategories')
+//             $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].id_vivienda }).appendTo('#containerRecomendaciones')
 //                 .html(
 //                     "<li class='portfolio-item'>" +
 //                     "<div class='item-main'>" +
 //                     "<div class='portfolio-image'>" +
-//                     "<img src = " + data[row].img_cat + " alt='foto' </img> " +
+//                     "<img src = " + data[row].img_vivienda + " alt='foto' </img> " +
 //                     "</div>" +
-//                     "<h5>" + data[row].name_cat + "</h5>" +
+//                     "<h5>" + data[row].id_tipo+  data[row].id_categoria+ "</h5>" +
 //                     "</div>" +
 //                     "</li>"
 //                 )
 //         }
-//     }).catch(function() {
-//         window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
-//     });
+//     })
+//    //.catch(function() {
+//    //     window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
+//    // });
 // }
 
-// function loadCatTypes() {
-//     ajaxPromise('module/home/ctrl/ctrl_home.php?op=homePageType','GET', 'JSON')
-//     .then(function(data) {
-//         for (row in data) {
-//             $('<div></div>').attr('class', "div_motor").attr({ 'id': data[row].name_tmotor }).appendTo('#containerTypecar')
-//                 .html(
-//                     "<li class='portfolio-item2'>" +
-//                     "<div class='item-main2'>" +
-//                     "<div class='portfolio-image2'>" +
-//                     "<img src = " + data[row].img_tmotor + " alt='foto'" +
-//                     "</div>" +
-//                     "<h5>" + data[row].name_tmotor + "</h5>" +
-//                     "</div>" +
-//                     "</li>"
-//                 )
 
-//         }
-//     }).catch(function() {
-//         window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Types_car HOME";
-//     });
-// }
+
 
 $(document).ready(function() {
     carousel_tipo();
-    // loadCategories();
-    // loadCatTypes();
+    loadCategorias();
+    loadOperacion();
+    loadCiudad();
+    loadRecomendaciones();
 });

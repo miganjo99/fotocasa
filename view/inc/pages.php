@@ -7,6 +7,9 @@
 			case "controller_vivienda";
 				include("module/viviendas/controller/".$_GET['page'].".php");
 				break;
+			case "ctrl_home";
+				include("module/homepage/ctrl_home/".$_GET['page'].".php");
+				break;
 			case "services";
 				include("module/services/".$_GET['page'].".php");
 				break;
@@ -27,6 +30,6 @@
 				break;
 		}
 	} else{
-		include("module/inicio/view/inicio.php");
+		include("module/homepage/view/homepage.html");
 	}	
 ?>
