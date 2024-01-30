@@ -9,6 +9,8 @@ function carousel_tipo() {
                 $('<div></div>').attr('class', "carousel__elements").attr('id', data[row].name_tipo).appendTo(".carousel__list")
                 .html(
                     "<img class='carousel__img' id='' src='" + data[row].img_tipo + "' alt='' >"
+                    +
+                    "<h5 class='tipo_name'>" + data[row].name_tipo + "</h5>" 
                 )
             }
             new Glider(document.querySelector('.carousel__list'), {
@@ -52,11 +54,11 @@ function loadOperacion() {
     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageOperacion','GET', 'JSON')
     .then(function(data) {
         for (row in data) {
-            $('<div></div>').attr('class', "div_operacion").attr({ 'id': data[row].name_operacion }).appendTo('#containerOperacion')
+            $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].name_operacion }).appendTo('#containerOperacion')
                 .html(
-                    "<li class='portfolio-item2'>" +
-                    "<div class='item-main2'>" +
-                    "<div class='portfolio-image2'>" +
+                    "<li class='portfolio-item'>" +
+                    "<div class='item-main'>" +
+                    "<div class='portfolio-image'>" +
                     "<img src = " + data[row].img_operacion + " alt='foto'" +
                     "</div>" +
                     "<h5>" + data[row].name_operacion + "</h5>" +
@@ -121,5 +123,5 @@ $(document).ready(function() {
     loadCategorias();
     loadOperacion();
     loadCiudad();
-    loadRecomendaciones();
+    //loadRecomendaciones();
 });

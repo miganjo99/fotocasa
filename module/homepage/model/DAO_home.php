@@ -52,7 +52,7 @@
 		}
 
 		function select_ciudad() {
-			$sql= "SELECT *FROM ciudad ORDER BY id_ciudad DESC";
+			$sql= "SELECT * FROM ciudad ORDER BY id_ciudad DESC";
 
 			$conexion = connect::con();
 			$res = mysqli_query($conexion, $sql);
@@ -68,7 +68,7 @@
 		}
 
 		function select_vivienda() {
-			$sql= "SELECT *FROM vivienda ORDER BY id_vivienda DESC";
+			$sql= "SELECT * FROM vivienda ORDER BY id_vivienda DESC";
 
 			$conexion = connect::con();
 			$res = mysqli_query($conexion, $sql);
