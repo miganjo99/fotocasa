@@ -1,8 +1,16 @@
-
+.portfolio-item .item-main {
+  margin: 0 10px 10px 0;
+  text-align: center;
+  background: #fff;
+  padding: 10px;
+  border:0px solid #E8EAEE;
+  
+}
 /* Fuente de carrusel */
 .tipo_name{
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 15px;
+  
 }
 
 
@@ -47,11 +55,21 @@
 
 /* Efecto de hover para mostrar el título */
 .portfolio-item:hover .item-main h5 {
-  opacity:0.7;
+  opacity:1;
+  
 }
 
+.portfolio-item:hover{
+  
+  transform: scale(1.1);
+}
 
-
+/* Estilo para la imagen dentro del card */
+.portfolio-image:hover img {
+  -webkit-box-shadow: -16px 18px 23px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -16px 18px 23px 0px rgba(0,0,0,0.75);
+  box-shadow: -16px 18px 23px 0px rgba(0,0,0,0.75);
+}
 
 /* #containerCategories,
 #containerOperacion,
@@ -321,71 +339,7 @@ border-radius: 0px;
 }
 
 
-/*    PORTFOLIO STYLES*/
 
-.portfolio-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.portfolio-items {
-  margin-right: -20px;
-}
-.portfolio-items > li {
-  float: left;
-  padding: 0;
-  margin: 0;
-}
-
-.portfolio-items.col-3 > li {
-  width: 33%;
-}
-
-.portfolio-item .item-main {
-  margin: 0 10px 10px 0;
-  text-align: center;
-  background: #fff;
-  padding: 10px;
-  border:0px solid #E8EAEE;
-  
-}
-.portfolio-item img {
-  width: 100%;
-}
-.portfolio-item .portfolio-image {
-  position: relative;
-}
-.portfolio-item h5 {
-  margin: 0;
-padding: 30px 0 30px 0;
-background-color: #000;
-color: #fff;
-font-size: 20px;
-}
-.portfolio-item .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  background-color: rgba(177, 166, 255, 1);
-  text-align: center;
-  vertical-align: middle;
-  -webkit-transition: opacity 300ms;
-  -moz-transition: opacity 300ms;
-  -o-transition: opacity 300ms;
-  transition: opacity 300ms;
-}
-.portfolio-item .overlay .preview {
-  position: relative;
-  top: 50%;
-  display: inline-block;
-  margin-top: -20px;
-}
-.portfolio-item:hover .overlay {
-  opacity: 1;
-}
 
 /*CONTACT STYLES*/
 
