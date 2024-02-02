@@ -9,7 +9,7 @@
 <div id="wrapper">		
     <div id="header">    	
     	<?php
-    	    include("view/inc/header.php");
+    	    include("view/inc/header.html");
     	?>        
     </div>  
     <div id="menu">
@@ -25,7 +25,7 @@
     </div>
     <div id="footer">   	   
 	    <?php
-	        include("view/inc/footer.php");
+	        include("view/inc/footer.html");
 	    ?>        
     </div>
 </div>

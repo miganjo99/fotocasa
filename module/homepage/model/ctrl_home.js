@@ -1,9 +1,7 @@
 function carousel_tipo() {
-    //alert("Hola JS ctrl_home");
     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=Carrousel_tipo','GET', 'JSON')
     .then(function(data) {        
         console.log(data);
-        //var data = JSON.parse(data);
         
         for (row in data) {
                 $('<div></div>').attr('class', "carousel__elements").attr('id', data[row].name_tipo).appendTo(".carousel__list")

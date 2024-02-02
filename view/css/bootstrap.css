@@ -443,7 +443,9 @@ h1,
 }
 h2,
 .h2 {
-  font-size: 30px;
+  font-size: 35px;
+  font-family: Verdana;
+  
 }
 h3,
 .h3 {
@@ -566,13 +568,7 @@ a.bg-danger:hover {
 ul,
 ol {
   margin-top: 0;
-  margin-bottom: 10px;
-}
-ul ul,
-ol ul,
-ul ol,
-ol ol {
-  margin-bottom: 0;
+  margin-bottom: 10px;  
 }
 .list-unstyled {
   padding-left: 0;
@@ -749,7 +745,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1250px;
   }
 }
 .container-fluid {

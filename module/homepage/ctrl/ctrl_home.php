@@ -2,24 +2,15 @@
     $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
     include($path . "module/homepage/model/DAO_home.php");
 
-    //$data = 'hola CTRL_HOME PHP';
-    //die('<script>console.log('.json_encode( $data ) .');</script>');
+
    
     switch ($_GET['op']) {
         case 'list';
-            //$data = 'hola Carrousel_tipo';
-            //die('<script>console.log('.json_encode( $data ) .');</script>');
+  
             include ('module/homepage/view/homepage.html');
         break;
 
         case 'Carrousel_tipo';
-           
-        
-            //$data = 'hola Carrousel_tipo';
-            //die('<script>console.log('.json_encode( $data ) .');</script>');
-           
-           
-           
             try{
                 $daohome = new DAOHome();
                 $SelectTipo = $daohome->select_tipo();

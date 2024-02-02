@@ -1,3 +1,24 @@
+.h2 {
+  font-size: 35px;
+  font-family: Verdana;
+  
+}
+
+
+#containerOperacion,
+#containerCiudad,
+#containerRecomendaciones{
+  width: 100%;
+  height: auto;
+  display: inline;
+   margin: -100px; 
+}
+#port-sec #containerOperacion{
+  margin-left: -55px;
+}
+h2.cat{
+  margin: auto;
+}
 .portfolio-item .item-main {
   margin: 0 10px 10px 0;
   text-align: center;
@@ -8,8 +29,8 @@
 }
 /* Fuente de carrusel */
 .tipo_name{
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 15px;
+  font-family: Verdana;
+  font-size: 18px;
   
 }
 
@@ -17,15 +38,24 @@
 /* Estilo para las categorías, operaciones y ciudades */
 .div_cate {
   display: inline-block;
-  margin-right: 20px; /* Espacio entre cada categoría, ajusta según sea necesario */
+  margin-right: 10px; /* Espacio entre cada categoría, ajusta según sea necesario */
   position: relative;
+  
 }
 
 /* Estilo para la imagen dentro del card */
-.portfolio-image img {
+
+/* .portfolio-image img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px; /* Bordes redondeados, ajusta según sea necesario */
+  border-radius: 8px;  
+
+} */
+.portfolio-image img {
+  width: 200px; /* Establece el ancho deseado para todas las imágenes */
+  height: 127px; /* Establece la altura deseada para todas las imágenes */
+  object-fit: cover; /* Mantiene la relación de aspecto y cubre el contenedor */
+  border-radius: 8px; /* Bordes redondeados, ajusta según sea necesario */  
 }
 
 /* Estilo para el card principal */
@@ -34,17 +64,27 @@
   width: 256px;
   height: auto;
   
+
 }
 
+/* #containerOperacion{
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+}
+#containerOperacion img{
+  scroll-snap-align: center;
+  object-fit: cover;
+} */
 /* Estilo para el título fuera del card */
 .item-main h5 {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para mejorar la legibilidad */
   padding: 10px;
-  margin: 0;
+  margin-left: 23px;
+  margin-right: 23px;
   text-align: center;
   font-size: 16px; /* Tamaño de fuente del título, ajusta según sea necesario */
   border-bottom-left-radius: 8px; /* Bordes redondeados en la esquina inferior izquierda */
@@ -56,7 +96,7 @@
 /* Efecto de hover para mostrar el título */
 .portfolio-item:hover .item-main h5 {
   opacity:1;
-  
+ 
 }
 
 .portfolio-item:hover{
@@ -71,21 +111,7 @@
   box-shadow: -16px 18px 23px 0px rgba(0,0,0,0.75);
 }
 
-/* #containerCategories,
-#containerOperacion,
-#containerCiudad {
-  display: flex;
-  flex-wrap: nowrap; 
-  justify-content: space-between; 
-  align-items: center; 
-} */
 
-
-/* .portfolio-image{
-  width: 265px;
-  height: auto;
-  align-items: center;
-} */
 
 .error { 
 	color: red;
@@ -94,7 +120,7 @@
     font-style:italic;
 }
 .carousel__img{
-  width: 64px;
+  width: 90px;
   height: auto;
 }
 
@@ -196,9 +222,7 @@ body {
 i.fa {
     padding:5px;
 }
-section {
-    padding-top:50px;
-}
+
 
 p {
     font-weight:300;
