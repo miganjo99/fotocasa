@@ -3,17 +3,14 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Home</title>
-
-
-	<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+	<title>Shop</title>
 
 	<!-- BOOTSTRAP CORE STYLE CSS -->
 	<link href="view/css/bootstrap.css" rel="stylesheet" />
 	<!-- FONTAWESOME STYLE CSS -->
 	<link href="view/css/font-awesome.min.css" rel="stylesheet" />
 	<!-- CUSTOM STYLE CSS -->
-	<link href="view/css/style.css" rel="stylesheet" />
+	<link href="view/css/styleshop.css" rel="stylesheet" />
 
 	<link rel="stylesheet" href="view/plugins/Glider/glider.css">
 	<!-- GOOGLE FONT -->
@@ -24,19 +21,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-	<script type="text/javascript">
-		$(function () {
-			$('#fecha').datepicker({
-				dateFormat: 'dd/mm/yy',
-				changeMonth: true,
-				changeYear: true,
-				yearRange: '1900:2050',
-				onSelect: function (selectedDate) {
-				}
-			});
-		});
-	</script>
-
 	<link href="view/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="view/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="view/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
@@ -46,7 +30,7 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	
-	<script src="module/homepage/model/ctrl_home.js"></script>
+	<script src="module/shop/model/ctrl_shop.js"></script>
 
 	<script src="view/js/promises.js"></script>
 

@@ -2,6 +2,9 @@
 	$path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
 	include($path . "model/connect.php");
     
+	
+
+
 	class DAOHome {
 		function select_tipo() {
 			$sql= "SELECT * FROM `tipo` ORDER BY name_tipo ASC LIMIT 30;";

@@ -1,7 +1,7 @@
 function carousel_tipo() {
     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=Carrousel_tipo','GET', 'JSON')
     .then(function(data) {        
-        console.log(data);
+        //console.log(data);
         
         for (row in data) {
                 $('<div></div>').attr('class', "carousel__elements").attr('id', data[row].name_tipo).appendTo(".carousel__list")
@@ -94,7 +94,7 @@ function loadCiudad() {
 function loadRecomendaciones() {
     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageRecomendaciones','GET', 'JSON')
     .then(function(data) {
-        console.log(data);
+        //console.log(data);
         for (row in data) {
             $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].id_vivienda }).appendTo('#containerRecomendaciones')
                 .html(

@@ -1,10 +1,16 @@
 <?php
-    if ((isset($_GET['page'])) && ($_GET['page']==="ctrl_home" ) || ($_GET['page']==="homepage") ){
+    if ((isset($_GET['page'])) && ($_GET['page']==="homepage") ){
 		include("view/inc/top_page_home.php");
 	}else {
 		include("view/inc/top_page_home.php");
 	}
-	session_start();
+	if ((isset($_GET['page'])) && ($_GET['page']==="shop") ){
+		include("view/inc/top_page_shop.php");
+	}else {
+		include("view/inc/top_page_shop.php");
+	}
+
+	//session_start();
 ?>
 <div id="wrapper">		
     <div id="header">    	

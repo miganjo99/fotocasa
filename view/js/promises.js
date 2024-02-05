@@ -1,8 +1,8 @@
 function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
-    // alert(sUrl);
-    // alert(sType);
-    // alert(sTData);
-    // alert(sData);
+    //  alert(sUrl);
+    //  alert(sType);
+    //  alert(sTData);
+    //  alert(sData);
 
     return new Promise((resolve, reject) => {
         //console.log(data);
@@ -19,8 +19,11 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
             // alert(data);
             resolve(data);
         }).fail((jqXHR, textStatus, errorThrow) => {
-            // alert(".fail hola");
             // console.error("Error en la solicitud AJAX:", errorThrow);
+            // console.log("Respuesta del servidor:", jqXHR.responseText);
+
+            alert(".fail hola");
+          
             reject(errorThrow);
         });
     });
