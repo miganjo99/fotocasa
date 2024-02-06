@@ -9,11 +9,12 @@ function ajaxForSearch(url) {
     ajaxPromise(url, 'GET', 'JSON')
         .then(function(data) {
             // console.log(data);
-            // alert("ajaxPromise shop dentro");
+           // alert("ajaxPromise shop dentro");
 
 
             $('#content_shop_viviendas').empty();
             $('.date_vivienda' && '.date_img').empty();
+            // $('.date_img_array').empty();
 
             //Mejora para que cuando no hayan resultados en los filtros aplicados
             
@@ -24,6 +25,15 @@ function ajaxForSearch(url) {
                     )
             } else {
                 for (row in data) {
+                    // for (row in data[1][0]) {
+                    //     $('<div></div>').attr({ 'id': data[1][0].id_img, class: 'date_img_array' }).appendTo('.date_img_list')
+                    //         .html(
+                    //             "<div class='content-img-list'>" +
+                    //             "<img src= '" + data[1][0][row].img_vivienda + "'" + "</img>" +
+                    //             "</div>"
+                    //         )
+                    // }
+                    
                     $('<div></div>').attr({ 'id': data[row].id_vivienda, 'class': 'list_content_shop' }).appendTo('#content_shop_viviendas')
                         .html(
                             "<div class='list_product'>" +
@@ -35,9 +45,9 @@ function ajaxForSearch(url) {
                             "<h1><b>" + data[row].precio + "\u20AC " + "</b></h1>" +
                             "<p>Up-to-date maintenance and revisions</p>" +
                             "<ul>" +
-                            "<li> <i></i>&nbsp;" + data[row].aseos + " aseos" + "</li>" +
-                            "<li> <i id='col-ico' class='fa-solid fa-person fa-xl'></i>&nbsp;" + data[row].estado + "</li>" +
-                            "<li> <i id='col-ico' class='fa-solid fa-palette fa-xl'></i>&nbsp;" + data[row].num_habs + " habitaciones" + "</li>" +
+                            "<li> <i id='col-ico' class='fa-solid fa-bath'></i>&nbsp;" + data[row].aseos + " aseos" + "</li>" +
+                            "<li> <i id='col-ico' class='fa-solid fa-trowel'></i>&nbsp;" + data[row].estado + "</li>" +
+                            "<li> <i id='col-ico' class='fa-solid fa-bed'></i>&nbsp;" + data[row].num_habs + " habitaciones" + "</li>" +
                             "</ul>" +
                             "<div class='buttons'>" +
                             "<button id='" + data[row].id_vivienda + "' class='more_info_list button add' >More Info</button>" +
@@ -48,6 +58,14 @@ function ajaxForSearch(url) {
                             "</div>" +
                             "</div>"
                         )
+                        // $('.date_img_list').slick({
+                        //     infinite: true,
+                        //     speed: 300,
+                        //     slidesToShow: 1,
+                        //     adaptiveHeight: true,
+                        //     autoplay: true,
+                        //     autoplaySpeed: 2600
+                        // });
                 }
             }
         }).catch(function() {
@@ -92,14 +110,14 @@ function loadDetails(id_vivienda) {
                 "<h1><b>" + data[0].id_vivienda + " " + data[0].estado + "</b></h1>" +
                 "<hr class=hr-shop>" +
                 "<table id='table-shop'> <tr>" +
-                "<td> <i id='col-ico' class='fa-solid fa-road fa-2xl'></i> &nbsp;" + data[0].antiguedad + " años" + "</td>" +
-                "<td> <i id='col-ico' class='fa-solid fa-person fa-2xl'></i> &nbsp;" + data[0].num_habs + " habitaciones" + "</td>  </tr>" +
-                "<td> <i id='col-ico' class='fa-solid fa-car fa-2xl'></i> &nbsp;" + data[0].fecha_publicacion + "</td>" +
-                "<td> <i id='col-ico' class='fa-solid fa-door-open fa-2xl'></i> &nbsp;" + data[0].aseos + " aseos"+ "</td>  </tr>" +
-                "<td> <i id='col-ico' class='fa-solid fa-gas-pump fa-2xl'></i> &nbsp;" + data[0].name_tipo + "</td>" +
-                "<td> <i id='col-ico' class='fa-solid fa-calendar-days fa-2xl'></i> &nbsp;" + data[0].name_operacion + "</td>  </tr>" +
-                "<td> <i id='col-ico' class='fa-solid fa-palette fa-2xl'></i> &nbsp;" + data[0].name_ciudad + "</td>" +
-                "<td> <i id='col-ico' class='fa-solid fa-palette fa-2xl'></i> &nbsp;" + data[0].name_categoria + "</td>" +
+                "<td> <i id='col-ico' class='fa-regular fa-calendar fa-2xl'></i> &nbsp;" + data[0].antiguedad + " años" + "</td>" +
+                "<td> <i id='col-ico' class='fa-solid fa-door-open fa-2xl'></i> &nbsp;" + data[0].num_habs + " habitaciones" + "</td>  </tr>" +
+                "<td> <i id='col-ico' class='fa-solid fa-calendar-days fa-2xl'></i> &nbsp;" + data[0].fecha_publicacion + "</td>" +
+                "<td> <i id='col-ico' class='fa-solid fa-bath fa-2xl'></i> &nbsp;" + data[0].aseos + " aseos"+ "</td>  </tr>" +
+                "<td> <i id='col-ico' class='fa-solid fa-trowel fa-2xl'></i> &nbsp;" + data[0].name_tipo + "</td>" +
+                "<td> <i id='col-ico' class='fa-solid fa-key fa-2xl'></i> &nbsp;" + data[0].name_operacion + "</td>  </tr>" +
+                "<td> <i id='col-ico' class='fa-solid fa-city fa-2xl'></i> &nbsp;" + data[0].name_ciudad + "</td>" +
+                "<td> <i id='col-ico' class='fa-solid fa-house fa-2xl'></i> &nbsp;" + data[0].name_categoria + "</td>" +
                 "</table>" +
                 "<hr class=hr-shop>" +
                 "<h3><b>" + "More Information:" + "</b></h3>" +
@@ -107,7 +125,7 @@ function loadDetails(id_vivienda) {
                 "<div class='buttons_details'>" +
                 "<a class='button add' href='#'>Contactar</a>" +
                 "<a class='button buy' href='#'>Like</a>" +
-                "<span class='button' id='price_details'>" + data[0].precio + " \u20AC"+ "<i class='fa-solid fa-euro-sign'></i> </span>" +
+                "<span class='button' id='price_details'>" + data[0].precio +" "+ "<i class='fa-solid fa-euro-sign'></i> </span>" +
                 "<a class='details__heart' id='" + data[0].id_vivienda + "'><i id=" + data[0].id_vivienda + " class='fa-solid fa-heart fa-lg'></i></a>" +
                 "</div>" +
                 "</div>" +

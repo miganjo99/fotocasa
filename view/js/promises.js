@@ -15,10 +15,12 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
             data: sData 
             
         }).done((data) => {
-            // console.log(data);
-            // alert(data);
+            //console.log(data);
+             //alert(data);
             resolve(data);
         }).fail((jqXHR, textStatus, errorThrow) => {
+            console.error("Error en la solicitud AJAX:", errorThrow);
+            console.log("Respuesta del servidor:", jqXHR.responseText);
 
             reject(errorThrow);
         });

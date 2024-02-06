@@ -8,7 +8,7 @@
 	<!-- BOOTSTRAP CORE STYLE CSS -->
 	<link href="view/css/bootstrap.css" rel="stylesheet" />
 	<!-- FONTAWESOME STYLE CSS -->
-	<link href="view/css/font-awesome.min.css" rel="stylesheet" />
+	<!-- <link href="view/css/font-awesome.min.css" rel="stylesheet" /> -->
 	<!-- CUSTOM STYLE CSS -->
 	<link href="view/css/styleshop.css" rel="stylesheet" />
 
@@ -45,7 +45,8 @@
   	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   	<script type="text/javascript" src="view/plugins/slick-1.8.1/slick/slick.min.js"></script>
 
-  	
+  	<!-- FONT AWESOME -->
+	<script src="https://kit.fontawesome.com/596716e4fd.js" crossorigin="anonymous"></script>
 
 	<!-- <script src="view/plugins/jquery-1.10.2.js"></script> -->
 	

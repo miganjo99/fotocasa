@@ -60,4 +60,21 @@ class DAOShop{
 		}
 		return $imgArray;
 	}
+	function select_imgs_vivienda_array(){
+		$sql = "SELECT i.img_vivienda
+		FROM img_vivienda i, vivienda v
+		WHERE v.id_img = i.id_vivienda";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		$imgArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			foreach ($res as $row) {
+				array_push($imgArray, $row);
+			}
+		}
+		return $imgArray;
+	}
 }

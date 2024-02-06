@@ -14,10 +14,6 @@ switch ($_GET['op']) {
     case 'all_viviendas':
         //$data = 'hola all_viviendas php';
         //die('<script>console.log('.json_encode( $data ) .');</script>');
-
-
-        // $prod = $_POST['total_prod']; PARA QUE ES ESTO?
-        // $items = $_POST['items_page'];
         
         try {
             $daoshop = new DAOShop();
@@ -44,6 +40,30 @@ switch ($_GET['op']) {
         try {
             $daoshop_img = new DAOShop();
             $Date_images = $daoshop_img->select_imgs_vivienda($_GET['id']);
+        } catch (Exception $e) {
+            echo json_encode("error");
+        }
+
+        if (!empty($Dates_Viviendas || $Date_images)) {
+            $rdo = array();
+            $rdo[0] = $Dates_Viviendas;
+            $rdo[1][] = $Date_images;
+            echo json_encode($rdo);
+        } else {
+            echo json_encode("error");
+        }
+        break;
+
+    case 'list_vivienda_array':
+        try {
+            $daoshop = new DAOShop();
+            $Dates_Viviendas = $daoshop->select_all_viviendas();
+        } catch (Exception $e) {
+            echo json_encode("error");
+        }
+        try {
+            $daoshop_img = new DAOShop();
+            $Date_images = $daoshop_img->select_imgs_vivienda_array();
         } catch (Exception $e) {
             echo json_encode("error");
         }
