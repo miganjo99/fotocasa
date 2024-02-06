@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Heebo:400,700|Open+Sans:400,700');
 
 
-
+.fa-heart:before {
+  content: none;
+}
 :root {
   --color: #3c3163;
   --transition-time: 0.5s;
@@ -41,6 +43,10 @@ a {
 
 .list_content_shop:hover {
   transform: scale(1.03);
+  transition: 0.8s;
+  -webkit-box-shadow: -8px 10px 5px -3px rgba(0,0,0,0.5);
+  -moz-box-shadow: -8px 10px 5px -3px rgba(0,0,0,0.5);
+  box-shadow: -8px 10px 5px -3px rgba(0,0,0,0.5);
 }
 
 .list_product {
@@ -101,4 +107,71 @@ a {
   font-weight: bold;
 }
 
-/* Your existing styles for card hover effects and media queries can remain unchanged */
+/* CSS DETAILS */
+#details-shop {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.date_img, .date_vivienda {
+  width: 48%; /* Ajusta el ancho según sea necesario */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content-img-details {
+  padding: 15px;
+  margin-left: 100px;
+}
+
+.content-img-details img {
+  width: 500px;
+  height: auto;
+  border-radius: 5px;
+  
+ 
+}
+
+.list_product_details {
+  display: flex;
+  height: 100%;
+}
+
+.product-info_details {
+  flex-grow: 1;
+  padding: 15px;
+}
+
+.product-content_details {
+  line-height: 1.5em;
+}
+
+#table-shop {
+  width: 100%;
+}
+
+#table-shop td {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.hr-shop {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.buttons_details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button.add, .button.buy, #price_details {
+  margin-right: 10px;
+}
+
+.details__heart {
+  color: var(--color);
+  text-decoration: none;
+}

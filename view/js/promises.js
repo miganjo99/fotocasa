@@ -19,11 +19,7 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
             // alert(data);
             resolve(data);
         }).fail((jqXHR, textStatus, errorThrow) => {
-            // console.error("Error en la solicitud AJAX:", errorThrow);
-            // console.log("Respuesta del servidor:", jqXHR.responseText);
 
-            alert(".fail hola");
-          
             reject(errorThrow);
         });
     });

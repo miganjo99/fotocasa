@@ -12,6 +12,11 @@
 	<!-- CUSTOM STYLE CSS -->
 	<link href="view/css/styleshop.css" rel="stylesheet" />
 
+	<!-- CARROUSSEL SLICK -->
+	<link rel="stylesheet" type="text/css" href="view/plugins/slick-1.8.1/slick/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="view/plugins/slick-1.8.1/slick/slick-theme.css"/>
+
+
 	<link rel="stylesheet" href="view/plugins/Glider/glider.css">
 	<!-- GOOGLE FONT -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
@@ -22,7 +27,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 	<link href="view/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="view/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<!-- <link href="view/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> -->
 	<link href="view/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
 	<!--<script src="../../module/viviendas/validate_vivienda.js"></script>-->
 
@@ -33,6 +38,14 @@
 	<script src="module/shop/model/ctrl_shop.js"></script>
 
 	<script src="view/js/promises.js"></script>
+
+	<!-- CARROUSSEL SLICK -->
+
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  	<script type="text/javascript" src="view/plugins/slick-1.8.1/slick/slick.min.js"></script>
+
+  	
 
 	<!-- <script src="view/plugins/jquery-1.10.2.js"></script> -->
 	

@@ -34,31 +34,31 @@ switch ($_GET['op']) {
         }
         break;
 
-    // case 'details_car':
-    //     try {
-    //         $daoshop = new DAOShop();
-    //         $Date_car = $daoshop->select_one_car($_GET['id']);
-    //     } catch (Exception $e) {
-    //         echo json_encode("error");
-    //     }
-    //     try {
-    //         $daoshop_img = new DAOShop();
-    //         $Date_images = $daoshop_img->select_imgs_car($_GET['id']);
-    //     } catch (Exception $e) {
-    //         echo json_encode("error");
-    //     }
+    case 'details_vivienda':
+        try {
+            $daoshop = new DAOShop();
+            $Dates_Viviendas = $daoshop->select_one_vivienda($_GET['id']);
+        } catch (Exception $e) {
+            echo json_encode("error");
+        }
+        try {
+            $daoshop_img = new DAOShop();
+            $Date_images = $daoshop_img->select_imgs_vivienda($_GET['id']);
+        } catch (Exception $e) {
+            echo json_encode("error");
+        }
 
-    //     if (!empty($Date_car || $Date_images)) {
-    //         $rdo = array();
-    //         $rdo[0] = $Date_car;
-    //         $rdo[1][] = $Date_images;
-    //         echo json_encode($rdo);
-    //     } else {
-    //         echo json_encode("error");
-    //     }
-    //     break;
+        if (!empty($Dates_Viviendas || $Date_images)) {
+            $rdo = array();
+            $rdo[0] = $Dates_Viviendas;
+            $rdo[1][] = $Date_images;
+            echo json_encode($rdo);
+        } else {
+            echo json_encode("error");
+        }
+        break;
 
-    // default;
-    //     include("module/exceptions/views/pages/error404.php");
-    //     break;
+    default;
+        //include("module/exceptions/views/pages/error404.php");
+        break;
 }

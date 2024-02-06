@@ -1,14 +1,15 @@
 <?php
     if ((isset($_GET['page'])) && ($_GET['page']==="homepage") ){
 		include("view/inc/top_page_home.php");
-	}else {
+
+	}else if ((isset($_GET['page'])) && ($_GET['page']==="shop") ){
+		include("view/inc/top_page_shop.php");
+	}else{
 		include("view/inc/top_page_home.php");
+
 	}
-	if ((isset($_GET['page'])) && ($_GET['page']==="shop") ){
-		include("view/inc/top_page_shop.php");
-	}else {
-		include("view/inc/top_page_shop.php");
-	}
+	
+	
 
 	//session_start();
 ?>

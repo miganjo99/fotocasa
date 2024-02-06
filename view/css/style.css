@@ -102,6 +102,7 @@ h2.cat{
 .portfolio-item:hover{
   
   transform: scale(1.1);
+  
 }
 
 /* Estilo para la imagen dentro del card */
