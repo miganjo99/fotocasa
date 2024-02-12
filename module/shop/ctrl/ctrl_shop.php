@@ -57,13 +57,13 @@ switch ($_GET['op']) {
     case 'list_vivienda_array':
         try {
             $daoshop = new DAOShop();
-            $Dates_Viviendas = $daoshop->select_all_viviendas();
+            $Dates_Viviendas = $daoshop->select_one_vivienda($_GET['id']);
         } catch (Exception $e) {
             echo json_encode("error");
         }
         try {
             $daoshop_img = new DAOShop();
-            $Date_images = $daoshop_img->select_imgs_vivienda_array();
+            $Date_images = $daoshop_img->select_imgs_vivienda($_GET['id']);
         } catch (Exception $e) {
             echo json_encode("error");
         }

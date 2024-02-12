@@ -26,6 +26,26 @@ class DAOShop{
 		}
 		return $retrArray;
 	}
+	function select_all_viviendas_array(){
+		
+		$sql = "SELECT v.*, i.img_vivienda
+		FROM vivienda v, img_vivienda i
+		WHERE i.id_vivienda=v.id_vivienda
+		ORDER BY v.id_vivienda;";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		$retrArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			while ($row = mysqli_fetch_assoc($res)) {
+				$retrArray[] = $row;
+			}
+		}
+		return $retrArray;
+	}
+	
 
 	function select_one_vivienda($id){
 		$sql = "SELECT *
@@ -60,10 +80,12 @@ class DAOShop{
 		}
 		return $imgArray;
 	}
-	function select_imgs_vivienda_array(){
-		$sql = "SELECT i.img_vivienda
+
+
+	function select_imgs_vivienda_array($id){
+		$sql = "SELECT DISTINCT i.img_vivienda
 		FROM img_vivienda i, vivienda v
-		WHERE v.id_img = i.id_vivienda";
+		WHERE v.id_img = i.id_vivienda AND v.id_img=$id";
 
 		$conexion = connect::con();
 		$res = mysqli_query($conexion, $sql);

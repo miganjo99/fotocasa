@@ -17,7 +17,7 @@
   margin-left: -65px;
 }
 h2.cat{
-  margin: auto;
+  margin: 30px;
 }
 .portfolio-item .item-main {
   margin: 0 10px 10px 0;
@@ -75,25 +75,19 @@ h2.cat{
   scroll-snap-align: center;
   object-fit: cover;
 } */
-/* Estilo para el título fuera del card */
+
 .item-main h5 {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  position: 100%;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para mejorar la legibilidad */
   padding: 10px;
-  margin-left: 23px;
-  margin-right: 23px;
-  text-align: center;
-  font-size: 16px; /* Tamaño de fuente del título, ajusta según sea necesario */
-  border-bottom-left-radius: 8px; /* Bordes redondeados en la esquina inferior izquierda */
-  border-bottom-right-radius: 8px; /* Bordes redondeados en la esquina inferior derecha */
-  opacity: 0; /* Hacemos el título invisible por defecto */
-  transition: opacity 0.5s ease-in-out; /* Efecto de transición para el título */
+  margin: 0 auto;
+  font-size: 20px; 
+  opacity: 0; 
+  transition: opacity 0.5s ease-in-out; 
 }
 
-/* Efecto de hover para mostrar el título */
+
+
 .portfolio-item:hover .item-main h5 {
   opacity:1;
  

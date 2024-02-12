@@ -14,7 +14,7 @@ function ajaxForSearch(url) {
 
             $('#content_shop_viviendas').empty();
             $('.date_vivienda' && '.date_img').empty();
-            // $('.date_img_array').empty();
+            //  $('.date_img_array').empty();
 
             //Mejora para que cuando no hayan resultados en los filtros aplicados
             
@@ -24,14 +24,16 @@ function ajaxForSearch(url) {
                         '<h3>¡No se encuentarn resultados con los filtros aplicados!</h3>'
                     )
             } else {
-                // for (row in data[1][0]) {
-                    //     $('<div></div>').attr({ 'id': data[1][0].id_img, class: 'date_img_array' }).appendTo('.date_img_list')
-                    //         .html(
-                    //             "<div class='content-img-list'>" +
-                    //             "<img src= '" + data[1][0][row].img_vivienda + "'" + "</img>" +
-                    //             "</div>"
-                    //         )
-                    // }
+                // <script>
+                //              for (row in data[1][0]) {
+                //                 $('<div></div>').attr({ 'id': data[1][0].id_vivienda, class: 'date_img_array' }).appendTo('.date_img_list')
+                //                     .html(
+                //                         "<div class='content-img-list'>" +
+                //                         "<img src= '" + data[1][0][row].img_vivienda + "'" + "</img>" +
+                //                         "</div>"
+                //                     )
+                //                 }
+                //                 </script>
                 for (row in data) {
                     
                     
