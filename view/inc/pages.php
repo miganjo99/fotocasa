@@ -1,18 +1,22 @@
 <?php
 	if(isset($_GET['page'])){
 		switch($_GET['page']){
-			case "shop";
-				include("module/shop/view/".$_GET['page'].".html");
+
+			// case "shop";
+			// 	include("module/shop/view/".$_GET['page'].".html");
+			// break;
+			// case "homepage";
+			// 	include("module/homepage/view/".$_GET['page'].".html");
+			// break;
+
+			case "ctrl_home";
+				include("module/homepage/ctrl/".$_GET['page'].".php");
 			break;
-			case "homepage";
-				include("module/homepage/view/".$_GET['page'].".html");
-			break;			
-			// case "ctrl_home";
-			// 	include("module/homepage/ctrl_home/".$_GET['page'].".php");
-			// 	break;
-			// case "ctrl_shop";
-			// 	include("module/shop/ctrl_shop/".$_GET['page'].".php");
-			// 	break;
+			case "ctrl_shop";
+				include("module/shop/ctrl/".$_GET['page'].".php");
+			break;
+
+
 			case "services";
 				include("module/services/".$_GET['page'].".php");
 				break;

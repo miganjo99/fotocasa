@@ -5,8 +5,7 @@
 
    
     switch ($_GET['op']) {
-        case 'list';
-  
+        case 'list'; 
             include ('module/homepage/view/homepage.html');
         break;
 

@@ -85,6 +85,20 @@
 			}
 			return $retrArray;
 		}
+		// function select_recomendacion(){
+		// 	$sql = "SELECT *
+		// 	FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o
+		// 	WHERE v.id_ciudad = c.id_ciudad 
+		// 	AND v.id_categoria = ca.id_categoria
+		// 	AND v.id_tipo = t.id_tipo
+		// 	AND v.id_operacion = o.id_operacion";
+	
+		// 	$conexion = connect::con();
+		// 	$res = mysqli_query($conexion, $sql)->fetch_object();
+		// 	connect::close($conexion);
+	
+		// 	return $res;
+		// }
 	
 		
 	}

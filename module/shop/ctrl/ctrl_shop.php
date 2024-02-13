@@ -2,8 +2,9 @@
 $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
 include($path . "module/shop/model/DAO_shop.php");
 
-//$data = 'hola crtl shop php';
-//die('<script>console.log('.json_encode( $data ) .');</script>');
+// $data = 'hola crtl shop php';
+// die('<script>console.log('.json_encode( $data ) .');</script>');
+
 switch ($_GET['op']) {
     
     

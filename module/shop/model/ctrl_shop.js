@@ -148,6 +148,50 @@ function loadDetails(id_vivienda) {
         // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
     });
 }
+// function load_filters(total_prod = 0, items_page = 3) {
+//     var filtros = JSON.parse(localStorage.getItem('filters'));
+//     ajaxPromise('modules/shop/crtl/crtl_shop.php?op=redirect', 'POST', 'JSON', { 'filtros': filtros, 'total_prod': total_prod, 'items_page': items_page })
+//         .then(function(shop) {
+//             $("#containerShop").empty();
+//             for (row in shop) {
+//                 $('<div></div>').appendTo('#containerShop')
+//                     .html(
+//                         '<div id="overlay">' +
+//                         '<div class= "cv-spinner" >' +
+//                         '<span class="spinner"></span>' +
+//                         '</div >' +
+//                         '</div > ' +
+//                         '</div>' +
+//                         '</div>' +
+//                         '<div class="page">' +
+//                         '<section class="section section-md bg-white">' +
+//                         '<div class="shell">' +
+//                         '<div class="range range-50 range-sm-center range-md-left range-md-middle range-md-reverse">' +
+//                         '<div class="cell-sm-6 wow fadeInRightSmall">' +
+//                         ' <div class="thumb-line"><img src="' + shop[row].img + '" alt="" width="531" height="640"/>' +
+//                         '</div>' +
+//                         '</div>' +
+//                         '<div class="cell-sm-6">' +
+//                         '<div class="box-width-3">' +
+//                         '<p class="heading-1 wow fadeInLeftSmall">' + shop[row].brand_name + '</p>' +
+//                         '<article class="quote-big wow fadeInLeftSmall" data-wow-delay=".1s">' +
+//                         '<p class="q">' + shop[row].modelo + '</p>' +
+//                         '<p class="q">' + shop[row].precio + '€</p>' +
+//                         '<p class="q">' + shop[row].cat_name + '</p>' +
+//                         '</article>' +
+//                         '<div class="divider wow fadeInLeftSmall" data-wow-delay=".2s"></div>' +
+//                         '<p class="q">' + shop[row].type_name + '<i class="fa-thin fa-gas-pump fa-2xl"></i></p>' +
+//                         '<p class="wow fadeInLeftSmall" data-wow-delay=".3s">' + shop[row].puertas + '<i class="fa-solid fa-door-open fa-2xl"></i></p><a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall link button_spinner" data-wow-delay=".4s" id="' + shop[row].id + '">Read More</a>' +
+//                         '</div>' +
+//                         '</div>' +
+//                         '</section>' +
+//                         '</div>');
+//             }
+//             mapBox_all(shop);
+//         }).catch(function() {
+//             window.location.href = "index.php?modules=exception&op=503&error=fail_salto&type=503";
+//         });
+// }
 
 $(document).ready(function() {
     loadViviendas();

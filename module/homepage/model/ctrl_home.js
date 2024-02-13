@@ -113,7 +113,41 @@ function loadRecomendaciones() {
    //     window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
    // });
 }
+function clicks(){
+    $(document).on("click",'div.carousel__elements', function (){
+        var filters = [];
+        filters.push({"tipo":[this.getAttribute('id')]});
+        
+        console.log(filters);
+        
+        //alert("click carroussel");
+      localStorage.removeItem('filters')
+      localStorage.setItem('filters', JSON.stringify(filters)); 
+        setTimeout(function(){ 
+          window.location.href = 'index.php?page=controller_shop&op=view';
+        }, 1000);  
+    }); 
 
+    // $(document).on("click",'img.services__img', function (){
+    //   var filters = [];
+    //   filters.push({"categoria":[this.getAttribute('id')]});
+    //   localStorage.removeItem('filters')
+    //   localStorage.setItem('filters', JSON.stringify(filters)); 
+    //     setTimeout(function(){ 
+    //       window.location.href = 'index.php?page=controller_shop&op=view';
+    //     }, 1000);  
+    // });
+
+    // $(document).on("click",'img.brand__img', function (){
+    //   var filters = [];
+    //   filters.push({"marca":[this.getAttribute('id')]});
+    //   localStorage.removeItem('filters')
+    //   localStorage.setItem('filters', JSON.stringify(filters)); 
+    //     setTimeout(function(){ 
+    //       window.location.href = 'index.php?page=controller_shop&op=view';
+    //     }, 1000);  
+    // });
+  } 
 
 
 
@@ -123,4 +157,5 @@ $(document).ready(function() {
     loadOperacion();
     loadCiudad();
     loadRecomendaciones();
+    clicks();
 });

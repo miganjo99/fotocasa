@@ -1,8 +1,8 @@
 <?php
-    if ((isset($_GET['page'])) && ($_GET['page']==="homepage") ){
+    if ((isset($_GET['page'])) && ($_GET['page']==="ctrl_home") ){
 		include("view/inc/top_page_home.php");
 
-	}else if ((isset($_GET['page'])) && ($_GET['page']==="shop") ){
+	}else if ((isset($_GET['page'])) && ($_GET['page']==="ctrl_shop") ){
 		include("view/inc/top_page_shop.php");
 	}else{
 		include("view/inc/top_page_home.php");
