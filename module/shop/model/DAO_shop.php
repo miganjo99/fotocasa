@@ -8,6 +8,49 @@ include($path . "model/connect.php");
 
 class DAOShop{
 
+	function redirect($filtros){
+        // $select = "SELECT *
+		// FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o
+		// WHERE v.id_ciudad = c.id_ciudad 
+		// AND v.id_categoria = ca.id_categoria
+		// AND v.id_tipo = t.id_tipo
+		// AND v.id_operacion = o.id_operacion";
+
+		$select = "SELECT *
+		FROM vivienda v";
+
+		
+        if ($filtros[0]['tipo']){
+            $prueba = $filtros[0]['tipo'][0];
+            $select.= " WHERE v.id_tipo = '$prueba';";
+        }
+        // else if($filtros[0]['ciudad']) {
+        //     $prueba = $filtros[0]['ciudad'][0];
+        //     //$select.= " AND t.type_name = '$prueba'";
+        // }
+        // else if($filtros[0]['categoria']) {
+        //     $prueba = $filtros[0]['categoria'][0];
+        //     //$select.= " AND c.marca = '$prueba'";
+        // }
+        // else if($filtros[0]['operacion']) {
+        //     $prueba = $filtros[0]['operacion'][0];
+        //     //$select.= " AND c.marca = '$prueba'";
+        // }
+        //////////$select.= " LIMIT $total_prod, $items_page";
+       
+        $conexion = connect::con();
+        $res = mysqli_query($conexion, $select);
+        connect::close($conexion);
+
+        $retrArray = array();
+        if ($res -> num_rows > 0) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                $retrArray[] = $row;
+            }
+        }
+        return $retrArray;
+    }
+
 	function select_all_viviendas(){
 		
 		$sql = "SELECT * 

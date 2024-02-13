@@ -35,10 +35,27 @@ h2.cat{
 }
 
 
-/* Estilo para las categorías, operaciones y ciudades */
 .div_cate {
   display: inline-block;
   margin-right: 10px; /* Espacio entre cada categoría, ajusta según sea necesario */
+  position: relative;
+  
+}
+.div_op {
+  display: inline-block;
+  margin-right: 10px; 
+  position: relative;
+  
+}
+.div_ciu {
+  display: inline-block;
+  margin-right: 10px; 
+  position: relative;
+  
+}
+.div_recom {
+  display: inline-block;
+  margin-right: 10px; 
   position: relative;
   
 }

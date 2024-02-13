@@ -4,7 +4,7 @@ function carousel_tipo() {
         //console.log(data);
         
         for (row in data) {
-                $('<div></div>').attr('class', "carousel__elements").attr('id', data[row].name_tipo).appendTo(".carousel__list")
+                $('<div></div>').attr('class', "carousel__elements").attr('id', data[row].id_tipo).appendTo(".carousel__list")
                 .html(
                     "<img class='carousel__img' id='' src='" + data[row].img_tipo + "' alt='' >"
                     +
@@ -31,7 +31,7 @@ function loadCategorias() {
     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageCategoria','GET', 'JSON')
     .then(function(data) {
         for (row in data) {
-            $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].name_categoria }).appendTo('#containerCategories')
+            $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].id_categoria }).appendTo('#containerCategories')
                 .html(
                     "<li class='portfolio-item'>" +
                     "<div class='item-main'>" +
@@ -52,7 +52,7 @@ function loadOperacion() {
     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageOperacion','GET', 'JSON')
     .then(function(data) {
         for (row in data) {
-            $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].name_operacion }).appendTo('#containerOperacion')
+            $('<div></div>').attr('class', "div_op").attr({ 'id': data[row].id_operacion }).appendTo('#containerOperacion')
                 .html(
                     "<li class='portfolio-item'>" +
                     "<div class='item-main'>" +
@@ -74,7 +74,7 @@ function loadCiudad() {
     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageCiudad','GET', 'JSON')
     .then(function(data) {
         for (row in data) {
-            $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].name_ciudad }).appendTo('#containerCiudad')
+            $('<div></div>').attr('class', "div_ciu").attr({ 'id': data[row].id_ciudad }).appendTo('#containerCiudad')
                 .html(
                     "<li class='portfolio-item'>" +
                     "<div class='item-main'>" +
@@ -96,7 +96,7 @@ function loadRecomendaciones() {
     .then(function(data) {
         //console.log(data);
         for (row in data) {
-            $('<div></div>').attr('class', "div_cate").attr({ 'id': data[row].id_vivienda }).appendTo('#containerRecomendaciones')
+            $('<div></div>').attr('class', "div_recom").attr({ 'id': data[row].id_vivienda }).appendTo('#containerRecomendaciones')
                 .html(
                     "<li class='portfolio-item'>" +
                     "<div class='item-main'>" +
@@ -116,37 +116,74 @@ function loadRecomendaciones() {
 function clicks(){
     $(document).on("click",'div.carousel__elements', function (){
         var filters = [];
-        filters.push({"tipo":[this.getAttribute('id')]});
+        filters.push({"id_tipo":[this.getAttribute('id')]});
         
         console.log(filters);
-        
-        //alert("click carroussel");
+        alert("click carroussel");
+        localStorage.removeItem('filters')
+       
+        localStorage.setItem('filters', JSON.stringify(filters)); 
+            setTimeout(function(){ 
+            window.location.href = 'index.php?page=ctrl_shop&op=list';
+            }, 1000);  
+    }); 
+
+    $(document).on("click",'div.div_cate', function (){
+      var filters = [];
+      filters.push({"categoria":[this.getAttribute('id')]});
+
+      console.log(filters);
+      alert("click");
+
       localStorage.removeItem('filters')
       localStorage.setItem('filters', JSON.stringify(filters)); 
         setTimeout(function(){ 
-          window.location.href = 'index.php?page=controller_shop&op=view';
+          //window.location.href = 'index.php?page=ctrl_shop&op=list';
         }, 1000);  
-    }); 
+    });
 
-    // $(document).on("click",'img.services__img', function (){
+    $(document).on("click",'div.div_op', function (){
+      var filters = [];
+      filters.push({"operacion":[this.getAttribute('id')]});
+
+      console.log(filters);
+      alert("click");
+
+      localStorage.removeItem('filters')
+      localStorage.setItem('filters', JSON.stringify(filters)); 
+        setTimeout(function(){ 
+          //window.location.href = 'index.php?page=ctrl_shop&op=list';
+        }, 1000);  
+    });
+
+    $(document).on("click",'div.div_ciu', function (){
+      var filters = [];
+      filters.push({"ciudad":[this.getAttribute('id')]});
+
+      console.log(filters);
+      alert("click");
+
+      localStorage.removeItem('filters')
+      localStorage.setItem('filters', JSON.stringify(filters)); 
+        setTimeout(function(){ 
+          //window.location.href = 'index.php?page=ctrl_shop&op=list';
+        }, 1000);  
+    });
+
+    // $(document).on("click",'div.div_recom', function (){
     //   var filters = [];
-    //   filters.push({"categoria":[this.getAttribute('id')]});
+    //   filters.push({"recomenacion":[this.getAttribute('id')]});
+
+    //   console.log(filters);
+    //   alert("click");
+
     //   localStorage.removeItem('filters')
     //   localStorage.setItem('filters', JSON.stringify(filters)); 
     //     setTimeout(function(){ 
-    //       window.location.href = 'index.php?page=controller_shop&op=view';
+    //       //window.location.href = 'index.php?page=ctrl_shop&op=list';
     //     }, 1000);  
     // });
-
-    // $(document).on("click",'img.brand__img', function (){
-    //   var filters = [];
-    //   filters.push({"marca":[this.getAttribute('id')]});
-    //   localStorage.removeItem('filters')
-    //   localStorage.setItem('filters', JSON.stringify(filters)); 
-    //     setTimeout(function(){ 
-    //       window.location.href = 'index.php?page=controller_shop&op=view';
-    //     }, 1000);  
-    // });
+    
   } 
 
 

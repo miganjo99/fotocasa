@@ -55,6 +55,19 @@ switch ($_GET['op']) {
         }
         break;
 
+    case 'redirect';
+        echo json_encode($_POST['filtros']);
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> redirect($_POST['filtros']);
+        
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+    break;
+
     case 'list_vivienda_array':
         try {
             $daoshop = new DAOShop();
