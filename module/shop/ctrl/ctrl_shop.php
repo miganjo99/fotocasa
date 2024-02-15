@@ -55,10 +55,11 @@ switch ($_GET['op']) {
         }
         break;
 
-    case 'redirect';
-        echo json_encode($_POST['filtros']);
+    case 'redirect_home';
+        //echo json_encode($_POST['filtros']);
+        //break;
         $homeQuery = new DAOShop();
-        $selSlide = $homeQuery -> redirect($_POST['filtros']);
+        $selSlide = $homeQuery -> redirect_home($_POST['filters_home']);
         
         if (!empty($selSlide)) {
             echo json_encode($selSlide);

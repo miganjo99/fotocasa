@@ -1,8 +1,17 @@
 function loadViviendas() {
     //alert("hola load shop");
 
-    ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=all_viviendas');
+    var verificate_filters = localStorage.getItem('filters_home') || false;
+    
+
+    if (verificate_filters != false) {//un unico filters
+        load_viviendas_filters_home();
+        
+    } else {
+        ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=all_viviendas');
+    }
 }
+
 
 function ajaxForSearch(url) {
     //alert(url);
@@ -150,32 +159,25 @@ function loadDetails(id_vivienda) {
     });
 }
 
-function loadFilters() { //un unico filters
-    var verificate_filters = localStorage.getItem('filters') || false;
-    
 
-    if (verificate_filters != false) {//un unico filters
-        load_viviendas_filters();
-        
-    } else {
-        ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=all_viviendas');//post?json?
-    }
-}
+function load_viviendas_filters_home() {
+    var filters_home = JSON.parse(localStorage.getItem('filters_home'));
+    //console.log(filtros);
+    //alert("filtros");
+    // return false;
 
-function load_viviendas_filters() {
-    var filtros = JSON.parse(localStorage.getItem('filters'));
-    console.log(filtros);
-    alert("filtros");
-    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=redirect', 'POST', 'JSON', { 'filtros': filtros })
+
+
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=redirect_home', 'POST', 'JSON', { 'filters_home': filters_home })
 
         .then(function(shop) {
             //console.log(shop);
             //return false;
-            alert(".then");
+            //alert(".then");
             $("#content_shop_viviendas").empty();
             for (row in shop) {
-                //$('<div></div>').attr({ 'id': shop[row].id_vivienda, 'class': 'list_content_shop' }).appendTo('#content_shop_viviendas')
-                $('<div></div>').appendTo('#containerShop')
+                //$('<div></div>').appendTo('#containerShop')
+                $('<div></div>').attr({ 'id': shop[row].id_vivienda, 'class': 'list_content_shop' }).appendTo('#content_shop_viviendas')
                 .html(
                     "<div class='list_product'>" +
                     "<div class='img-container'>" +
@@ -209,6 +211,5 @@ function load_viviendas_filters() {
 $(document).ready(function() {
     loadViviendas();
     clicks();
-    loadFilters();
-    load_viviendas_filters();
+    load_viviendas_filters_home();
 }); 

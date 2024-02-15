@@ -8,7 +8,10 @@ include($path . "model/connect.php");
 
 class DAOShop{
 
-	function redirect($filtros){
+	function redirect_home($filters_home){
+		//return $filtros;
+
+
         // $select = "SELECT *
 		// FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o
 		// WHERE v.id_ciudad = c.id_ciudad 
@@ -17,25 +20,28 @@ class DAOShop{
 		// AND v.id_operacion = o.id_operacion";
 
 		$select = "SELECT *
-		FROM vivienda v";
+		FROM vivienda v
+		WHERE";
 
 		
-        if ($filtros[0]['tipo']){
-            $prueba = $filtros[0]['tipo'][0];
-            $select.= " WHERE v.id_tipo = '$prueba';";
+        if (isset($filters_home[0]['tipo'])){
+            $prueba = $filters_home[0]['tipo'][0];
+            $select.= " v.id_tipo = '$prueba'";
         }
-        // else if($filtros[0]['ciudad']) {
-        //     $prueba = $filtros[0]['ciudad'][0];
-        //     //$select.= " AND t.type_name = '$prueba'";
-        // }
-        // else if($filtros[0]['categoria']) {
-        //     $prueba = $filtros[0]['categoria'][0];
-        //     //$select.= " AND c.marca = '$prueba'";
-        // }
-        // else if($filtros[0]['operacion']) {
-        //     $prueba = $filtros[0]['operacion'][0];
-        //     //$select.= " AND c.marca = '$prueba'";
-        // }
+		else if (isset($filters_home[0]['categoria'])) {
+            $prueba = $filters_home[0]['categoria'][0];
+            $select.= " v.id_categoria = '$prueba'";
+        }
+		else if (isset($filters_home[0]['operacion'])) {
+            $prueba = $filters_home[0]['operacion'][0];
+            $select.= " v.id_operacion = '$prueba'";
+        }
+        else if (isset($filters_home[0]['ciudad'])) {
+            $prueba = $filters_home[0]['ciudad'][0];
+            $select.= " v.id_ciudad = '$prueba'";
+        }
+        
+        
         //////////$select.= " LIMIT $total_prod, $items_page";
        
         $conexion = connect::con();
