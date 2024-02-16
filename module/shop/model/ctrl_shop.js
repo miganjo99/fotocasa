@@ -1,13 +1,18 @@
 function loadViviendas() {
+    //localStorage.removeItem('filters_home');  
+    //console.log(localStorage.getItem('filters_home'));
     //alert("hola load shop");
+    // se tiene que borrar el cache al final de function load_viviendas_filters_home()!!!!!!
+    var verificate_filters = localStorage.getItem('filters_home') || null;//de false a null
+   
 
-    var verificate_filters = localStorage.getItem('filters_home') || false;
-    
-
-    if (verificate_filters != false) {//un unico filters
+    if (verificate_filters !=  null) {//un unico filters
+        //console.log(verificate_filters);
+        //alert("entrando en load_viviendas_filters_home");
         load_viviendas_filters_home();
         
     } else {
+        
         ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=all_viviendas');
     }
 }
@@ -15,10 +20,11 @@ function loadViviendas() {
 
 function ajaxForSearch(url) {
     //alert(url);
+    //localStorage.removeItem('filters_home')
     ajaxPromise(url, 'GET', 'JSON')
         .then(function(data) {
             // console.log(data);
-           // alert("ajaxPromise shop dentro");
+           //alert("ajaxPromise shop dentro");
 
 
             $('#content_shop_viviendas').empty();
@@ -83,6 +89,7 @@ function ajaxForSearch(url) {
         }).catch(function() {
            // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function ajxForSearch SHOP";
         });
+        
 }
 
 function clicks() {
@@ -206,6 +213,12 @@ function load_viviendas_filters_home() {
         }).catch(function() {
             // window.location.href = "index.php?modules=exception&op=503&error=fail_salto&type=503";
         });
+        //borrar caché????
+        //
+        //
+        //
+        //
+        localStorage.removeItem('filters_home');
 }
 
 $(document).ready(function() {

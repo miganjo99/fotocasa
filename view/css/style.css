@@ -118,9 +118,9 @@ h2.cat{
 
 /* Estilo para la imagen dentro del card */
 .portfolio-image:hover img {
-  -webkit-box-shadow: -5px 6px 21px -5px rgba(0,0,0,0.75);
-  -moz-box-shadow: -5px 6px 21px -5px rgba(0,0,0,0.75);
-  box-shadow: -5px 6px 21px -5px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -1px 1px 21px -4px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 1px 21px -4px rgba(0,0,0,0.75);
+  box-shadow: -1px 1px 21px -4px rgba(0,0,0,0.75);
 }
 
 
