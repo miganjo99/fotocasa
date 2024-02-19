@@ -85,6 +85,24 @@
 			}
 			return $retrArray;
 		}
+		function select_recomendacion() {
+			$sql= "SELECT * 
+			FROM vivienda 
+			ORDER BY id_vivienda DESC
+			LIMIT 5";
+
+			$conexion = connect::con();
+			$res = mysqli_query($conexion, $sql);
+			connect::close($conexion);
+
+			$retrArray = array();
+			if (mysqli_num_rows($res) > 0) {
+				while ($row = mysqli_fetch_assoc($res)) {
+					$retrArray[] = $row;
+				}
+			}
+			return $retrArray;
+		}
 		// function select_recomendacion(){
 		// 	$sql = "SELECT *
 		// 	FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o

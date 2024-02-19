@@ -75,6 +75,7 @@ class DAOShop{
 		}
 		return $retrArray;
 	}
+	
 	function select_all_viviendas_array(){
 		
 		$sql = "SELECT v.*, i.img_vivienda

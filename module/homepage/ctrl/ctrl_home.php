@@ -76,7 +76,7 @@
         case 'homePageRecomendaciones';
             try{
                 $daohome = new DAOHome();
-                $SelectVivienda = $daohome->select_vivienda();
+                $SelectVivienda = $daohome->select_recomendacion();
             } catch(Exception $e){
                 echo json_encode("error");
             }
