@@ -1,22 +1,135 @@
 function loadViviendas() {
     //localStorage.removeItem('filters_home');  
-    //console.log(localStorage.getItem('filters_home'));
-    //alert("hola load shop");
+    // console.log(localStorage.getItem('filters_shop'));
+    // alert("hola load shop");
     // se tiene que borrar el cache al final de function load_viviendas_filters_home()!!!!!!
-    var verificate_filters = localStorage.getItem('filters_home') || null;//de false a null
-   
-
-    if (verificate_filters !=  null) {//un unico filters
+    var verificate_filters_home = localStorage.getItem('filters_home') || null;//de false a null
+   // var verificate_filters_shop = localStorage.getItem('filters_shop') || null;//de false a null
+    
+    if (verificate_filters_home !=  null) {//un unico filters
         //console.log(verificate_filters);
         //alert("entrando en load_viviendas_filters_home");
         load_viviendas_filters_home();
-        
-    } else {
-        
+    
+    }
+    else {
+       
         ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=all_viviendas');
     }
 }
 
+function print_filters() {
+    //get stringify
+    //set parse
+    //localStorage.setItem('filters_shop', JSON.stringify(filters_shop)); 
+    //.parse=string a json
+
+    //.stringify= obj 
+    $('<div class="div-filters"></div>').appendTo('.filters_shop')
+        .html(
+            '<br>'+
+            '&nbsp'+ '&nbsp'+
+            '<select class="filter_operacion">' +
+            '<option value="0">Operación</option>' +
+            '<option value="1">Compra</option>' +
+            '<option value="2">Alquiler</option>' +
+            '<option value="3">Compartir</option>' +
+            '<option value="4">Alquiler de habitación</option>' +
+            '<option value="5">Alquiler con compra</option>' +
+            '</select>' +
+            /////////////////////////////// MODAL CIUDAD/////////////////////////////////////
+            '&nbsp'+
+            '<input type="radio" name="ciudad" class="filter_ciudad" value="1" id="Valencia">' +
+            '<label for="Valencia">Valencia</label>' +
+            '&nbsp'+
+            '<input type="radio" name="ciudad" class="filter_ciudad" value="2" id="Madrid">' +
+            '<label for="Madrid">Madrid</label>' +
+            '&nbsp'+
+            '<input type="radio" name="ciudad" class="filter_ciudad" value="3" id="Barcelona">' +
+            '<label for="Barcelona">Barcelona</label>' +
+            '&nbsp'+
+            '<input type="radio" name="ciudad" class="filter_ciudad" value="4" id="Santander">' +
+            '<label for="Santander">Santander</label>' +
+            '&nbsp'+
+            '<input type="radio" name="ciudad" class="filter_ciudad" value="5" id="Ontinyent">' +
+            '<label for="Ontinyent">Ontinyent</label>' +
+            '&nbsp'+
+            
+            '<select class="filter_tipo">' +
+            '<option value="0">Tipo de vivienda</option>' +
+            '<option value="1">chalet</option>' +
+            '<option value="2">finca</option>' +
+            '<option value="3">piso</option>' +
+            '<option value="4">casa</option>' +
+            '<option value="5">apartamento</option>' +
+            '</select>' +
+
+            '&nbsp'+
+
+            '<select class="filter_precio">' +
+            '<option value="precio_mayor">Precio de mas a menos </option>' +
+            '<option value="precio_menor">Precio de menos a mas </option>' +            
+            '</select>' +
+
+            '<div id="overlay">' +
+            '<div class= "cv-spinner" >' +
+            '<span class="spinner"></span>' +
+            '</div >' +
+            '</div > ' +
+            '</div>' +
+            '</div>' +
+            '<p> </p>' +
+            '<button class="filter_button button_spinner" id="filter_button">Filter</button>' +
+            '<button class="filter_remove" id="Remove_filter">Remove</button>');
+
+            $(document).on('click', '.Remove_filter', function() {
+                remove_filters();
+            });
+}
+
+function shopAll() {
+    var filters_shop = localStorage.getItem('filters_shop');
+    //var filters_shop = JSON.stringify(localStorage.getItem('filters_shop'));
+
+   
+    console.log(filters_shop);
+    alert("shopall");
+    // if (filters_shop) {
+    //     ajaxForSearch("module/shop/crtl/crtl_shop.php?op=filter", filters_shop);
+    // } else {
+    //     ajaxForSearch("module/shop/crtl/crtl_shop.php?op=all_viviendas");
+    // }
+}
+
+function filter_button() {
+    
+
+    $(function() {
+        $('.filter_operacion').change(function() {
+            localStorage.setItem('filter_operacion', "Hola");
+        });
+        if (localStorage.getItem('filter_operacion')) {
+            $('.filter_operacion').val(localStorage.getItem('filter_operacion'));
+        }
+    });
+    // $(function() {
+    //     $('.filter_order').change(function() {
+    //         localStorage.setItem('filter_order', this.value);
+    //     });
+    //     if (localStorage.getItem('filter_order')) {
+    //         $('.filter_order').val(localStorage.getItem('filter_order'));
+    //     }
+    // });
+    
+    
+}
+
+
+function remove_filters() {
+    localStorage.removeItem('filters_home');
+    
+    location.reload();
+}
 
 function ajaxForSearch(url) {
     //alert(url);
@@ -25,8 +138,6 @@ function ajaxForSearch(url) {
         .then(function(data) {
             // console.log(data);
            //alert("ajaxPromise shop dentro");
-
-
             $('#content_shop_viviendas').empty();
             $('.date_vivienda' && '.date_img').empty();
             //  $('.date_img_array').empty();
@@ -39,16 +150,7 @@ function ajaxForSearch(url) {
                         '<h3>¡No se encuentarn resultados con los filtros aplicados!</h3>'
                     )
             } else {
-                // <script>
-                //              for (row in data[1][0]) {
-                //                 $('<div></div>').attr({ 'id': data[1][0].id_vivienda, class: 'date_img_array' }).appendTo('.date_img_list')
-                //                     .html(
-                //                         "<div class='content-img-list'>" +
-                //                         "<img src= '" + data[1][0][row].img_vivienda + "'" + "</img>" +
-                //                         "</div>"
-                //                     )
-                //                 }
-                //                 </script>
+                
                 for (row in data) {
                     
                     
@@ -76,14 +178,7 @@ function ajaxForSearch(url) {
                             "</div>" +
                             "</div>"
                         )
-                        // $('.date_img_list').slick({
-                        //     infinite: true,
-                        //     speed: 300,
-                        //     slidesToShow: 1,
-                        //     adaptiveHeight: true,
-                        //     autoplay: true,
-                        //     autoplaySpeed: 2600
-                        // });
+                       
                 }
             }
         }).catch(function() {
@@ -224,5 +319,7 @@ function load_viviendas_filters_home() {
 $(document).ready(function() {
     loadViviendas();
     clicks();
+    print_filters();
+    filter_button();
     load_viviendas_filters_home();
 }); 

@@ -97,6 +97,36 @@ class DAOShop{
 	}
 	
 
+	function filters($filters_shop){
+       
+        $consulta = "SELECT *
+		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o, img_vivienda i
+		WHERE v.id_ciudad = c.id_ciudad 
+		AND v.id_categoria = ca.id_categoria
+		AND v.id_tipo = t.id_tipo
+		AND v.id_operacion = o.id_operacion";
+
+            for ($i=0; $i < count($filters_shop); $i++){
+                if ($i==0){
+                    $consulta.= " WHERE c." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
+                }else {
+                    $consulta.= " AND c." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
+                }        
+            }   
+
+        $conexion = connect::con();
+        $res = mysqli_query($conexion, $consulta);
+        connect::close($conexion);
+
+        $retrArray = array();
+        if ($res -> num_rows > 0) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                $retrArray[] = $row;
+            }
+        }
+        return $retrArray;
+    }
+
 	function select_one_vivienda($id){
 		$sql = "SELECT *
 		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o

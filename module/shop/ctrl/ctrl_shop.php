@@ -93,6 +93,22 @@ switch ($_GET['op']) {
         }
         break;
 
+
+    case 'filter';
+        //echo json_encode($_POST['filters_shop']);
+        //break;
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> filters($_POST['filters_shop']);
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+    break;
+
+
+
     default;
         //include("module/exceptions/views/pages/error404.php");
         break;
