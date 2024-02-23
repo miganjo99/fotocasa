@@ -95,10 +95,13 @@ switch ($_GET['op']) {
 
 
     case 'filter';
-        //echo json_encode($_POST['filters_shop']);
-        //break;
+        
+       // echo json_encode("Hola");
+       // break;
+
         $homeQuery = new DAOShop();
         $selSlide = $homeQuery -> filters($_POST['filters_shop']);
+        
         if (!empty($selSlide)) {
             echo json_encode($selSlide);
         }

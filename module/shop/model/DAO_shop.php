@@ -99,21 +99,28 @@ class DAOShop{
 
 	function filters($filters_shop){
        
-        $consulta = "SELECT *
-		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o, img_vivienda i
-		WHERE v.id_ciudad = c.id_ciudad 
-		AND v.id_categoria = ca.id_categoria
-		AND v.id_tipo = t.id_tipo
-		AND v.id_operacion = o.id_operacion";
+		//return "Hola DAOOOOOOOOOOOO";
+		//return $filters_shop;
+		    
+        // $consulta = "SELECT v.*
+		// FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o, img_vivienda i
+		// WHERE v.id_ciudad = c.id_ciudad 
+		// AND v.id_categoria = ca.id_categoria
+		// AND v.id_tipo = t.id_tipo
+		// AND v.id_operacion = o.id_operacion";
 
+
+        $consulta = "SELECT DISTINCT v.*
+		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o, img_vivienda i";
+		//return $consulta;
             for ($i=0; $i < count($filters_shop); $i++){
                 if ($i==0){
-                    $consulta.= " WHERE c." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
+                    $consulta.= " WHERE v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1]; 
                 }else {
-                    $consulta.= " AND c." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
+                    $consulta.= " AND v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
                 }        
             }   
-
+			//return $filters_shop;
         $conexion = connect::con();
         $res = mysqli_query($conexion, $consulta);
         connect::close($conexion);
