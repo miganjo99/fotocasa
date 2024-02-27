@@ -1,8 +1,106 @@
 
 /* CSS FILTROS */
 
+.div-filters {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
 
-.filter_button,
+.select {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+.div-filters select.filter_operacion,
+.div-filters select.filter_ciudad,
+.div-filters select.filter_tipo,
+.div-filters select.filter_precio,
+.div-filters select.filter_habitaciones {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.div-filters select.filter_operacion option,
+.div-filters select.filter_ciudad option,
+.div-filters select.filter_tipo option,
+.div-filters select.filter_precio option,
+.div-filters select.filter_habitaciones option {
+    padding: 5px;
+}
+
+
+
+.filter_button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter_button:hover {
+  background-color: #45a049;
+}
+
+.filter_remove {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.filter_remove:hover {
+  background-color: #db4436;
+}
+
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: none;
+}
+
+.cv-spinner {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  border-radius: 100%;
+  position: relative;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@keyframes sk-scaleout {
+  0% { transform: scale(0) }
+  100% {
+      opacity: 0;
+      transform: scale(1.0);
+  }
+}
+
+
+/* .filter_button,
 .filter_remove {
     padding: 10px 20px;
     margin-top: 10px;
@@ -21,7 +119,7 @@
 .filter_button:hover,
 .filter_remove:hover {
     background-color: #45a049; 
-}
+} */
 
 @import url('https://fonts.googleapis.com/css?family=Heebo:400,700|Open+Sans:400,700');
 

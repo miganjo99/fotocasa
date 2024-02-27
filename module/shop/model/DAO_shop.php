@@ -119,7 +119,13 @@ class DAOShop{
                 }else {
                     $consulta.= " AND v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
                 }        
-            }   
+                // else if{
+                //     $consulta.= " AND v." . $filters_shop[$i][0] .  ">=" . $filters_shop[$i][1];
+                // }        
+                // else if{
+                //     $consulta.= " AND v." . $filters_shop[$i][0] .  "<=" . $filters_shop[$i][1];
+                // }        
+			}    
 			//return $filters_shop;
         $conexion = connect::con();
         $res = mysqli_query($conexion, $consulta);
