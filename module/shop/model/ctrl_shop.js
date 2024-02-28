@@ -25,72 +25,59 @@ function loadViviendas() {
 }
 
 function print_filters() {
-    //get stringify
-    //set parse
-    //localStorage.setItem('filters_shop', JSON.stringify(filters_shop)); 
-    //.parse=string a json
+    
+    
 
-    //.stringify= obj 
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_operacion', 'POST', 'JSON')
+    .then(function(data) {
+        //console.log("data:", data);
+        var selectElement = $('<select class="filter_operacion" id="filter_operacion">');
+        for (var row in data) {
+            selectElement.append($('<option></option>').attr('value', data[row].id_operacion).text(data[row].name_operacion));
+        }
+        selectElement.append('</select>'); 
+        //console.log("selectElement", selectElement);
+
+        $('<div class="div-filters"></div>').appendTo('.div-filters').html(selectElement);
+    });
+
+    
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_ciudad', 'POST', 'JSON')
+    .then(function(data) {
+        var selectElement = $('<select class="filter_ciudad" id="filter_ciudad">');
+        for (var row in data) {
+            selectElement.append($('<option></option>').attr('value', data[row].id_ciudad).text(data[row].name_ciudad));
+        }
+        selectElement.append('</select>');
+        $('<div class="div-filters"></div>').appendTo('.filters_shop').html(selectElement);
+    });
+
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_tipo', 'POST', 'JSON')
+    .then(function(data) {
+        var selectElement = $('<select class="filter_tipo" id="filter_tipo">');
+        for (var row in data) {
+            selectElement.append($('<option></option>').attr('value', data[row].id_tipo).text(data[row].name_tipo));
+        }
+        selectElement.append('</select>');
+        $('<div class="div-filters"></div>').appendTo('.filters_shop').html(selectElement);
+    });
+    
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_categoria', 'POST', 'JSON')
+    .then(function(data) {
+        var selectElement = $('<select class="filter_categoria" id="filter_categoria">');
+        for (var row in data) {
+            selectElement.append($('<option></option>').attr('value', data[row].id_categoria).text(data[row].name_categoria));
+        }
+        selectElement.append('</select>');
+        $('<div class="div-filters"></div>').appendTo('.filters_shop').html(selectElement);
+    });
+
+
+
     
     $('<div class="div-filters"></div>').appendTo('.filters_shop')
     .html(
-        '<br>'+
-        '&nbsp'+ '&nbsp'+
-        // '<select class="filter_operacion" id="filter_operacion">' +
-        // '<option value="0">Operación</option>' +
-        // '<option value="1">Compra</option>' +
-        // '<option value="2">Alquiler</option>' +
-        // '<option value="3">Compartir</option>' +
-        // '<option value="4">Alquiler de habitación</option>' +
-        // '<option value="5">Alquiler con compra</option>' +
-        // '</select>' 
         
-        
-        
-        
-        
-        
-        +
-        /////////////////////////////// MODAL CIUDAD/////////////////////////////////////
-       
-        '&nbsp'+ '&nbsp'+
-        '<select class="filter_ciudad">' +
-        '<option value="0">Ciudad</option>' +
-        '<option value="1">Valencia</option>' +
-        '<option value="2">Madrid</option>' +
-        '<option value="3">Barcelona</option>' +
-        '<option value="4">Santander</option>' +
-        '<option value="5">Ontinyent</option>' +
-        '</select>' +
-
-
-        '&nbsp'+ '&nbsp'+
-        '<select class="filter_tipo">' +
-        '<option value="0" >Tipo de vivienda</option>' +
-        '<option value="1">chalet</option>' +
-        '<option value="2">finca</option>' +
-        '<option value="3">piso</option>' +
-        '<option value="4">casa</option>' +
-        '<option value="5">apartamento</option>' +
-        '</select>' +
-
-        '&nbsp'+ '&nbsp'+
-
-        '<select class="filter_precio">' +
-        '<option value="0">Precio </option>' +
-        '<option value=">100000">Mas de 100.000 euros </option>' +
-        '<option value="<100000">Menos de 100.000 euros </option>' +            
-        '</select>' +
-
-        '&nbsp'+ '&nbsp'+
-
-        'Habitaciones:<select class="filter_habitaciones">' +
-        '<option value="1">+1</option>' +
-        '<option value="2">+2</option>' +            
-        '<option value="3">+3</option>' +            
-        '<option value="4">+4</option>' +            
-        '</select>' +
-
         '<div id="overlay">' +
         '<div class= "cv-spinner" >' +
         '<span class="spinner"></span>' +
@@ -111,66 +98,51 @@ function print_filters() {
 }
 
 function filter_button() {
-    
-    console.log("Hola1");
-    $('.filter_operacion').change(function() {
+
+
+    $(document).on('change', '.filter_operacion', function() {
         console.log("Hola");
         console.log(this.value);
         localStorage.setItem('filter_operacion', this.value);
-
-        
     });
     if (localStorage.getItem('filter_operacion')) {
         $('.filter_operacion').val(localStorage.getItem('filter_operacion'));
     }
 
 
-    $('.filter_ciudad').change(function() {
+    
+
+    $(document).on('change', '.filter_ciudad', function() {
         console.log("Hola");
         console.log(this.value);
         localStorage.setItem('filter_ciudad', this.value);
-
-        
-    });
+    });   
     if (localStorage.getItem('filter_ciudad')) {
         $('.filter_ciudad').val(localStorage.getItem('filter_ciudad'));
     }
 
 
-    $('.filter_tipo').change(function() {
+    $(document).on('change', '.filter_tipo', function() {
         console.log("Hola");
         console.log(this.value);
         localStorage.setItem('filter_tipo', this.value);
-
-        
     });
     if (localStorage.getItem('filter_tipo')) {
         $('.filter_tipo').val(localStorage.getItem('filter_tipo'));
     }
 
 
-    $('.filter_precio').change(function() {
+    $(document).on('change', '.filter_categoria', function() {
         console.log("Hola");
         console.log(this.value);
-        localStorage.setItem('filter_precio', this.value);
-
-        
+        localStorage.setItem('filter_categoria', this.value);
     });
-    if (localStorage.getItem('filter_precio')) {
-        $('.filter_precio').val(localStorage.getItem('filter_precio'));
+    if (localStorage.getItem('filter_categoria')) {
+        $('.filter_categoria').val(localStorage.getItem('filter_categoria'));
     }
 
 
-    $('.filter_habitaciones').change(function() {
-        console.log("Hola");
-        console.log(this.value);
-        localStorage.setItem('filter_habitaciones', this.value);
-
-        
-    });
-    if (localStorage.getItem('filter_habitaciones')) {
-        $('.filter_habitaciones').val(localStorage.getItem('filter_habitaciones'));
-    }
+    
 
 
 
@@ -189,12 +161,10 @@ function filter_button() {
         if (localStorage.getItem('filter_tipo')) {
             filters_shop.push(['id_tipo', localStorage.getItem('filter_tipo')])
         }
-        if (localStorage.getItem('filter_precio')) {
-            filters_shop.push(['precio', localStorage.getItem('filter_precio')])
+        if (localStorage.getItem('filter_categoria')) {
+            filters_shop.push(['id_categoria', localStorage.getItem('filter_categoria')])
         }
-        if (localStorage.getItem('filter_habitaciones')) {
-            filters_shop.push(['num_habs', localStorage.getItem('filter_habitaciones')])
-        }
+       
     
         localStorage.removeItem('filters_shop');
         // console.log("******************************************");
@@ -224,41 +194,35 @@ function highlightFilters() {
 
    //if el select es igual a operacion
 
-        // if (all_filters = 'filter_operacion') {
+        // if (all_filters[0] = 'filter_operacion') {
         //             console.log(document.getElementById('filter_operacion'));
         //          document.getElementById('filter_operacion').value = all_filters[0];
         //          console.log("all filters inside 1",all_filters);
         //     }         
    
-        // if (all_filters = 'filter_ciudad') {
+        // if (all_filters[0] = 'filter_ciudad') {
         //             console.log(document.getElementById('filter_ciudad'));
         //          document.getElementById('filter_operacion').value = all_filters[1];
         //          console.log("all filters inside 2",all_filters);
         //     }         
    
-        // if (all_filters = 'filter_tipo') {
+        // if (all_filters[0] = 'filter_tipo') {
         //             console.log(document.getElementById('filter_tipo'));
         //          document.getElementById('filter_tipo').value = all_filters[2];
         //          console.log("all filters inside 3",all_filters);
         //     }         
    
-        // if (all_filters = 'filter_precio') {
-        //             console.log(document.getElementById('filter_precio'));
-        //          document.getElementById('filter_precio').value = all_filters[3];
+        // if (all_filters[0] = 'filter_categoria') {
+        //             console.log(document.getElementById('filter_categoria'));
+        //          document.getElementById('filter_categoria').value = all_filters[3];
         //          console.log("all filters inside 4",all_filters);
         //     }         
    
-        // if (all_filters = 'filter_habitaciones') {
-        //             console.log(document.getElementById('filter_habitaciones'));
-        //          document.getElementById('filter_habitaciones').value = all_filters[4];
-        //          console.log("all filters inside 5",all_filters);
-        //     }         
+                
    
 
 }
     
-
-
 
 function remove_filters() {
     
@@ -267,8 +231,9 @@ function remove_filters() {
     localStorage.removeItem('filter_operacion');
     localStorage.removeItem('filter_ciudad');
     localStorage.removeItem('filter_tipo');
-    localStorage.removeItem('filter_precio');
-    localStorage.removeItem('filter_habitaciones');
+    localStorage.removeItem('filter_categoria');
+    // localStorage.removeItem('filter_precio');
+    // localStorage.removeItem('filter_habitaciones');
     
     location.reload();
 }
@@ -458,10 +423,29 @@ function load_viviendas_filters_home() {
         localStorage.removeItem('filters_home');
 }
 
+
+function filtro_operacion(){
+
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_operacion', 'POST', 'JSON')
+    .then(function(data) {
+        var selectElement = $('<select class="filter_operacion" id="filter_operacion"></select>');
+        for (var row in data) {
+            selectElement.append($('<option></option>').attr('value', data[row].id_operacion).text(data[row].name_operacion));
+        }
+        $('<div class="div-filters"></div>').appendTo('.filters_shop').html(selectElement);
+    });
+
+
+
+
+
+}
+
+
 $(document).ready(function() {
     print_filters();
     loadViviendas();
-    clicks();
     filter_button();
+    clicks();
     load_viviendas_filters_home();
 }); 

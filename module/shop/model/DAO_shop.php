@@ -140,6 +140,97 @@ class DAOShop{
         return $retrArray;
     }
 
+
+	function select_tipo() {
+		$sql= "SELECT * FROM tipo ORDER BY id_tipo ASC;";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		$retrArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			while ($row = mysqli_fetch_assoc($res)) {
+				$retrArray[] = $row;
+			}
+		}
+		return $retrArray;
+	}
+
+	function select_categorias() {
+		$sql= "SELECT *FROM categoria ORDER BY id_categoria ASC";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		$retrArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			while ($row = mysqli_fetch_assoc($res)) {
+				$retrArray[] = $row;
+			}
+		}
+		return $retrArray;
+	}
+
+	function select_operacion() {
+		$sql= "SELECT *FROM operacion ORDER BY id_operacion ASC";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		$retrArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			while ($row = mysqli_fetch_assoc($res)) {
+				$retrArray[] = $row;
+			}
+		}
+		return $retrArray;
+	}
+
+	function select_ciudad() {
+		$sql= "SELECT * FROM ciudad ORDER BY id_ciudad ASC";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		$retrArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			while ($row = mysqli_fetch_assoc($res)) {
+				$retrArray[] = $row;
+			}
+		}
+		return $retrArray;
+	}
+
+
+	function filtrosdinamicos(){
+		
+		$sql = "SELECT *
+		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o		
+		WHERE  v.id_ciudad = c.id_ciudad 
+		AND v.id_categoria = ca.id_categoria
+		AND v.id_tipo = t.id_tipo
+		AND v.id_operacion = o.id_operacion
+		GROUP BY o.id_operacion";
+
+
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		$retrArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			while ($row = mysqli_fetch_assoc($res)) {
+				$retrArray[] = $row;
+			}
+		}
+		return $retrArray;
+	}
+
 	function select_one_vivienda($id){
 		$sql = "SELECT *
 		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o
