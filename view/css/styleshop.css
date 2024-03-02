@@ -1,6 +1,35 @@
 
 /* CSS FILTROS */
 
+
+
+.filters_container {
+  margin-left: 20px;
+  margin-right: 50px;
+  margin-bottom: 20px; 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  background-color: #f9f9f9; 
+  -webkit-box-shadow: 0px 0px 26px -8px rgba(0,0,0,1);
+-moz-box-shadow: 0px 0px 26px -8px rgba(0,0,0,1);
+box-shadow: 0px 0px 26px -8px rgba(0,0,0,1);
+}
+
+/* Estilos para los selects de filtro */
+.filters_container select {
+  margin-right: 10px; 
+  padding: 8px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+}
+
+
+.filters_shop {
+  width: 100%; 
+  margin: 20px;
+}
+
 .div-filters {
   background-color: #f2f2f2;
   padding: 10px;
@@ -15,34 +44,18 @@
   border: 1px solid #ccc;
   margin-right: 10px;
 }
-.div-filters select.filter_operacion,
-.div-filters select.filter_ciudad,
-.div-filters select.filter_tipo,
-.div-filters select.filter_precio,
-.div-filters select.filter_habitaciones {
-    padding: 5px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-}
-
-.div-filters select.filter_operacion option,
-.div-filters select.filter_ciudad option,
-.div-filters select.filter_tipo option,
-.div-filters select.filter_precio option,
-.div-filters select.filter_habitaciones option {
-    padding: 5px;
-}
-
 
 
 .filter_button {
+  
   background-color: #4CAF50;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 20px;
+  margin: 20px;
 }
 
 .filter_button:hover {
@@ -57,6 +70,7 @@
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px;
+  margin-right: 50px;
 }
 
 .filter_remove:hover {

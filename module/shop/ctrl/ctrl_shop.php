@@ -111,37 +111,7 @@ switch ($_GET['op']) {
     break;
 
 
-    case 'filtro_tipo';
-    try{
-        $daohome = new DAOShop();
-        $SelectTipo = $daohome->select_tipo();
-    } catch(Exception $e){
-        echo json_encode("error");
-    }
     
-    if(!empty($SelectTipo)){
-        echo json_encode($SelectTipo); 
-    }
-    else{
-        echo json_encode("error");
-    }
-    break;
-
-    case 'filtro_categoria';
-        try{
-            $DAOShop = new DAOShop();
-            $SelectCategory = $DAOShop->select_categorias();
-        } catch(Exception $e){
-            echo json_encode("error");
-        }
-        
-        if(!empty($SelectCategory)){
-            echo json_encode($SelectCategory); 
-        }
-        else{
-            echo json_encode("error");
-        }
-    break;
 
     case 'filtro_operacion';
         try{
@@ -175,7 +145,37 @@ switch ($_GET['op']) {
         }
     break;
 
+    case 'filtro_tipo';
+        try{
+            $daohome = new DAOShop();
+            $SelectTipo = $daohome->select_tipo();
+        } catch(Exception $e){
+            echo json_encode("error");
+        }
+        
+        if(!empty($SelectTipo)){
+            echo json_encode($SelectTipo); 
+        }
+        else{
+            echo json_encode("error");
+        }
+    break;
 
+    case 'filtro_categoria';
+        try{
+            $DAOShop = new DAOShop();
+            $SelectCategory = $DAOShop->select_categorias();
+        } catch(Exception $e){
+            echo json_encode("error");
+        }
+        
+        if(!empty($SelectCategory)){
+            echo json_encode($SelectCategory); 
+        }
+        else{
+            echo json_encode("error");
+        }
+    break;
 
     // case 'filtrosdinamicos';
         
