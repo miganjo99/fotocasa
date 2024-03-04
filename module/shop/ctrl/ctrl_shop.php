@@ -177,6 +177,22 @@ switch ($_GET['op']) {
         }
     break;
 
+    case 'filtro_orientacion';
+        try{
+            $DAOShop = new DAOShop();
+            $SelectOrientacion = $DAOShop->select_orientacion();
+        } catch(Exception $e){
+            echo json_encode("error");
+        }
+        
+        if(!empty($SelectOrientacion)){
+            echo json_encode($SelectOrientacion); 
+        }
+        else{
+            echo json_encode("error");
+        }
+    break;
+    
     // case 'filtrosdinamicos';
         
        

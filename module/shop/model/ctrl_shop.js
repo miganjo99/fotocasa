@@ -32,6 +32,7 @@ function print_filters() {
     ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_operacion', 'POST', 'JSON')
     .then(function(data) {
         var selectElement = $('<select class="filter_operacion" id="filter_operacion"></select>'); 
+        selectElement.append($('<option class="filter_operacion" id="filter_operacion" value="0">Operacion</option>'));
         for (var row in data) {
             selectElement.append($('<option></option>').attr('value', data[row].id_operacion).text(data[row].name_operacion));
         }
@@ -41,6 +42,8 @@ function print_filters() {
     ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_ciudad', 'POST', 'JSON')
     .then(function(data) {
         var selectElement = $('<select class="filter_ciudad" id="filter_ciudad"></select>'); 
+        selectElement.append($('<option class="filter_ciudad" id="filter_ciudad" value="0">Ciudad</option>'));
+
         for (var row in data) {
             selectElement.append($('<option></option>').attr('value', data[row].id_ciudad).text(data[row].name_ciudad));
         }
@@ -50,6 +53,8 @@ function print_filters() {
     ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_tipo', 'POST', 'JSON')
     .then(function(data) {
         var selectElement = $('<select class="filter_tipo" id="filter_tipo"></select>'); 
+        selectElement.append($('<option class="filter_tipo" id="filter_tipo" value="0">Tipo</option>'));
+
         for (var row in data) {
             selectElement.append($('<option></option>').attr('value', data[row].id_tipo).text(data[row].name_tipo));
         }
@@ -59,13 +64,39 @@ function print_filters() {
     ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_categoria', 'POST', 'JSON')
     .then(function(data) {
         var selectElement = $('<select class="filter_categoria" id="filter_categoria"></select>'); 
+        selectElement.append($('<option class="filter_categoria" id="filter_categoria" value="0">Categoria</option>'));
+
         for (var row in data) {
             selectElement.append($('<option></option>').attr('value', data[row].id_categoria).text(data[row].name_categoria));
         }
         filters_container.append(selectElement); 
     });
-
     
+    // ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_orientacion', 'POST', 'JSON')
+    // .then(function(data) {
+    //     var selectElement = $('<select class="filter_orientacion" id="filter_orientacion"></select>'); 
+    //     selectElement.append($('<option class="filter_orientacion" id="filter_orientacion" value="0">Orientacion</option>'));
+
+    //     for (var row in data) {
+    //         selectElement.append($('<option></option>').attr('value', data[row].id_orientacion).text(data[row].name_orientacion));
+    //     }
+    //     filters_container.append(selectElement); 
+    // });
+
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_orientacion', 'POST', 'JSON')
+    .then(function(data) {
+        var checkbox_container = $('<div class="checkbox_container"></div>'); 
+
+        for (var row in data) {
+            var checkbox_orientacion = $('<label></label>').text(data[row].name_orientacion);
+            checkbox_orientacion.prepend('<input type="checkbox" id= class="filter_orientacion" value="' + data[row].id_orientacion + '"> ');
+            checkbox_container.append(checkbox_orientacion);
+        }
+
+        filters_container.append(checkbox_container); 
+    });
+
+
     var botones = '<button class="filter_button button_spinner" id="filter_button">Filter</button>' +
                 '<button class="filter_remove" id="Remove_filter">Remove</button>';
     filters_container.append(botones);
@@ -124,6 +155,15 @@ function filter_button() {
         $('.filter_categoria').val(localStorage.getItem('filter_categoria'));
     }
 
+    $(document).on('change', '.filter_orientacion', function() {
+        console.log("Hola");
+        console.log(this.value);
+        localStorage.setItem('filter_orientacion', this.value);
+    });
+    if (localStorage.getItem('filter_orientacion')) {
+        $('.filter_orientacion').val(localStorage.getItem('filter_orientacion'));
+    }
+
 
     
 
@@ -147,6 +187,9 @@ function filter_button() {
         if (localStorage.getItem('filter_categoria')) {
             filters_shop.push(['id_categoria', localStorage.getItem('filter_categoria')])
         }
+        if (localStorage.getItem('filter_orientacion')) {
+            filters_shop.push(['id_orientacion', localStorage.getItem('filter_orientacion')])
+        }
        
     
         localStorage.removeItem('filters_shop');
@@ -163,7 +206,7 @@ function filter_button() {
         // CUANDO SI QUE ENCUENTRA RESPUESTA 
 
 
-        $('#content_shop_viviendas').empty();
+        $('#content_shop_viviendas').empty();//borrar toto los resultados de los filtros antiguos, para que marque bien el highlight
 
         if (filters_shop.length > 0) {
             ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=filter', 'POST', 'JSON', { 'filters_shop': filters_shop })
@@ -181,7 +224,7 @@ function filter_button() {
                 });
         }
 
-
+        
     
     });
     
@@ -217,6 +260,10 @@ function highlightFilters() {
             console.log('id_categoria', valor);
             $('#filter_categoria').val(valor);
         }
+        if (nombre === 'id_orientacion') {
+            console.log('id_orientacion', valor);
+            $('#filter_orientacion').val(valor);
+        }
     }
 
 
@@ -231,6 +278,7 @@ function remove_filters() {
     localStorage.removeItem('filter_ciudad');
     localStorage.removeItem('filter_tipo');
     localStorage.removeItem('filter_categoria');
+    localStorage.removeItem('filter_orientacion');
     // localStorage.removeItem('filter_precio');
     // localStorage.removeItem('filter_habitaciones');
     
