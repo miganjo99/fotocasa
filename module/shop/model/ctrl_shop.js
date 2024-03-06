@@ -12,11 +12,15 @@ function loadViviendas() {
     }else if(verificate_filters_shop !=  null){
         //alert("enviando al ajaxforsearch");
         //alert(verificate_filters_shop);
-
+        
         var filters_shop=JSON.parse(verificate_filters_shop);
         ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop });
         
         //highlightFilters();
+        setTimeout(() => {
+            highlightFilters();
+            
+          }, "1000");
           
     }
     else {
@@ -26,6 +30,8 @@ function loadViviendas() {
 }
 
 function print_filters() {
+    
+    
     
     var filters_container = $('<div class="filters_container"></div>');
 
@@ -72,43 +78,36 @@ function print_filters() {
         filters_container.append(selectElement); 
     });
     
-    // ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_orientacion', 'POST', 'JSON')
-    // .then(function(data) {
-    //     var selectElement = $('<select class="filter_orientacion" id="filter_orientacion"></select>'); 
-    //     selectElement.append($('<option class="filter_orientacion" id="filter_orientacion" value="0">Orientacion</option>'));
-
-    //     for (var row in data) {
-    //         selectElement.append($('<option></option>').attr('value', data[row].id_orientacion).text(data[row].name_orientacion));
-    //     }
-    //     filters_container.append(selectElement); 
-    // });
-
     ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_orientacion', 'POST', 'JSON')
     .then(function(data) {
-        var checkbox_container = $('<div class="checkbox_container"></div>'); 
+        var radio = $('<div class="radio_container"></div>'); 
 
         for (var row in data) {
-            var checkbox_orientacion = $('<label></label>').text(data[row].name_orientacion);
-            checkbox_orientacion.prepend('<input type="checkbox" id= class="filter_orientacion" value="' + data[row].id_orientacion + '"> ');
-            checkbox_container.append(checkbox_orientacion);
+            var eleccion_orientacion = $('<label></label>').text(data[row].name_orientacion);
+            eleccion_orientacion.prepend('<input type="radio" name="orientacion" class="filter_orientacion" value="' + data[row].id_orientacion + '"> ');
+            radio.append(eleccion_orientacion);
         }
 
-        filters_container.append(checkbox_container); 
+        filters_container.append(radio); 
     });
 
+
+        
 
     var botones = '<button class="filter_button button_spinner" id="filter_button">Filter</button>' +
                 '<button class="filter_remove" id="Remove_filter">Remove</button>';
     filters_container.append(botones);
 
-                      
+            
     $('.filters_shop').html(filters_container);
                       
+    
     $(document).on('click', '.filter_remove', function() {
         remove_filters();
     });
         //localStorage.removeItem('filters_shop');//se borran aqui los filtros?
-
+    
+    
 }
 
 function filter_button() {
@@ -192,37 +191,12 @@ function filter_button() {
         }
        
     
-        localStorage.removeItem('filters_shop');
-        // console.log("******************************************");
-        // console.log(filters_shop);
-        // console.log("******************************************");
+        localStorage.removeItem('filters_shop'); 
+
+        localStorage.setItem('filters_shop', JSON.stringify(filters_shop));   
+          
+        location.reload();
         
-        localStorage.setItem('filters_shop', JSON.stringify(filters_shop));
-        //location.reload();
-
-        
-        // CONTROL PARA EL HIGHLIGHT, PARA QUE RECARGUE Y BORRE FILTROS
-        // EN CASO DE NO ENCONTRAR VIVIENDAS CON DICHOS FILTROS, Y LLAMAR A HIGHLIGHFILTERS(), 
-        // CUANDO SI QUE ENCUENTRA RESPUESTA 
-
-
-        $('#content_shop_viviendas').empty();//borrar toto los resultados de los filtros antiguos, para que marque bien el highlight
-
-        if (filters_shop.length > 0) {
-            ajaxForSearch('module/shop/ctrl/ctrl_shop.php?op=filter', 'POST', 'JSON', { 'filters_shop': filters_shop })
-                .then(function (data) {
-                    if (Array.isArray(data) && data.length > 0) {
-                        highlightFilters();
-                    } else {
-                        localStorage.removeItem('filters_shop');
-                        location.reload();
-                    }
-                })
-                .catch(function (error) {
-                    alert("ERRORCATCH");
-                    console.error('Error al aplicar los filtros:', error);
-                });
-        }
 
         
     
@@ -288,9 +262,11 @@ function remove_filters() {
 function ajaxForSearch(url, type, JSON, data=undefined) {
     //alert(url);
     //localStorage.removeItem('filters_home')
+    
     ajaxPromise(url, type, JSON, data)
         .then(function(data) {
              //console.log(data);
+             
            //alert("ajaxPromise shop dentro");
             $('#content_shop_viviendas').empty();
             $('.date_vivienda' && '.date_img').empty();

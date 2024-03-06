@@ -24,6 +24,22 @@
                 echo json_encode("error");
             }
         break;
+        
+        case 'Carrousel_orientacion';
+            try{
+                $daohome = new DAOHome();
+                $SelectTipo = $daohome->select_orientacion();
+            } catch(Exception $e){
+                echo json_encode("error");
+            }
+            
+            if(!empty($SelectTipo)){
+                echo json_encode($SelectTipo); 
+            }
+            else{
+                echo json_encode("error");
+            }
+        break;
 
         case 'homePageCategoria';
             try{

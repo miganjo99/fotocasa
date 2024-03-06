@@ -2,9 +2,37 @@
 /* CSS FILTROS */
 
 
+.radio_container {
+  display: inline-block;
+  margin-right: 18px;
+  font-size: 16px;
+      font-weight: 400;
+      height: 100%;
+      line-height: 28px;
+      vertical-align: baseline;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      color: #646464;
+      transition: all 0.5s ease 0s;
+
+}
+input[type='radio'],
+    label {
+      vertical-align: baseline;
+      padding: 5px;
+      
+    }
+
+
+
+
+
 
 .filters_container {
   margin-left: 20px;
+  /* position: fixed;
+  z-index: 5; */
   margin-right: 50px;
   margin-bottom: 20px; 
   padding: 10px; 
@@ -12,8 +40,8 @@
   border-radius: 8px; 
   background-color: #f9f9f9; 
   -webkit-box-shadow: 0px 0px 26px -8px rgba(0,0,0,1);
--moz-box-shadow: 0px 0px 26px -8px rgba(0,0,0,1);
-box-shadow: 0px 0px 26px -8px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 26px -8px rgba(0,0,0,1);
+  box-shadow: 0px 0px 26px -8px rgba(0,0,0,1);
 }
 
 /* Estilos para los selects de filtro */

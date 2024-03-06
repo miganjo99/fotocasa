@@ -1,3 +1,31 @@
+function carousel_orientacion() {
+    ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=Carrousel_orientacion','GET', 'JSON')
+    .then(function(data) {        
+        //console.log(data);
+        
+        for (row in data) {
+                $('<div></div>').attr('class', "carousel__elements").attr('id', data[row].id_orientacion).appendTo(".carousel__list")
+                .html(
+                    "<img class='carousel__img' id='' src='" + data[row].img_orientacion + "' alt='' >"
+                    +
+                    "<h5 class='tipo_name'>" + data[row].name_orientacion + "</h5>" 
+                )
+            }
+            new Glider(document.querySelector('.carousel__list'), {
+                slidesToShow: 3,
+                dots: '.carousel__indicator',
+                draggable: true,
+                arrows: {
+                    prev: '.carousel__prev',
+                    next: '.carousel__next'
+                }
+            });
+        })
+        // .catch(function() {
+        //     window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Carrusel_tipo HOME";
+        // });
+}
+
 function carousel_tipo() {
     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=Carrousel_tipo','GET', 'JSON')
     .then(function(data) {        
