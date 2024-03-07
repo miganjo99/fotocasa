@@ -25,10 +25,10 @@
             }
         break;
         
-        case 'Carrousel_orientacion';
+        case 'Carrousel_innovacion';
             try{
                 $daohome = new DAOHome();
-                $SelectTipo = $daohome->select_orientacion();
+                $SelectTipo = $daohome->select_innovacion();
             } catch(Exception $e){
                 echo json_encode("error");
             }

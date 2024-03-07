@@ -10,8 +10,6 @@ function loadViviendas() {
         load_viviendas_filters_home();
     
     }else if(verificate_filters_shop !=  null){
-        //alert("enviando al ajaxforsearch");
-        //alert(verificate_filters_shop);
         
         var filters_shop=JSON.parse(verificate_filters_shop);
         ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop });
@@ -194,7 +192,7 @@ function filter_button() {
         localStorage.removeItem('filters_shop'); 
 
         localStorage.setItem('filters_shop', JSON.stringify(filters_shop));   
-          
+
         location.reload();
         
 
@@ -235,8 +233,7 @@ function highlightFilters() {
             $('#filter_categoria').val(valor);
         }
         if (nombre === 'id_orientacion') {
-            console.log('id_orientacion', valor);
-            $('#filter_orientacion').val(valor);
+            $('input[name="orientacion"][value="' + valor + '"]').prop('checked', true);
         }
     }
 

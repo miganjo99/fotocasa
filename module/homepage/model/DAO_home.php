@@ -22,8 +22,8 @@
 			return $retrArray;
 		}
 
-		function select_orientacion() {
-			$sql= "SELECT * FROM `operacion` ORDER BY name_operacion ASC LIMIT 30;";
+		function select_innovacion() {
+			$sql= "SELECT * FROM `innovacion` ORDER BY name_innovacion ASC LIMIT 30;";
 
 			$conexion = connect::con();
 			$res = mysqli_query($conexion, $sql);

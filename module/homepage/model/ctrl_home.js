@@ -1,25 +1,27 @@
-function carousel_orientacion() {
-    ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=Carrousel_orientacion','GET', 'JSON')
+function carousel_innovacion() {
+    ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=Carrousel_innovacion','GET', 'JSON')
     .then(function(data) {        
         //console.log(data);
         
         for (row in data) {
-                $('<div></div>').attr('class', "carousel__elements").attr('id', data[row].id_orientacion).appendTo(".carousel__list")
+                $('<div></div>').attr('class', "carousel__elements_innovacion").attr('id', data[row].id_innovacion).appendTo(".carousel__innovacion")
                 .html(
-                    "<img class='carousel__img' id='' src='" + data[row].img_orientacion + "' alt='' >"
+                    "<img class='carousel__img_innovacion' id='' src='" + data[row].img_innovacion + "' alt='' >"
                     +
-                    "<h5 class='tipo_name'>" + data[row].name_orientacion + "</h5>" 
+                    "<h5 class='tipo_name_innovacion'>" + data[row].name_innovacion + "</h5>" 
+                    +"<br><br><br>"+"<br><br><br>"
                 )
             }
-            new Glider(document.querySelector('.carousel__list'), {
+            new Glider(document.querySelector('.carousel__innovacion'), {
                 slidesToShow: 3,
-                dots: '.carousel__indicator',
+                slidesToScroll: 1,
                 draggable: true,
+                dots: '.dots',
                 arrows: {
-                    prev: '.carousel__prev',
-                    next: '.carousel__next'
+                  prev: '.glider-prev',
+                  next: '.glider-next'
                 }
-            });
+              });
         })
         // .catch(function() {
         //     window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Carrusel_tipo HOME";
@@ -217,6 +219,7 @@ function clicks(){
 
 
 $(document).ready(function() {
+    carousel_innovacion();
     carousel_tipo();
     loadCategorias();
     loadOperacion();

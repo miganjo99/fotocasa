@@ -1,3 +1,72 @@
+/* Estilos para el texto del h5 en el carrusel de innovación */
+.carousel__elements_innovacion h5.tipo_name_innovacion {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente elegante y legible */
+  font-size: 30px; /* Tamaño del texto */
+  color: #000000; /* Color del texto */
+  text-align: center; /* Alineación del texto */
+  margin-top: 10px; /* Espaciado superior */
+  margin-bottom: 5px; /* Espaciado inferior */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejorar la legibilidad */
+  letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+/* Efecto de hover para el texto del h5 */
+.carousel__elements_innovacion h5.tipo_name_innovacion:hover {
+  transform: scale(1.1); /* Escala el texto al pasar el mouse para agregar un efecto de zoom */
+}
+
+/* Estilos para las imágenes del carrusel de innovación */
+.carousel__img_innovacion {
+  width: 100%; /* Ajusta el ancho de las imágenes al 100% del contenedor */
+  height: 300px; /* Establece una altura fija para las imágenes */
+  object-fit: cover; /* Escala la imagen para que cubra todo el contenedor */
+  border-radius: 8px; /* Agrega esquinas redondeadas */
+}
+
+/* Estilos para los elementos del carrusel de innovación */
+.carousel__elements_innovacion {
+  margin-right: 10px; /* Agrega espacio entre cada elemento */
+}
+
+/* Estilos para los botones de navegación del carrusel de innovación */
+.carousel__innovacion .glider-prev,
+.carousel__innovacion .glider-next {
+  background-color: #333; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  padding: 5px; /* Espaciado interno */
+  border: none; /* Quita el borde */
+  border-radius: 50%; /* Hace que los botones sean redondos */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  position: absolute; /* Posiciona los botones absolutamente */
+  top: 50%; /* Alinea los botones verticalmente al centro */
+  transform: translateY(-50%); /* Ajusta la posición verticalmente */
+  z-index: 1; /* Asegura que estén por encima del carrusel */
+}
+
+/* Estilos para el indicador de puntos del carrusel de innovación */
+.carousel__innovacion .dots {
+  text-align: center; /* Alinea los puntos al centro */
+  margin-top: 10px; /* Agrega espacio encima de los puntos */
+}
+
+.carousel__innovacion .dot {
+  display: inline-block; /* Hace que los puntos se muestren en línea */
+  width: 10px; /* Ancho de los puntos */
+  height: 10px; /* Altura de los puntos */
+  background-color: #bbb; /* Color de fondo de los puntos */
+  border-radius: 50%; /* Hace que los puntos sean redondos */
+  margin: 0 5px; /* Agrega espacio entre los puntos */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+
+
+
+
+
+
+
+
 .h2 {
   font-size: 35px;
   font-family: Verdana;
