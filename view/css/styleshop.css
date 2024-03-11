@@ -2,6 +2,18 @@
 /* CSS FILTROS */
 
 
+.ultima_busqueda {
+  background-color: #91a320; /* Color de fondo */
+  
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+  margin: 20px;
+}
+
 .radio_container {
   display: inline-block;
   margin-right: 18px;

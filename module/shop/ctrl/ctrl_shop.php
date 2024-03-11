@@ -110,8 +110,54 @@ switch ($_GET['op']) {
         }
     break;
 
+    case 'filter_ult';
+        
+       
+        try {
+            $daoshop = new DAOShop();
+            $Dates_Viviendas = $daoshop->filter_ult($_GET['ultima_busqueda']);
+        } catch (Exception $e) {
+            echo json_encode("error");
+        }
+        try {
+            $daoshop_img = new DAOShop();
+            $Date_images = $daoshop_img->filter_ult_img($_GET['ultima_busqueda']);
+        } catch (Exception $e) {
+            echo json_encode("error");
+        }
+
+        if (!empty($Dates_Viviendas || $Date_images)) {
+            $rdo = array();
+            $rdo[0] = $Dates_Viviendas;
+            $rdo[1][] = $Date_images;
+            echo json_encode($rdo);
+        } else {
+            echo json_encode("error");
+        }
+
+
+
+    break;
+
 
     
+
+    case 'filtro_ordenar';
+       
+        try{
+            $DAOShop = new DAOShop();
+            $SelectOperation = $DAOShop->select_orden($_POST['filters_shop']);
+        } catch(Exception $e){
+            echo json_encode("error");
+        }
+        
+        if(!empty($SelectOperation)){
+            echo json_encode($SelectOperation); 
+        }
+        else{
+            echo json_encode("error");
+        }
+    break;
 
     case 'filtro_operacion';
         try{

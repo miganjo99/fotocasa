@@ -75,6 +75,73 @@ class DAOShop{
 		}
 		return $retrArray;
 	}
+
+	function select_orden($filters_shop){
+		
+		
+		$consulta = "SELECT DISTINCT v.*
+		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o, img_vivienda i";
+		//return $consulta;
+		
+		if ($filters_shop[0][0] == 'precio') {
+				//echo json_encode("*********************");
+				//return false;
+	
+				if ($filters_shop[0][1] == 1) {
+					$consulta .=  " ORDER BY v.precio ASC";
+				} elseif ($filters_shop[0][1] == 2) {
+					$consulta .= " ORDER BY v.precio DESC";
+				}
+			}
+			
+			//return $filters_shop;
+        $conexion = connect::con();
+        $res = mysqli_query($conexion, $consulta);
+        connect::close($conexion);
+
+        $retrArray = array();
+        if ($res -> num_rows > 0) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                $retrArray[] = $row;
+            }
+        }
+        return $retrArray;
+		
+		
+		
+		
+		
+		
+		
+		
+		// $sql = "SELECT * 
+		// FROM vivienda v";
+
+		// if ($filters_shop[0][0] == 'precio') {
+		// 	//echo json_encode("*********************");
+		// 	//return false;
+
+		// 	if ($filters_shop[0][1] == 1) {
+		// 		$sql .=  " ORDER BY v.precio ASC";
+		// 	} elseif ($filters_shop[0][1] == 2) {
+		// 		$sql .= " ORDER BY v.precio DESC";
+		// 	}
+		// }
+
+
+
+		// $conexion = connect::con();
+		// $res = mysqli_query($conexion, $sql);
+		// connect::close($conexion);
+
+		// $retrArray = array();
+		// if (mysqli_num_rows($res) > 0) {
+		// 	while ($row = mysqli_fetch_assoc($res)) {
+		// 		$retrArray[] = $row;
+		// 	}
+		// }
+		// return $retrArray;
+	}
 	
 	function select_all_viviendas_array(){
 		
@@ -113,19 +180,23 @@ class DAOShop{
         $consulta = "SELECT DISTINCT v.*
 		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o, img_vivienda i";
 		//return $consulta;
-            for ($i=0; $i < count($filters_shop); $i++){
-                if ($i==0){
-                    $consulta.= " WHERE v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1]; 
-                }else {
-                    $consulta.= " AND v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
-                }        
-                // else if{
-                //     $consulta.= " AND v." . $filters_shop[$i][0] .  ">=" . $filters_shop[$i][1];
-                // }        
-                // else if{
-                //     $consulta.= " AND v." . $filters_shop[$i][0] .  "<=" . $filters_shop[$i][1];
-                // }        
-			}    
+		for ($i = 0; $i < count($filters_shop); $i++) {
+			if ($i == 0 ) {
+				$consulta .= " WHERE v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1]; 
+			} else {
+				$consulta .= " AND v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
+			}
+			
+		}   
+
+		
+
+	
+
+		
+
+			
+			
 			//return $filters_shop;
         $conexion = connect::con();
         $res = mysqli_query($conexion, $consulta);
@@ -139,6 +210,42 @@ class DAOShop{
         }
         return $retrArray;
     }
+
+	function filter_ult($ultima_busqueda){
+       
+
+        $sql = "SELECT *
+		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o
+		WHERE v.id_vivienda = '$ultima_busqueda'
+		AND  v.id_ciudad = c.id_ciudad 
+		AND v.id_categoria = ca.id_categoria
+		AND v.id_tipo = t.id_tipo
+		AND v.id_operacion = o.id_operacion";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql)->fetch_object();
+		connect::close($conexion);
+
+		return $res;
+    }
+	
+	function filter_ult_img($ultima_busqueda){
+		$sql = "SELECT i.id_vivienda, i.img_vivienda
+			    FROM img_vivienda i
+			    WHERE i.id_vivienda = '$ultima_busqueda'";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		$imgArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			foreach ($res as $row) {
+				array_push($imgArray, $row);
+			}
+		}
+		return $imgArray;
+	}
 
 	function select_operacion() {
 		$sql= "SELECT *FROM operacion ORDER BY id_operacion ASC";

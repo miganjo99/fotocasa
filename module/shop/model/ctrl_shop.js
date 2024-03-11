@@ -32,6 +32,29 @@ function print_filters() {
     
     
     var filters_container = $('<div class="filters_container"></div>');
+    
+
+    var selectElement1 = $('<div class="div-filters-ordenar"></div>').html(
+        '<select class="filter_ordenar">' +
+        '<option value="1">Ordenar precio de menor a mayor</option>' +
+        '<option value="2">Ordenar precio de mayor a menor</option>' +
+        '</select>'
+    );
+    filters_container.append(selectElement1);
+
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_ordenar', 'POST', 'JSON', { 'filters_shop': filters_shop })
+    .then(function(data) {
+
+    //     var selectElement1 = $('<div class="div-filters-ordenar"></div>').html(
+    //     '<select class="filter_ordenar">' +
+    //     '<option value="1">Ordenar precio de menor a mayor</option>' +
+    //     '<option value="2">Ordenar precio de mayor a menor</option>' +
+    //     '</select>'
+    // );
+        //filters_container.append(selectElement1);
+        ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop });
+
+    });
 
     ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_operacion', 'POST', 'JSON')
     .then(function(data) {
@@ -89,11 +112,12 @@ function print_filters() {
         filters_container.append(radio); 
     });
 
-
+    
         
 
     var botones = '<button class="filter_button button_spinner" id="filter_button">Filter</button>' +
-                '<button class="filter_remove" id="Remove_filter">Remove</button>';
+                '<button class="filter_remove" id="Remove_filter">Remove</button>' +
+                '<button class="ultima_busqueda" id="ultima_busqueda">ultima busqueda</button>';
     filters_container.append(botones);
 
             
@@ -103,12 +127,99 @@ function print_filters() {
     $(document).on('click', '.filter_remove', function() {
         remove_filters();
     });
-        //localStorage.removeItem('filters_shop');//se borran aqui los filtros?
+
+    $(document).on('click', '.ultima_busqueda', function() {
+        ultima_busqueda();
+    });
+        //localStorage.removeItem('filters_shop');//se borran aqui los filtros?        
+}
+
+
+function ultima_busqueda() {
+    
+    var ultima_busqueda = localStorage.getItem('id');
+    console.log("ultima_busqueda",ultima_busqueda);
+    //var filter_ult=JSON.parse(ultima_busqueda);
+       // ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter_ult", 'POST', 'JSON', ultima_busqueda);
+
+        ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filter_ult&ultima_busqueda=' + ultima_busqueda, 'GET', 'JSON')
+        .then(function(data) {
+            console.log(data);
+           // alert("load details");
+
+            $('#content_shop_viviendas').empty();
+            $('.date_img_dentro').empty();
+            $('.date_vivienda_dentro').empty();
+    
+            for (row in data[1][0]) {
+                $('<div></div>').attr({ 'id': data[1][0].id_img, class: 'date_img_dentro' }).appendTo('.date_img')
+                    .html(
+                        "<div class='content-img-details'>" +
+                        "<img src= '" + data[1][0][row].img_vivienda + "'" + "</img>" +
+                        "</div>"
+                    )
+            }
+    
+            $('<div></div>').attr({ 'id': data[0].id_vivienda, class: 'date_vivienda_dentro' }).appendTo('.date_vivienda')
+                .html(
+                    
+                    "<div class='list_product_details'>" +
+                    "<div class='product-info_details'>" +
+                    "<div class='product-content_details'>" +
+                    "<h1><b>" + data[0].precio +" "+ "<i class='fa-solid fa-euro-sign'></i>"+"</b></h1>" +
+                    "<hr class=hr-shop>" +
+                    "<table id='table-shop'> <tr>" +
+                    "<td> <i id='col-ico' class='fa-regular fa-calendar fa-2xl'></i> &nbsp;" + data[0].antiguedad + " años" + "</td>" +
+                    "<td> <i id='col-ico' class='fa-solid fa-door-open fa-2xl'></i> &nbsp;" + data[0].num_habs + " habitaciones" + "</td>  </tr>" +
+                    "<td> <i id='col-ico' class='fa-solid fa-calendar-days fa-2xl'></i> &nbsp;" + data[0].fecha_publicacion + "</td>" +
+                    "<td> <i id='col-ico' class='fa-solid fa-bath fa-2xl'></i> &nbsp;" + data[0].aseos + " aseos"+ "</td>  </tr>" +
+                    "<td> <i id='col-ico' class='fa-solid fa-house fa-2xl'></i> &nbsp;" + data[0].name_tipo + "</td>" +
+                    "<td> <i id='col-ico' class='fa-solid fa-key fa-2xl'></i> &nbsp;" + data[0].name_operacion + "</td>  </tr>" +
+                    "<td> <i id='col-ico' class='fa-solid fa-city fa-2xl'></i> &nbsp;" + data[0].name_ciudad + "</td>" +
+                    "<td> <i id='col-ico' class='fa-solid fa-trowel fa-2xl'></i> &nbsp;" + data[0].name_categoria + "</td>" +
+                    "</table>" +
+                    "<hr class=hr-shop>" +
+                    "<h3><b>" + "Descripción:" + "</b></h3>" +
+                    "<p>" + data[0].descripcion + "</p>" +
+                    "<div class='buttons_details'>" +
+                    "<a class='button add' href='#'>Contactar</a>" +
+                    "<a class='button buy' href='#'>Guardar</a>" +
+                    "<span class='button' id='price_details'>" + data[0].precio +" "+ "<i class='fa-solid fa-euro-sign'></i> </span>" +
+                    "<a class='details__heart' id='" + data[0].id_vivienda + "'><i id=" + data[0].id_vivienda + " class='fa-solid fa-heart fa-lg'></i></a>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>"
+                )
     
     
+            $('.date_img').slick({
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true,
+                autoplay: true,
+                autoplaySpeed: 2600
+            });
+        }).catch(function() {
+            // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
+        });    
+   
 }
 
 function filter_button() {
+
+    
+
+    $(document).on('change', '.filter_ordenar', function() {
+        console.log("Hola");
+        console.log(this.value);
+        localStorage.setItem('filter_ordenar', this.value);
+    });
+    if (localStorage.getItem('filter_ordenar')) {
+        $('.filter_ordenar').val(localStorage.getItem('filter_ordenar'));
+    }
+
 
 
     $(document).on('change', '.filter_operacion', function() {
@@ -172,6 +283,10 @@ function filter_button() {
     $(document).on('click', '.filter_button', function () {
         var filters_shop = [];
 
+        if (localStorage.getItem('filter_ordenar')) {
+            filters_shop.push(['precio', localStorage.getItem('filter_ordenar')])
+        }
+        
         if (localStorage.getItem('filter_operacion')) {
             filters_shop.push(['id_operacion', localStorage.getItem('filter_operacion')])
         }
@@ -192,6 +307,9 @@ function filter_button() {
         localStorage.removeItem('filters_shop'); 
 
         localStorage.setItem('filters_shop', JSON.stringify(filters_shop));   
+        
+
+        //localStorage.setItem('filters_shop', JSON.stringify(filters_ultimos));   
 
         location.reload();
         
@@ -250,7 +368,7 @@ function remove_filters() {
     localStorage.removeItem('filter_tipo');
     localStorage.removeItem('filter_categoria');
     localStorage.removeItem('filter_orientacion');
-    // localStorage.removeItem('filter_precio');
+    localStorage.removeItem('filter_ordenar');
     // localStorage.removeItem('filter_habitaciones');
     
     location.reload();
@@ -320,6 +438,10 @@ function clicks() {
         var id_vivienda = this.getAttribute('id');
         //console.log(id_vivienda);
         //alert("button more info");
+       
+        localStorage.setItem('id', id_vivienda);
+        //console.log(localStorage.getItem('id'));
+
         loadDetails(id_vivienda);
     });
 }

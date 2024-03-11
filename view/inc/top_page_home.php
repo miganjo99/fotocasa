@@ -47,6 +47,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	
 	<script src="module/homepage/model/ctrl_home.js"></script>
+	<script src="module/search/model/crtl_search.js"></script>
+
 
 	<script src="view/js/promises.js"></script>
 
