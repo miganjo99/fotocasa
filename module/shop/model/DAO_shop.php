@@ -210,6 +210,52 @@ class DAOShop{
         }
         return $retrArray;
     }
+	function search($filters_search){
+       
+		
+        $consulta = "SELECT v.*, i.*, c.*
+		FROM vivienda v, ciudad c, innovacion i
+		WHERE v.id_innovacion = i.id_innovacion
+		AND v.id_ciudad = c.id_ciudad";
+		
+		for ($i = 0; $i < count($filters_search); $i++) {
+			if ($i == 0 ) {
+
+				if ($filters_search[0]['id_operacion'][0]){
+                     $consulta .= " AND v.id_operacion = " . ($filters_search[0]['id_operacion'][0]);
+                    
+                    
+                }
+				else if ($filters_search[0]['id_innovacion'][0]){
+                     $consulta .= " AND v.id_innovacion = " . ($filters_search[0]['id_innovacion'][0]);
+                    
+                    
+                }
+
+				// $consulta .= " AND v." . $filters_search[$i][0] . "=" . $filters_search[$i][1]; 
+			} 
+			// else if {
+			// 	$consulta .= " AND v." . $filters_search[$i][0] . "=" . $filters_search[$i][1];
+			
+			// } else if {
+			// 	$consulta .= " AND c.name_ciudad" . $filters_search[$i][0] . "=" . $filters_search[$i][1];
+			// }
+			
+		}   
+
+
+        $conexion = connect::con();
+        $res = mysqli_query($conexion, $consulta);
+        connect::close($conexion);
+
+        $retrArray = array();
+        if ($res -> num_rows > 0) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                $retrArray[] = $row;
+            }
+        }
+        return $retrArray;
+    }
 
 	function filter_ult($ultima_busqueda){
        

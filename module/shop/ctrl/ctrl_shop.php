@@ -109,6 +109,22 @@ switch ($_GET['op']) {
             echo "error";
         }
     break;
+    
+    case 'search';
+        
+       // echo json_encode("Hola");
+       // break;
+
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> search($_POST['filters_search']);
+        
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+    break;
 
     case 'filter_ult';
         

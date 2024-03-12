@@ -3,11 +3,11 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
 include($path . "module/search/model/DAO_search.php");
 
 switch ($_GET['op']) {
-    case 'search_ciudad';
+    case 'search_operacion';
      //echo json_encode("BREAK search ciudad");
      //break;
         $homeQuery = new DAOSearch();
-        $selSlide = $homeQuery -> search_ciudad();
+        $selSlide = $homeQuery -> search_operacion();
         //echo json_encode($selSlide);
         
 
@@ -33,7 +33,7 @@ switch ($_GET['op']) {
 
     case 'search_innovacion';
         $homeQuery = new DAOSearch();
-        $selSlide = $homeQuery -> search_innovacion($_POST['ciudad']);        
+        $selSlide = $homeQuery -> search_innovacion($_POST['operacion']);        
         if (!empty($selSlide)) {
             echo json_encode($selSlide);
         }
@@ -45,15 +45,11 @@ switch ($_GET['op']) {
     case 'autocomplete';
     try{
         $dao = new DAOSearch();
-        if (!empty($_POST['brand']) && empty($_POST['category'])){
-            $rdo = $dao->select_only_brand($_POST['complete'], $_POST['brand']);
-        }else if(!empty($_POST['brand']) && !empty($_POST['category'])){
-            $rdo = $dao->select_brand_category($_POST['complete'], $_POST['brand'], $_POST['category']);
-        }else if(empty($_POST['brand']) && !empty($_POST['category'])){
-            $rdo = $dao->select_only_category($_POST['category'], $_POST['complete']);
-        }else {
-            $rdo = $dao->select_city($_POST['complete']);
-        }
+        //echo json_encode("autocomplete");
+        //break;
+        $rdo = $dao->select_ciudad_innovacion($_POST['complete'], $_POST['operacion'], $_POST['innovacion']);
+        
+        
     }catch (Exception $e){
         echo json_encode("catch");
         exit;

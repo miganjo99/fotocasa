@@ -2,6 +2,7 @@ function loadViviendas() {
     
     var verificate_filters_home = localStorage.getItem('filters_home') || null;//de false a null
     var verificate_filters_shop = localStorage.getItem('filters_shop') || null;//de false a null
+    var verificate_filters_search = localStorage.getItem('filters_search') || null;//de false a null
     
     
 
@@ -20,6 +21,12 @@ function loadViviendas() {
             
           }, "1000");
           
+    }else if(verificate_filters_search !=  null){
+        
+        var filters_search=JSON.parse(verificate_filters_search);
+        console.log("filters_search:",filters_search);
+        ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=search", 'POST', 'JSON', { 'filters_search': filters_search });
+          
     }
     else {
        
@@ -34,27 +41,27 @@ function print_filters() {
     var filters_container = $('<div class="filters_container"></div>');
     
 
-    var selectElement1 = $('<div class="div-filters-ordenar"></div>').html(
-        '<select class="filter_ordenar">' +
-        '<option value="1">Ordenar precio de menor a mayor</option>' +
-        '<option value="2">Ordenar precio de mayor a menor</option>' +
-        '</select>'
-    );
-    filters_container.append(selectElement1);
-
-    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_ordenar', 'POST', 'JSON', { 'filters_shop': filters_shop })
-    .then(function(data) {
-
-    //     var selectElement1 = $('<div class="div-filters-ordenar"></div>').html(
+    // var selectElement1 = $('<div class="div-filters-ordenar"></div>').html(
     //     '<select class="filter_ordenar">' +
     //     '<option value="1">Ordenar precio de menor a mayor</option>' +
     //     '<option value="2">Ordenar precio de mayor a menor</option>' +
     //     '</select>'
     // );
-        //filters_container.append(selectElement1);
-        ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop });
+    // filters_container.append(selectElement1);
 
-    });
+    // ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_ordenar', 'POST', 'JSON', { 'filters_shop': filters_shop })
+    // .then(function(data) {
+
+    // //     var selectElement1 = $('<div class="div-filters-ordenar"></div>').html(
+    // //     '<select class="filter_ordenar">' +
+    // //     '<option value="1">Ordenar precio de menor a mayor</option>' +
+    // //     '<option value="2">Ordenar precio de mayor a menor</option>' +
+    // //     '</select>'
+    // // );
+    //     //filters_container.append(selectElement1);
+    //     ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop });
+
+    // });
 
     ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_operacion', 'POST', 'JSON')
     .then(function(data) {

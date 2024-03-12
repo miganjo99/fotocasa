@@ -4,11 +4,11 @@
 
     class DAOSearch {
 
-        function search_ciudad(){
+        function search_operacion(){
             //echo json_encode("HOLA DAO");
             
 
-            $select="SELECT * FROM ciudad";
+            $select="SELECT * FROM operacion";
             //return $select;
             $conexion = connect::con();
             $res = mysqli_query($conexion, $select);
@@ -39,10 +39,10 @@
             return $retrArray;
         }
 
-        function search_innovacion($ciudad){
+        function search_innovacion($operacion){
             $select="SELECT i.*
             FROM vivienda v, innovacion i
-            WHERE i.id_innovacion = v.id_innovacion AND v.id_ciudad = '$ciudad'";
+            WHERE i.id_innovacion = v.id_innovacion AND v.id_operacion = '$operacion'";
 
             $conexion = connect::con();
             $res = mysqli_query($conexion, $select);
@@ -57,10 +57,41 @@
             return $retrArray;
         }
 
-        function select_only_brand($complete, $brand){
+    
+
+
+        function select_ciudad_innovacion($complete, $operacion, $innovacion){
             $select="SELECT *
-            FROM car c
-            WHERE marca = '$brand' AND city LIKE '$complete%'";
+            FROM vivienda v, operacion o, innovacion i, ciudad c
+            WHERE v.id_operacion = o.id_operacion
+            AND v.id_innovacion = i.id_innovacion
+            AND v.id_ciudad = c.id_ciudad ";
+
+            if (empty($complete) && !empty($operacion) && empty($innovacion)){
+
+                $select .= "AND v.id_operacion = $operacion ;";
+             }
+            else if (empty($complete) && empty($operacion) && !empty($innovacion)){
+ 
+                $select .= " AND v.id_innovacion = $innovacion ;";
+             }
+            else if (empty($complete) && !empty($operacion) && !empty($innovacion)){
+
+                $select .= "AND v.id_operacion = $operacion AND v.id_innovacion = $innovacion ;";
+             }
+            else if (!empty($complete) && empty($operacion) && !empty($innovacion)){
+
+                $select .= "AND v.id_innovacion= $innovacion AND c.name_ciudad LIKE '$complete%' ;";
+             }
+            else if (!empty($complete) && !empty($operacion) && empty($innovacion)){
+
+                $select .= "AND v.id_operacion = $operacion AND c.name_ciudad LIKE '$complete%' ;";
+             }
+            else if(!empty($complete) && empty($operacion) && empty($innovacion)){
+
+                $select .= " AND c.name_ciudad LIKE '$complete%' ;";
+             }
+            
             
             $conexion = connect::con();
             $res = mysqli_query($conexion, $select);
@@ -75,58 +106,5 @@
             return $retrArray;
         }
 
-        function select_only_category($category, $complete){
-            $select="SELECT *
-            FROM car c
-            WHERE categoria = '$category' AND city LIKE '$complete%'";
-            
-            $conexion = connect::con();
-            $res = mysqli_query($conexion, $select);
-            connect::close($conexion);
-            
-            $retrArray = array();
-            if ($res -> num_rows > 0) {
-                while ($row = mysqli_fetch_assoc($res)) {
-                    $retrArray[] = $row;
-                }
-            }
-            return $retrArray;
-        }
-
-
-        function select_brand_category($complete, $brand, $category){
-            $select="SELECT *
-            FROM car c
-            WHERE c.marca = '$brand' AND c.categoria = '$category' AND c.city LIKE '$complete%'";
-            
-            $conexion = connect::con();
-            $res = mysqli_query($conexion, $select);
-            connect::close($conexion);
-            
-            $retrArray = array();
-            if ($res -> num_rows > 0) {
-                while ($row = mysqli_fetch_assoc($res)) {
-                    $retrArray[] = $row;
-                }
-            }
-            return $retrArray;
-        }
-
-        function select_city($complete){
-            $select="SELECT *
-            FROM car c
-            WHERE c.city LIKE '$complete%'";
-            
-            $conexion = connect::con();
-            $res = mysqli_query($conexion, $select);
-            connect::close($conexion);
-            
-            $retrArray = array();
-            if ($res -> num_rows > 0) {
-                while ($row = mysqli_fetch_assoc($res)) {
-                    $retrArray[] = $row;
-                }
-            }
-            return $retrArray;
-        }
+        
     }
