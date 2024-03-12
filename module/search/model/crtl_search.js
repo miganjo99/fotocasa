@@ -72,10 +72,10 @@ function autocomplete() {
         ajaxPromise('module/search/crtl/crtl_search.php?op=autocomplete', 'POST', 'JSON', sdata)
             .then(function (data) {
                 console.log("dataaaaaaaaaaaaaaaaaaaaa:",data);
-                $('#searchAuto').empty();
-                $('#searchAuto').fadeIn(10000000);
+                $('#search_viv').empty();
+                $('#search_viv').fadeIn(10000000);
                 for (row in data) {
-                    $('<div></div>').appendTo('#search_viv').html(data[row].name_ciudad).attr({ 'class': 'searchElement', 'id': data[row].name_ciudad });
+                    $('<div style="color: coral;"></div>').appendTo('#search_viv').html(data[row].name_ciudad).attr({ 'class': 'searchElement', 'id': data[row].name_ciudad });
                 }
                 $(document).on('click', '.searchElement', function () {
                     $('#autocom').val(this.getAttribute('id'));

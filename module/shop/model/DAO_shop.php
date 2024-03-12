@@ -210,6 +210,7 @@ class DAOShop{
         }
         return $retrArray;
     }
+	
 	function search($filters_search){
        
 		
@@ -228,6 +229,11 @@ class DAOShop{
                 }
 				else if ($filters_search[0]['id_innovacion'][0]){
                      $consulta .= " AND v.id_innovacion = " . ($filters_search[0]['id_innovacion'][0]);
+                    
+                    
+                }
+				else if ($filters_search[0]['ciudad'][0]){
+                     $consulta .= " AND c.name_ciudad = " . ($filters_search[0]['ciudad'][0]);
                     
                     
                 }
