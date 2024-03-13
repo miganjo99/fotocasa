@@ -141,7 +141,6 @@ function print_filters() {
         //localStorage.removeItem('filters_shop');//se borran aqui los filtros?        
 }
 
-
 function ultima_busqueda() {
     
     var ultima_busqueda = localStorage.getItem('id');
@@ -370,6 +369,7 @@ function remove_filters() {
     
 
     localStorage.removeItem('filters_shop');
+    localStorage.removeItem('filters_search');
     localStorage.removeItem('filter_operacion');
     localStorage.removeItem('filter_ciudad');
     localStorage.removeItem('filter_tipo');
@@ -387,8 +387,8 @@ function ajaxForSearch(url, type, JSON, data=undefined) {
     
     ajaxPromise(url, type, JSON, data)
         .then(function(data) {
-             //console.log(data);
-             
+             //console.log("RETURN CONSULTA",data);
+            
            //alert("ajaxPromise shop dentro");
             $('#content_shop_viviendas').empty();
             $('.date_vivienda' && '.date_img').empty();
@@ -578,7 +578,6 @@ $(document).ready(function() {
     print_filters();
     loadViviendas();
     filter_button();
-    //highlightFilters();
     clicks();
     load_viviendas_filters_home();
 }); 

@@ -59,7 +59,7 @@ function autocomplete() {
         let sdata = { complete: $(this).val() };
         //console,log("sdata",sdata);
         if (($('.search_operacion').val() != 0)) {
-            console.log("search_operacion",$('.search_operacion').val());
+            //console.log("search_operacion",$('.search_operacion').val());
             sdata.operacion = $('.search_operacion').val();
             if (($('.search_operacion').val() != 0) && ($('.search_innovacion').val() != 0)) {
                 sdata.innovacion = $('.search_innovacion').val();
@@ -71,7 +71,7 @@ function autocomplete() {
         console.log("sdata",sdata);
         ajaxPromise('module/search/crtl/crtl_search.php?op=autocomplete', 'POST', 'JSON', sdata)
             .then(function (data) {
-                console.log("dataaaaaaaaaaaaaaaaaaaaa:",data);
+                //console.log("dataaaaaaaaaaaaaaaaaaaaa:",data);
                 $('#search_viv').empty();
                 $('#search_viv').fadeIn(10000000);
                 for (row in data) {
@@ -95,7 +95,7 @@ function autocomplete() {
 function button_search() {
     $('#search-btn').on('click', function () {
         var search = [];
-        console.log("search",search);
+        //console.log("search",search);
         if ($('.search_operacion').val() != undefined) {
             search.push({ "id_operacion": [$('.search_operacion').val()] })
             if ($('.search_innovacion').val() != undefined) {

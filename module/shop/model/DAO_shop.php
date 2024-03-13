@@ -214,40 +214,24 @@ class DAOShop{
 	function search($filters_search){
        
 		
-        $consulta = "SELECT v.*, i.*, c.*
+        $consulta = "SELECT v.*
 		FROM vivienda v, ciudad c, innovacion i
 		WHERE v.id_innovacion = i.id_innovacion
-		AND v.id_ciudad = c.id_ciudad";
+		AND v.id_ciudad = c.id_ciudad ";
+		
 		
 		for ($i = 0; $i < count($filters_search); $i++) {
-			if ($i == 0 ) {
-
-				if ($filters_search[0]['id_operacion'][0]){
-                     $consulta .= " AND v.id_operacion = " . ($filters_search[0]['id_operacion'][0]);
-                    
-                    
-                }
-				else if ($filters_search[0]['id_innovacion'][0]){
-                     $consulta .= " AND v.id_innovacion = " . ($filters_search[0]['id_innovacion'][0]);
-                    
-                    
-                }
-				else if ($filters_search[0]['ciudad'][0]){
-                     $consulta .= " AND c.name_ciudad = " . ($filters_search[0]['ciudad'][0]);
-                    
-                    
-                }
-
-				// $consulta .= " AND v." . $filters_search[$i][0] . "=" . $filters_search[$i][1]; 
-			} 
-			// else if {
-			// 	$consulta .= " AND v." . $filters_search[$i][0] . "=" . $filters_search[$i][1];
-			
-			// } else if {
-			// 	$consulta .= " AND c.name_ciudad" . $filters_search[$i][0] . "=" . $filters_search[$i][1];
-			// }
-			
-		}   
+			if (!empty($filters_search[$i]['id_operacion'][0])) {
+				$consulta .= " AND v.id_operacion = " . ($filters_search[$i]['id_operacion'][0]);
+			}
+			elseif (!empty($filters_search[$i]['id_innovacion'][0])) {
+				$consulta .= " AND v.id_innovacion = " . ($filters_search[$i]['id_innovacion'][0]);
+			}
+			elseif (!empty($filters_search[$i]['ciudad'][0])) {
+				$consulta .= " AND c.name_ciudad = '" . $filters_search[$i]['ciudad'][0] . "'";
+			}
+		}
+		//return $consulta;
 
 
         $conexion = connect::con();

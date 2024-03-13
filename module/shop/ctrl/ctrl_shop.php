@@ -112,8 +112,8 @@ switch ($_GET['op']) {
     
     case 'search';
         
-       // echo json_encode("Hola");
-       // break;
+    //    echo json_encode("Hola");
+    //    break;
 
         $homeQuery = new DAOShop();
         $selSlide = $homeQuery -> search($_POST['filters_search']);
