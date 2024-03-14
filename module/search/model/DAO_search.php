@@ -61,7 +61,7 @@
 
 
         function select_ciudad_innovacion($complete, $operacion, $innovacion){
-            $select="SELECT *
+            $select="SELECT DISTINCT c.name_ciudad
             FROM vivienda v, operacion o, innovacion i, ciudad c
             WHERE v.id_operacion = o.id_operacion
             AND v.id_innovacion = i.id_innovacion

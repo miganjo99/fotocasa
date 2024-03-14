@@ -432,9 +432,13 @@ function ajaxForSearch(url, type, JSON, data=undefined) {
                         )
                        
                 }
+                mapLeaflet_all(data);
             }
         }).catch(function() {
            // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function ajxForSearch SHOP";
+            // $('#content_shop_viviendas').empty();
+            //     $('<div></div>').appendTo('#content_shop_viviendas')
+            //     .html('<h1>No hay viviendas con estos filtros</h1>');
         });
         
 }
@@ -572,7 +576,50 @@ function load_viviendas_filters_home() {
         localStorage.removeItem('filters_home');
 }
 
+function mapLeaflet_all(data) {
+   
 
+        console.log("data ",data);
+        var map = L.map('map').setView([40.521506, -3.695466], 6);
+        
+        // 40.521506, -3.695466
+ 
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); 
+
+
+        L.marker([39.078138, 125.750723]).addTo(map)
+            .bindPopup('MARCADOR');
+
+            for (var i = 0; i < data.length; i++) {
+                var marker = L.marker([data[i].lat, data[i].long]).addTo(map);
+                var popupContent = '<h3 style="text-align:center;">' + data[i].precio + '€</h3>' +
+                                   '<p style="text-align:center;">Estado: <b>' + data[i].estado + '</b></p>' +
+                                   '<p style="text-align:center;">Descripcion: <b>' + data[i].descripcion + '</b></p>' +
+                                   '<img src="' + data[i].img_vivienda + '"/>' +
+                                   '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall link" ' +
+                                   'data-wow-delay=".4s" id="' + data[i].id_vivienda + '">Read More</a>';
+                marker.bindPopup(popupContent);
+            }
+
+}
+
+// function mapBox(id) {
+//     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
+//     const map = new mapboxgl.Map({
+//         container: 'map',
+//         style: 'mapbox://styles/mapbox/streets-v11',
+//         center: [id.longi, id.lat], // starting position [lng, lat]
+//         zoom: 10 // starting zoom
+//     });
+//     const markerOntinyent = new mapboxgl.Marker()
+//     const minPopup = new mapboxgl.Popup()
+//     minPopup.setHTML('<h4>' + id.brand_name + '</h4><p>Modelo: ' + id.modelo + '</p>' +
+//         '<p>Precio: ' + id.precio + '€</p>' +
+//         '<img src=" ' + id.img + '"/>')
+//     markerOntinyent.setPopup(minPopup)
+//         .setLngLat([id.longi, id.lat])
+//         .addTo(map);
+// }
 
 $(document).ready(function() {
     print_filters();

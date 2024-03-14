@@ -471,7 +471,37 @@ border: 1px solid #e1e1e1;
     background-color:#000;
     color:#808080;
 }
-    #footer-sec h4 {
-        text-transform:uppercase;
-        color:#fff;
-    }
+#footer-sec h4 {
+    text-transform:uppercase;
+    color:#fff;
+}
+
+
+   
+
+/* CSS SEARCH */
+
+
+
+select.search_innovacion, select.search_operacion{
+  width: 150px;
+  height: auto;
+  margin: 5px;
+  border-radius: 5px;
+  align-items:baseline;
+}
+
+
+
+#autocom{
+  width: 150px;
+  height: auto;
+
+  margin: 4px;
+  border-radius: 5px;
+  
+}
+
+
+
+

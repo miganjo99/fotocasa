@@ -1,4 +1,13 @@
-
+#autocom{
+  margin: 10px;
+  border-radius: 5px;
+  
+}
+.leaflet-pane img{
+  width: 300px;
+  height: auto;
+  border-radius: 5%;
+}
 
 /* CSS FILTROS */
 
@@ -304,9 +313,40 @@ a {
   font-weight: bold;
 }
 
+
+/* CSS MAPS */
+
+
+
+.container_viv {
+  display: flex;
+  flex-grow: 1;
+}
+.container_shop {
+  
+  flex-grow: 1;
+  padding: 20px;
+}
+#map {
+ 
+  width: 600px;
+    height: auto;
+    position: fixed;
+    right: 95px;
+    top: 250px;
+    bottom: 40px;
+    /* z-index: -1; */
+    background-color: white;
+    border-radius: 5%;
+}
+
+
+
+
+
 /* CSS DETAILS */
 #details-shop {
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   padding: 20px;
 }
@@ -372,3 +412,4 @@ a {
   color: var(--color);
   text-decoration: none;
 }
+

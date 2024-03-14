@@ -27,9 +27,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 	<link href="view/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<!-- <link href="view/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> -->
 	<link href="view/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
-	<!--<script src="../../module/viviendas/validate_vivienda.js"></script>-->
+	
+
+	<!-- MAP -->
+	<link rel="stylesheet" href="view/plugins/leaflet/leaflet.css" />
+
+
+	
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
 
@@ -48,6 +53,10 @@
 
   	<!-- FONT AWESOME -->
 	<script src="https://kit.fontawesome.com/596716e4fd.js" crossorigin="anonymous"></script>
+
+	<!-- MAPS -->
+	
+	<script src="view/plugins/leaflet/leaflet.js"></script>
 
 	<!-- <script src="view/plugins/jquery-1.10.2.js"></script> -->
 	
