@@ -44,11 +44,18 @@ switch ($_GET['op']) {
         } catch (Exception $e) {
             echo json_encode("error");
         }
+        try {
+            $daoshop_visit = new DAOShop();
+            $Date_visit = $daoshop_visit->update_visit($_GET['id']);
+        } catch (Exception $e) {
+            echo json_encode("error");
+        }
 
-        if (!empty($Dates_Viviendas || $Date_images)) {
+        if (!empty($Dates_Viviendas || $Date_images || $Date_visit)) {
             $rdo = array();
             $rdo[0] = $Dates_Viviendas;
             $rdo[1][] = $Date_images;
+            $rdo[2][] = $Date_visit;
             echo json_encode($rdo);
         } else {
             echo json_encode("error");

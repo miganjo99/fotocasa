@@ -104,6 +104,21 @@
                 echo json_encode("error");
             }
         break;
+        case 'homePageMasVisitadas';
+            try{
+                $daohome = new DAOHome();
+                $SelectVivienda = $daohome->select_mas_visitadas();
+            } catch(Exception $e){
+                echo json_encode("error");
+            }
+            
+            if(!empty($SelectVivienda)){
+                echo json_encode($SelectVivienda); 
+            }
+            else{
+                echo json_encode("error");
+            }
+        break;
 
         // default;
         //     include("module/exceptions/views/pages/error404.php");

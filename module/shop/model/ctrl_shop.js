@@ -462,6 +462,7 @@ function loadDetails(id_vivienda) {
     .then(function(data) {
         //console.log(data);
         //alert("load details");
+        //$('#map').empty();
         $('#content_shop_viviendas').empty();
         $('.date_img_dentro').empty();
         $('.date_vivienda_dentro').empty();
@@ -516,6 +517,7 @@ function loadDetails(id_vivienda) {
             autoplay: true,
             autoplaySpeed: 2600
         });
+        mapLeaflet(data);
     }).catch(function() {
         // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
     });
@@ -578,12 +580,8 @@ function load_viviendas_filters_home() {
 
 function mapLeaflet_all(data) {
    
-
-        console.log("data ",data);
         var map = L.map('map').setView([40.521506, -3.695466], 6);
-        
-        // 40.521506, -3.695466
- 
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); 
 
 
@@ -596,30 +594,44 @@ function mapLeaflet_all(data) {
                                    '<p style="text-align:center;">Estado: <b>' + data[i].estado + '</b></p>' +
                                    '<p style="text-align:center;">Descripcion: <b>' + data[i].descripcion + '</b></p>' +
                                    '<img src="' + data[i].img_vivienda + '"/>' +
-                                   '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall link" ' +
+                                   '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall more_info_list" ' +
                                    'data-wow-delay=".4s" id="' + data[i].id_vivienda + '">Read More</a>';
                 marker.bindPopup(popupContent);
             }
 
+           
 }
 
-// function mapBox(id) {
-//     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
-//     const map = new mapboxgl.Map({
-//         container: 'map',
-//         style: 'mapbox://styles/mapbox/streets-v11',
-//         center: [id.longi, id.lat], // starting position [lng, lat]
-//         zoom: 10 // starting zoom
-//     });
-//     const markerOntinyent = new mapboxgl.Marker()
-//     const minPopup = new mapboxgl.Popup()
-//     minPopup.setHTML('<h4>' + id.brand_name + '</h4><p>Modelo: ' + id.modelo + '</p>' +
-//         '<p>Precio: ' + id.precio + '€</p>' +
-//         '<img src=" ' + id.img + '"/>')
-//     markerOntinyent.setPopup(minPopup)
-//         .setLngLat([id.longi, id.lat])
-//         .addTo(map);
-// }
+function mapLeaflet(data) {
+    
+
+    console.log("mapa details", data[0].lat);
+     //alert("hola mapLeaflet "),
+     //$('#map').empty();
+
+    //const map = L.map('map').setView([0, 0], 10); // inicio mapa
+
+    var map =L.map('map').setView([data[0].lat, data[0].long], 12); 
+    
+    
+    console.log("map::",map);
+    //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    //var map = L.map('map').setView([51.505, -0.09], 13);
+
+        //var marker = L.marker([data[0].lat, data[0].long]).addTo(map);
+        // const popupContent = '<h3 style="text-align:center;">' + data[0].precio + '€</h3>' +
+        // '<p style="text-align:center;">Estado: <b>' + data[0].estado + '</b></p>' +
+        // '<p style="text-align:center;">Descripcion: <b>' + data[0].descripcion + '</b></p>' +
+        // '<img src="' + data[0].img_vivienda + '"/>' +
+        // '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall link" ' +
+        // 'data-wow-delay=".4s" id="' + data[0].id_vivienda + '">Read More</a>';
+
+        // marker.bindPopup(popupContent).openPopup();
+        
+    
+     
+}
 
 $(document).ready(function() {
     print_filters();

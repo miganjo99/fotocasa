@@ -119,6 +119,24 @@
 			}
 			return $retrArray;
 		}
+		function select_mas_visitadas() {
+			$sql= "SELECT * 
+			FROM vivienda v, visitas vi
+			WHERE v.id_vivienda=vi.id_vivienda 
+			ORDER BY vi.num_visitas DESC LIMIT 5";
+
+			$conexion = connect::con();
+			$res = mysqli_query($conexion, $sql);
+			connect::close($conexion);
+
+			$retrArray = array();
+			if (mysqli_num_rows($res) > 0) {
+				while ($row = mysqli_fetch_assoc($res)) {
+					$retrArray[] = $row;
+				}
+			}
+			return $retrArray;
+		}
 		// function select_recomendacion(){
 		// 	$sql = "SELECT *
 		// 	FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o

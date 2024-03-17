@@ -76,7 +76,8 @@
 
 #containerOperacion,
 #containerCiudad,
-#containerRecomendaciones{
+#containerRecomendaciones,
+#containerMasVisitadas{
   width: 100%;
   height: auto;
   display: inline;
@@ -123,6 +124,12 @@ h2.cat{
   
 }
 .div_recom {
+  display: inline-block;
+  margin-right: 10px; 
+  position: relative;
+  
+}
+.div_visit {
   display: inline-block;
   margin-right: 10px; 
   position: relative;

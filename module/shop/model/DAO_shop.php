@@ -424,6 +424,23 @@ class DAOShop{
 		}
 		return $imgArray;
 	}
+	function update_visit($id){
+		$sql = "UPDATE visitas 
+				 SET num_visitas = num_visitas + 1
+				 WHERE id_vivienda = '$id'";
+	
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+	
+		if ($res) {
+			
+			return true;
+		} else {
+			
+			return false;
+		}
+	}
 
 
 	function select_imgs_vivienda_array($id){

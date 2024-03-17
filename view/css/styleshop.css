@@ -6,6 +6,7 @@
 .leaflet-pane img{
   width: 300px;
   height: auto;
+  margin: 15px;
   border-radius: 5%;
 }
 
