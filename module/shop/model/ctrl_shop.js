@@ -432,7 +432,7 @@ function ajaxForSearch(url, type, JSON, data=undefined) {
                         )
                        
                 }
-                mapLeaflet_all(data);
+                mapBox_all(data);
             }
         }).catch(function() {
            // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function ajxForSearch SHOP";
@@ -517,7 +517,8 @@ function loadDetails(id_vivienda) {
             autoplay: true,
             autoplaySpeed: 2600
         });
-        mapLeaflet(data);
+        
+        mapBox(data);
     }).catch(function() {
         // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
     });
@@ -578,59 +579,83 @@ function load_viviendas_filters_home() {
         localStorage.removeItem('filters_home');
 }
 
-function mapLeaflet_all(data) {
-   
-        var map = L.map('map').setView([40.521506, -3.695466], 6);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); 
 
 
-        L.marker([39.078138, 125.750723]).addTo(map)
-            .bindPopup('MARCADOR');
+function mapBox_all(data) {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-0.61667, 38.83966492354664], // starting position [lng, lat]
+        zoom: 5 // starting zoom
+    });
 
-            for (var i = 0; i < data.length; i++) {
-                var marker = L.marker([data[i].lat, data[i].long]).addTo(map);
-                var popupContent = '<h3 style="text-align:center;">' + data[i].precio + '€</h3>' +
-                                   '<p style="text-align:center;">Estado: <b>' + data[i].estado + '</b></p>' +
-                                   '<p style="text-align:center;">Descripcion: <b>' + data[i].descripcion + '</b></p>' +
-                                   '<img src="' + data[i].img_vivienda + '"/>' +
-                                   '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall more_info_list" ' +
-                                   'data-wow-delay=".4s" id="' + data[i].id_vivienda + '">Read More</a>';
-                marker.bindPopup(popupContent);
-            }
-
-           
+    for (row in data) {
+        const marker = new mapboxgl.Marker()
+        const minPopup = new mapboxgl.Popup()
+        minPopup.setHTML('<h3 style="text-align:center;">' + data[row].precio + '€</h3>' +
+        '<p style="text-align:center;">Estado: <b>' + data[row].estado + '</b></p>' +
+        '<p style="text-align:center;">Descripcion: <b>' + data[row].descripcion + '</b></p>' +
+        '<img src="' + data[row].img_vivienda + '"/>' +
+        '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall more_info_list" ' +
+        'data-wow-delay=".4s" id="' + data[row].id_vivienda + '">Read More</a>')
+        marker.setPopup(minPopup)
+            .setLngLat([data[row].long, data[row].lat])
+            .addTo(map);
+    }
 }
 
-function mapLeaflet(data) {
+// function mapLeaflet(data) {
     
 
-    console.log("mapa details", data[0].lat);
-     //alert("hola mapLeaflet "),
-     //$('#map').empty();
+//     console.log("mapa details", data[0].lat);
+//      //alert("hola mapLeaflet "),
+//      //$('#map').empty();
 
-    //const map = L.map('map').setView([0, 0], 10); // inicio mapa
+//     //const map = L.map('map').setView([0, 0], 10); // inicio mapa
 
-    var map =L.map('map').setView([data[0].lat, data[0].long], 12); 
+//     var map =L.map('map').setView([data[0].lat, data[0].long], 12); 
     
     
-    console.log("map::",map);
-    //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+//     console.log("map::",map);
+//     //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    //var map = L.map('map').setView([51.505, -0.09], 13);
+//     //var map = L.map('map').setView([51.505, -0.09], 13);
 
-        //var marker = L.marker([data[0].lat, data[0].long]).addTo(map);
-        // const popupContent = '<h3 style="text-align:center;">' + data[0].precio + '€</h3>' +
-        // '<p style="text-align:center;">Estado: <b>' + data[0].estado + '</b></p>' +
-        // '<p style="text-align:center;">Descripcion: <b>' + data[0].descripcion + '</b></p>' +
-        // '<img src="' + data[0].img_vivienda + '"/>' +
-        // '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall link" ' +
-        // 'data-wow-delay=".4s" id="' + data[0].id_vivienda + '">Read More</a>';
+//         //var marker = L.marker([data[0].lat, data[0].long]).addTo(map);
+//         // const popupContent = '<h3 style="text-align:center;">' + data[0].precio + '€</h3>' +
+//         // '<p style="text-align:center;">Estado: <b>' + data[0].estado + '</b></p>' +
+//         // '<p style="text-align:center;">Descripcion: <b>' + data[0].descripcion + '</b></p>' +
+//         // '<img src="' + data[0].img_vivienda + '"/>' +
+//         // '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall link" ' +
+//         // 'data-wow-delay=".4s" id="' + data[0].id_vivienda + '">Read More</a>';
 
-        // marker.bindPopup(popupContent).openPopup();
+//         // marker.bindPopup(popupContent).openPopup();
         
     
      
+// }
+
+function mapBox(data) {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
+    
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [data[0].long, data[0].lat], // Puedes usar las coordenadas del primer dato
+        zoom: 10
+    });
+
+    for (row in data) {
+        const marker = new mapboxgl.Marker()
+        const minPopup = new mapboxgl.Popup()
+        minPopup.setHTML('<h4>' + data[row].estado + '</h4><p>Categoria: ' + data[row].name_categoria + '</p>' +
+            '<p>Precio: ' + data[row].precio + '€</p>' +
+            '<img src=" ' + data[row].img_vivienda + '"/>')
+        marker.setPopup(minPopup)
+            .setLngLat([data[row].long, data[row].lat])
+            .addTo(map);
+    }
 }
 
 $(document).ready(function() {

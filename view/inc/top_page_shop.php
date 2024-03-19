@@ -31,8 +31,8 @@
 	
 
 	<!-- MAP -->
-	<link rel="stylesheet" href="view/plugins/leaflet/leaflet.css" />
-
+	<!-- <link rel="stylesheet" href="view/plugins/leaflet/leaflet.css" /> -->
+	<link href='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='stylesheet' />
 
 	
 
@@ -56,7 +56,9 @@
 
 	<!-- MAPS -->
 	
-	<script src="view/plugins/leaflet/leaflet.js"></script>
+	<!-- <script src="view/plugins/leaflet/leaflet.js"></script> -->
+	<script src='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js'></script>
+
 
 	<!-- <script src="view/plugins/jquery-1.10.2.js"></script> -->
 	

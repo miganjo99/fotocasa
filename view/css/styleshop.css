@@ -341,7 +341,10 @@ a {
     border-radius: 5%;
 }
 
-
+#map img{
+  width: 220px;
+  margin-bottom: 10px;
+}
 
 
 
