@@ -14,6 +14,7 @@ function loadViviendas() {
         
         var filters_shop=JSON.parse(verificate_filters_shop);
         ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop });
+        ////////////////////////////////////////////////////////////////////////////, 'num_pages' : num_pages, 'offset' : offset
         
         //highlightFilters();
         setTimeout(() => {
@@ -40,28 +41,6 @@ function print_filters() {
     
     var filters_container = $('<div class="filters_container"></div>');
     
-
-    // var selectElement1 = $('<div class="div-filters-ordenar"></div>').html(
-    //     '<select class="filter_ordenar">' +
-    //     '<option value="1">Ordenar precio de menor a mayor</option>' +
-    //     '<option value="2">Ordenar precio de mayor a menor</option>' +
-    //     '</select>'
-    // );
-    // filters_container.append(selectElement1);
-
-    // ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_ordenar', 'POST', 'JSON', { 'filters_shop': filters_shop })
-    // .then(function(data) {
-
-    // //     var selectElement1 = $('<div class="div-filters-ordenar"></div>').html(
-    // //     '<select class="filter_ordenar">' +
-    // //     '<option value="1">Ordenar precio de menor a mayor</option>' +
-    // //     '<option value="2">Ordenar precio de mayor a menor</option>' +
-    // //     '</select>'
-    // // );
-    //     //filters_container.append(selectElement1);
-    //     ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop });
-
-    // });
 
     ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=filtro_operacion', 'POST', 'JSON')
     .then(function(data) {
@@ -381,13 +360,16 @@ function remove_filters() {
     location.reload();
 }
 
-function ajaxForSearch(url, type, JSON, data=undefined) {
-    //alert(url);
+function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset = 0) {
+    
     //localStorage.removeItem('filters_home')
     
-    ajaxPromise(url, type, JSON, data)
+    
+    //ajaxPromise(url, 'POST', 'JSON', { 'filters_shop': filters_shop, 'filters_search': filters_search, 'filters_home': filters_home , 'num_pages': num_pages, 'offset': offset })
+    ajaxPromise(url, type, JSON, data, num_pages, offset)
         .then(function(data) {
-             //console.log("RETURN CONSULTA",data);
+
+            //console.log("RETURN CONSULTA",data);
             
            //alert("ajaxPromise shop dentro");
             $('#content_shop_viviendas').empty();
@@ -524,7 +506,6 @@ function loadDetails(id_vivienda) {
     });
 }
 
-
 function load_viviendas_filters_home() {
     var filters_home = JSON.parse(localStorage.getItem('filters_home'));
     //console.log(filtros);
@@ -567,7 +548,7 @@ function load_viviendas_filters_home() {
                     "</div>"
                 )
             }
-            // mapBox_all(shop);
+            mapBox_all(shop);
         }).catch(function() {
             // window.location.href = "index.php?modules=exception&op=503&error=fail_salto&type=503";
         });
@@ -579,15 +560,13 @@ function load_viviendas_filters_home() {
         localStorage.removeItem('filters_home');
 }
 
-
-
 function mapBox_all(data) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [-0.61667, 38.83966492354664], // starting position [lng, lat]
-        zoom: 5 // starting zoom
+        zoom: 4.5 // starting zoom
     });
 
     for (row in data) {
@@ -605,44 +584,14 @@ function mapBox_all(data) {
     }
 }
 
-// function mapLeaflet(data) {
-    
-
-//     console.log("mapa details", data[0].lat);
-//      //alert("hola mapLeaflet "),
-//      //$('#map').empty();
-
-//     //const map = L.map('map').setView([0, 0], 10); // inicio mapa
-
-//     var map =L.map('map').setView([data[0].lat, data[0].long], 12); 
-    
-    
-//     console.log("map::",map);
-//     //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-//     //var map = L.map('map').setView([51.505, -0.09], 13);
-
-//         //var marker = L.marker([data[0].lat, data[0].long]).addTo(map);
-//         // const popupContent = '<h3 style="text-align:center;">' + data[0].precio + '€</h3>' +
-//         // '<p style="text-align:center;">Estado: <b>' + data[0].estado + '</b></p>' +
-//         // '<p style="text-align:center;">Descripcion: <b>' + data[0].descripcion + '</b></p>' +
-//         // '<img src="' + data[0].img_vivienda + '"/>' +
-//         // '<a class="button button-primary-outline button-ujarak button-size-1 wow fadeInLeftSmall link" ' +
-//         // 'data-wow-delay=".4s" id="' + data[0].id_vivienda + '">Read More</a>';
-
-//         // marker.bindPopup(popupContent).openPopup();
-        
-    
-     
-// }
 
 function mapBox(data) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
-    
+
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [data[0].long, data[0].lat], // Puedes usar las coordenadas del primer dato
+        center: [data[0].long, data[0].lat], 
         zoom: 10
     });
 
@@ -658,10 +607,81 @@ function mapBox(data) {
     }
 }
 
+function pagination() {
+
+    var filters_search = JSON.parse(localStorage.getItem('filters_search'));
+    var filters_home = JSON.parse(localStorage.getItem('filters_home'));
+    var filters_shop = JSON.parse(localStorage.getItem('filters_shop'));
+
+    // var filters = {
+    //     ...filters_search,
+    //     ...filters_home,
+    //     ...filters_shop
+    // };
+
+    // console.log("filters all count", filters);
+    if (filters_search) {//Todo ifs
+        var url = "module/shop/ctrl/ctrl_shop.php?op=count_search";
+    }
+    if (filters_home) {
+        var url = "module/shop/ctrl/ctrl_shop.php?op=count_home";
+    }
+    if (filters_shop) {
+        var url = "module/shop/ctrl/ctrl_shop.php?op=count_shop";
+    } 
+   
+
+    ajaxPromise(url, 'POST', 'JSON', {'filters_search': filters_search, 'filters_home': filters_home, 'filters_shop': filters_shop})
+    .then(function(data) {
+            //alert("pagination");
+            //console.log("hola paginacion",data);
+            
+            var num_prod = data[0].contador;
+            console.log("num_prod",num_prod);
+            
+            if (num_prod >= 3) {
+                num_pages = Math.ceil(num_prod / 3)//.ceil redondea hacia arriba
+            } else {
+                num_pages = 1;
+            }
+
+            $('#pagination').empty();
+
+            for (var i = 1; i <= num_pages; i++) {
+                //console.log("HOLA FOR PAGINATION");
+                var pageButton = $('<button/>', {
+                    text: i,
+                    id: 'page_' + i,
+                    click: function() {
+                        var pageNum = parseInt($(this).text());
+                        var offset = 3 * (pageNum - 1);
+                        //console.log("OFFSET",offset);
+                        //console.log("aaaaaaaaaaaaaaaaaa filters_shop aaaaaaaaaaaaaa",filters_shop);
+                        
+                        if (filters_shop != null) {
+                            console.log("HOLA IF PAGINATION");
+                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", filters_shop, 3, offset);
+                        } else {
+                            console.log("HOLA ELSE PAGINATION");
+                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=all_viviendas", undefined, 3, offset);
+                        }
+                        $('html, body').animate({ scrollTop: $(".wrap") });
+                    }
+                });
+                $('#pagination').append(pageButton);
+            }
+
+            var pag_actual = localStorage.getItem('move') ? Math.floor(JSON.parse(localStorage.getItem('move'))[1] / 3) + 1 : 1;
+            $('#page_' + pag_actual).addClass('active'); 
+
+        })
+}
+
 $(document).ready(function() {
     print_filters();
     loadViviendas();
     filter_button();
     clicks();
     load_viviendas_filters_home();
+    pagination();
 }); 

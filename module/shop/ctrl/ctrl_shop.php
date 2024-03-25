@@ -13,12 +13,12 @@ switch ($_GET['op']) {
     break;
 
     case 'all_viviendas':
-        //$data = 'hola all_viviendas php';
-        //die('<script>console.log('.json_encode( $data ) .');</script>');
+        // $data = $_POST['num_pages'];
+        // die('<script>console.log('.json_encode( $data ) .');</script>');
         
         try {
             $daoshop = new DAOShop();
-            $Dates_Viviendas = $daoshop->select_all_viviendas();
+            $Dates_Viviendas = $daoshop->select_all_viviendas($_POST['num_pages'],$_POST['offset']);
             //die('<script>console.log('.json_encode( $daoshop ) .');</script>');
         } catch (Exception $e) {
             echo json_encode("error");
@@ -62,19 +62,19 @@ switch ($_GET['op']) {
         }
         break;
 
-    case 'redirect_home';
-        //echo json_encode($_POST['filtros']);
-        //break;
-        $homeQuery = new DAOShop();
-        $selSlide = $homeQuery -> redirect_home($_POST['filters_home']);
+    // case 'redirect_home';
+    //     //echo json_encode($_POST['filtros']);
+    //     //break;
+    //     $homeQuery = new DAOShop();
+    //     $selSlide = $homeQuery -> redirect_home($_POST['filters_home'], $_POST['offset'], $_POST['num_pages']);
         
-        if (!empty($selSlide)) {
-            echo json_encode($selSlide);
-        }
-        else {
-            echo "error";
-        }
-    break;
+    //     if (!empty($selSlide)) {
+    //         echo json_encode($selSlide);
+    //     }
+    //     else {
+    //         echo "error";
+    //     }
+    // break;
 
     case 'list_vivienda_array':
         try {
@@ -102,12 +102,12 @@ switch ($_GET['op']) {
 
 
     case 'filter';
-        
-       // echo json_encode("Hola");
-       // break;
 
+        $data = $_POST['num_pages'];
+        die('<script>console.log('.json_encode( $data ) .');</script>');
+        
         $homeQuery = new DAOShop();
-        $selSlide = $homeQuery -> filters($_POST['filters_shop']);
+        $selSlide = $homeQuery -> filters($_POST['filters_shop'],$_POST['num_pages'],$_POST['offset']);
         
         if (!empty($selSlide)) {
             echo json_encode($selSlide);
@@ -118,12 +118,9 @@ switch ($_GET['op']) {
     break;
     
     case 'search';
-        
-    //    echo json_encode("Hola");
-    //    break;
 
         $homeQuery = new DAOShop();
-        $selSlide = $homeQuery -> search($_POST['filters_search']);
+        $selSlide = $homeQuery -> search($_POST['filters_search'],$_POST['offset'],$_POST['num_pages']);
         
         if (!empty($selSlide)) {
             echo json_encode($selSlide);
@@ -161,10 +158,7 @@ switch ($_GET['op']) {
 
 
     break;
-
-
     
-
     case 'filtro_ordenar';
        
         try{
@@ -262,21 +256,48 @@ switch ($_GET['op']) {
         }
     break;
     
-    // case 'filtrosdinamicos';
-        
-       
+    case 'count_shop';    
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> count_shop($_POST['filters_shop']);
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+    break;
+    case 'count_all';    
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> count_all($_POST['filters']);
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+    break;
 
-    //     $homeQuery = new DAOShop();
-    //     $selSlide = $homeQuery -> filtrosdinamicos();
-        
-    //     if (!empty($selSlide)) {
-    //         echo json_encode($selSlide);
-    //     }
-    //     else {
-    //         echo "error";
-    //     }
-    // break;
-
+    case 'count_home';    
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> count_home($_POST['filters_home']);
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+        break;
+    
+    case 'count_search';    
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> count_search($_POST['filters_search']);
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+        break;
 
 
     default;
