@@ -333,6 +333,8 @@ a {
   width: 600px;
   height: auto;
   position: fixed;
+  /* position: sticky;
+  flex: 1; */
   right: 95px;
   top: 250px;
   bottom: 40px;

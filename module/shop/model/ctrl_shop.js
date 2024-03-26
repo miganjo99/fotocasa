@@ -12,11 +12,15 @@ function loadViviendas() {
     
     }else if(verificate_filters_shop !=  null){
         
+
         var filters_shop=JSON.parse(verificate_filters_shop);
-        ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop });
+        //var filter=JSON.parse(verificate_filters_shop);
+        console.log("Json parseado");
+        console.log(filters_shop);
+        ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop  });
+        //ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filter': filter , 'num_pages' : num_pages, 'offset' : offset  });
         ////////////////////////////////////////////////////////////////////////////, 'num_pages' : num_pages, 'offset' : offset
         
-        //highlightFilters();
         setTimeout(() => {
             highlightFilters();
             
@@ -364,13 +368,30 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
     
     //localStorage.removeItem('filters_home')
     
-    
+    // console.log(url);
+    // console.log(type);
+    // console.log(JSON);
+    //  console.log("---- DATA PARSEADA ----");
+    //  console.log(data);
+    //  console.log("---- DATA PARSEADA ----");
+    // console.log(num_pages);
+    // console.log(offset);
+
+    //ajaxPromise(url, type, JSON, data)
+    //ajaxPromise(url, type, JSON, data, num_pages, offset)
     //ajaxPromise(url, 'POST', 'JSON', { 'filters_shop': filters_shop, 'filters_search': filters_search, 'filters_home': filters_home , 'num_pages': num_pages, 'offset': offset })
-    ajaxPromise(url, type, JSON, data, num_pages, offset)
+
+    /*let obj = {
+        'filtros' : data, // Array
+        'num_pages' : num_pages, // Int
+        'offset' : offset, // Int
+    };*/
+
+    ajaxPromise(url, type, JSON, {'filters_shop': data ,'num_pages': num_pages, 'offset': offset})
         .then(function(data) {
 
-            //console.log("RETURN CONSULTA",data);
-            
+            console.log("RETURN CONSULTA");
+            console.log(data);
            //alert("ajaxPromise shop dentro");
             $('#content_shop_viviendas').empty();
             $('.date_vivienda' && '.date_img').empty();
@@ -417,6 +438,8 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
                 mapBox_all(data);
             }
         }).catch(function() {
+            console.log("entro al CATCH");
+
            // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function ajxForSearch SHOP";
             // $('#content_shop_viviendas').empty();
             //     $('<div></div>').appendTo('#content_shop_viviendas')
@@ -618,23 +641,26 @@ function pagination() {
     //     ...filters_home,
     //     ...filters_shop
     // };
-
+    var url;
     // console.log("filters all count", filters);
     if (filters_search) {//Todo ifs
-        var url = "module/shop/ctrl/ctrl_shop.php?op=count_search";
+         url = "module/shop/ctrl/ctrl_shop.php?op=count_search";
     }
     if (filters_home) {
-        var url = "module/shop/ctrl/ctrl_shop.php?op=count_home";
+         url = "module/shop/ctrl/ctrl_shop.php?op=count_home";
     }
     if (filters_shop) {
-        var url = "module/shop/ctrl/ctrl_shop.php?op=count_shop";
+         url = "module/shop/ctrl/ctrl_shop.php?op=count_shop";
+    }
+    else{
+        url = "module/shop/ctrl/ctrl_shop.php?op=count_all";
     } 
    
 
     ajaxPromise(url, 'POST', 'JSON', {'filters_search': filters_search, 'filters_home': filters_home, 'filters_shop': filters_shop})
     .then(function(data) {
             //alert("pagination");
-            //console.log("hola paginacion",data);
+            //console.log("hola paginacion",url);
             
             var num_prod = data[0].contador;
             console.log("num_prod",num_prod);
@@ -653,17 +679,23 @@ function pagination() {
                     text: i,
                     id: 'page_' + i,
                     click: function() {
+                        
                         var pageNum = parseInt($(this).text());
                         var offset = 3 * (pageNum - 1);
                         //console.log("OFFSET",offset);
                         //console.log("aaaaaaaaaaaaaaaaaa filters_shop aaaaaaaaaaaaaa",filters_shop);
                         
+                        
                         if (filters_shop != null) {
                             console.log("HOLA IF PAGINATION");
-                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", filters_shop, 3, offset);
+                            console.log(offset);
+                            console.log('offset');
+                            //ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter",'POST','JSON',{filters_shop : filters_shop, num_pages : 3, offset:  offset} );
+                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', {'filters_shop' : filters_shop }, num_pages = 3 , offset )
+
                         } else {
                             console.log("HOLA ELSE PAGINATION");
-                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=all_viviendas", undefined, 3, offset);
+                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=all_viviendas", 'GET', 'JSON', undefined, num_pages = 3 , offset);
                         }
                         $('html, body').animate({ scrollTop: $(".wrap") });
                     }

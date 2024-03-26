@@ -18,7 +18,7 @@ switch ($_GET['op']) {
         
         try {
             $daoshop = new DAOShop();
-            $Dates_Viviendas = $daoshop->select_all_viviendas($_POST['num_pages'],$_POST['offset']);
+            $Dates_Viviendas = $daoshop->select_all_viviendas($_GET['offset'],$_GET['num_pages']);
             //die('<script>console.log('.json_encode( $daoshop ) .');</script>');
         } catch (Exception $e) {
             echo json_encode("error");
@@ -32,6 +32,7 @@ switch ($_GET['op']) {
         break;
 
     case 'details_vivienda':
+
         try {
             $daoshop = new DAOShop();
             $Dates_Viviendas = $daoshop->select_one_vivienda($_GET['id']);
@@ -103,18 +104,21 @@ switch ($_GET['op']) {
 
     case 'filter';
 
-        $data = $_POST['num_pages'];
-        die('<script>console.log('.json_encode( $data ) .');</script>');
-        
+        //$data = $_POST['filters_shop'];
+        //die('<script>console.log('.json_encode( $data ) .');</script>');
+
         $homeQuery = new DAOShop();
         $selSlide = $homeQuery -> filters($_POST['filters_shop'],$_POST['num_pages'],$_POST['offset']);
-        
+
         if (!empty($selSlide)) {
+            //echo "TENEMOS DATOS";
             echo json_encode($selSlide);
-        }
-        else {
+            //echo json_encode(array("success" => true, "data" => $selSlide));
+        }else {
+            //echo json_encode(array("success" => false, "message" => "No se encontraron datos disponibles."));
             echo "error";
         }
+
     break;
     
     case 'search';
@@ -268,7 +272,7 @@ switch ($_GET['op']) {
     break;
     case 'count_all';    
         $homeQuery = new DAOShop();
-        $selSlide = $homeQuery -> count_all($_POST['filters']);
+        $selSlide = $homeQuery -> count_all();
         if (!empty($selSlide)) {
             echo json_encode($selSlide);
         }

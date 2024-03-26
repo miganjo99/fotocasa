@@ -32,7 +32,7 @@ class DAOShop{
             $prueba = $filters_home[0]['ciudad'][0];
             $select.= " v.id_ciudad = '$prueba'";
         }
-		$select.= " LIMIT $offset, $num_pages";
+		$select.= " LIMIT $num_pages, $offset";
 
         
         //////////$select.= " LIMIT $total_prod, $items_page";
@@ -50,14 +50,14 @@ class DAOShop{
         return $retrArray;
     }
 
-	function select_all_viviendas($num_pages, $offset){
+	function select_all_viviendas($offset, $num_pages ){
 		
 		$sql = "SELECT * 
 		FROM vivienda v  
 		ORDER BY v.id_vivienda DESC
-		LIMIT  $num_pages, $offset;";
+		LIMIT  $offset, $num_pages;";
 
-		
+		//return $sql;
 
 		$conexion = connect::con();
 		$res = mysqli_query($conexion, $sql);
@@ -161,12 +161,40 @@ class DAOShop{
 	
 
 	function filters($filters_shop, $num_pages, $offset){
-       
 
+
+		
 
         $consulta = "SELECT DISTINCT v.*
 		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o, img_vivienda i";
 		//return $consulta;
+		
+		$index = 0;
+		foreach ($filters_shop as &$value) {
+			foreach($value as &$value_parsed){
+				// Aqui esta el array de cada uno de los filtros con el id seleccionado, ej:
+				// [id_operacion : 2]
+				//echo " nombre: ";
+				//echo $value_parsed[0];
+				//echo " id: ";
+				//echo $value_parsed[1];
+ 
+
+				if ($index == 0 ) {
+					$consulta .= " WHERE v." . $value_parsed[0] . "=" . $value_parsed[1]; 
+				} else {
+					$consulta .= " AND v." . $value_parsed[0] . "=" . $value_parsed[1];
+				}
+				
+				
+
+
+				$index++;
+			}
+		}
+
+
+		/*
 		for ($i = 0; $i < count($filters_shop); $i++) {
 			if ($i == 0 ) {
 				$consulta .= " WHERE v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1]; 
@@ -174,10 +202,12 @@ class DAOShop{
 				$consulta .= " AND v." . $filters_shop[$i][0] . "=" . $filters_shop[$i][1];
 			}
 			
-		}   
+		}   */
 
-		$consulta.= " LIMIT  $num_pages, $offset";
+		$consulta.= " LIMIT  $offset, $num_pages ";
 
+		
+		//return $consulta;
 
         $conexion = connect::con();
         $res = mysqli_query($conexion, $consulta);
@@ -185,10 +215,15 @@ class DAOShop{
 
         $retrArray = array();
         if ($res -> num_rows > 0) {
+			//echo "---------------------------------------------- num rows es > 0 ----------------------------------------------";
             while ($row = mysqli_fetch_assoc($res)) {
-                $retrArray[] = $row;
+				$retrArray[] = $row;
             }
-        }
+        }else{
+			
+			//echo "---------------------------------------------- num rows es <= 0 ----------------------------------------------";
+		}
+		//return "Tus muertos pisaos";
         return $retrArray;
     }
 	
@@ -452,7 +487,7 @@ class DAOShop{
     }
 
 
-	function count_all($filters){
+	function count_all(){
 
 		$consulta = "SELECT DISTINCT COUNT(v.id_vivienda) contador
 		FROM vivienda v, ciudad c, categoria ca, tipo t, operacion o 
@@ -461,14 +496,7 @@ class DAOShop{
 		AND v.id_tipo=t.id_tipo
 		AND v.id_operacion=o.id_operacion";
 
-		for ($i = 0; $i < count($filters); $i++) {
-			if ($i == 0 ) {
-				$consulta .= " AND v." . $filters[$i][0] . "=" . $filters[$i][1]; 
-			} else {
-				$consulta .= " AND v." . $filters[$i][0] . "=" . $filters[$i][1];
-			}
-			
-		}   
+		 
         $conexion = connect::con();
         $res = mysqli_query($conexion, $consulta);
         connect::close($conexion);

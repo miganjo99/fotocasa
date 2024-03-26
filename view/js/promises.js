@@ -12,7 +12,7 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
             url: sUrl,
             type: sType,
             dataType: sTData,
-            data: sData 
+            data: sData
             
         }).done((data) => {
             //console.log(data);
