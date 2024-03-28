@@ -7,54 +7,53 @@ include($path . "model/connect.php");
 
 
 class DAOShop{
-
-	function redirect_home($filters_home, $offset, $num_pages){
 	
-
-		$select = "SELECT *
-		FROM vivienda v
-		WHERE";
-
+	function redirect_home($filters_home, $offset, $num_pages) {
+		$select = "SELECT * FROM vivienda v WHERE";
+		//echo "******************************";
+		//echo $filters_home[0];
+		//echo "******************************";
+		//return $filters_home;
+		foreach ($filters_home as &$value) {
+			//foreach($value as &$value_parsed){
+			foreach ($value as $value_parsed) {
+				if (isset($value_parsed['categoria'])) {
+					$prueba = $value_parsed['categoria'][0];
+					$select .= " v.id_categoria = '$prueba'";
+				} elseif (isset($value_parsed['tipo'])) {
+					$prueba = $value_parsed['tipo'][0];
+					$select .= " v.id_tipo = '$prueba'";
+				} elseif (isset($value_parsed['operacion'])) {
+					$prueba = $value_parsed['operacion'][0];
+					$select .= " v.id_operacion = '$prueba'";
+				} elseif (isset($value_parsed['ciudad'])) {
+					$prueba = $value_parsed['ciudad'][0];
+					$select .= " v.id_ciudad = '$prueba'";
+				}
+			}
 		
-        if (isset($filters_home[0]['tipo'])){
-            $prueba = $filters_home[0]['tipo'][0];
-            $select.= " v.id_tipo = '$prueba'";
-        }
-		else if (isset($filters_home[0]['categoria'])) {
-            $prueba = $filters_home[0]['categoria'][0];
-            $select.= " v.id_categoria = '$prueba'";
-        }
-		else if (isset($filters_home[0]['operacion'])) {
-            $prueba = $filters_home[0]['operacion'][0];
-            $select.= " v.id_operacion = '$prueba'";
-        }
-        else if (isset($filters_home[0]['ciudad'])) {
-            $prueba = $filters_home[0]['ciudad'][0];
-            $select.= " v.id_ciudad = '$prueba'";
-        }
-		$select.= " LIMIT $num_pages, $offset";
-
-        
-        //////////$select.= " LIMIT $total_prod, $items_page";
-       
-        $conexion = connect::con();
-        $res = mysqli_query($conexion, $select);
-        connect::close($conexion);
-
-        $retrArray = array();
-        if ($res -> num_rows > 0) {
-            while ($row = mysqli_fetch_assoc($res)) {
-                $retrArray[] = $row;
-            }
-        }
-        return $retrArray;
-    }
+		}	
+		$select .= " LIMIT $offset, $num_pages";
+	
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $select);
+		connect::close($conexion);
+	
+		$retrArray = array();
+		if ($res->num_rows > 0) {
+			while ($row = mysqli_fetch_assoc($res)) {
+				$retrArray[] = $row;
+			}
+		}
+		return $retrArray;
+	}
+	
 
 	function select_all_viviendas($offset, $num_pages ){
 		
 		$sql = "SELECT * 
 		FROM vivienda v  
-		ORDER BY v.id_vivienda DESC
+		ORDER BY v.id_vivienda ASC
 		LIMIT  $offset, $num_pages;";
 
 		//return $sql;
@@ -172,7 +171,6 @@ class DAOShop{
 		$index = 0;
 		foreach ($filters_shop as &$value) {
 			foreach($value as &$value_parsed){
-				// Aqui esta el array de cada uno de los filtros con el id seleccionado, ej:
 				// [id_operacion : 2]
 				//echo " nombre: ";
 				//echo $value_parsed[0];
@@ -470,8 +468,7 @@ class DAOShop{
             $select.= " v.id_ciudad = '$prueba'";
         }
         
-        
-        //////////$select.= " LIMIT $total_prod, $items_page";
+        //return $select;
        
         $conexion = connect::con();
         $res = mysqli_query($conexion, $select);

@@ -63,19 +63,21 @@ switch ($_GET['op']) {
         }
         break;
 
-    // case 'redirect_home';
-    //     //echo json_encode($_POST['filtros']);
-    //     //break;
-    //     $homeQuery = new DAOShop();
-    //     $selSlide = $homeQuery -> redirect_home($_POST['filters_home'], $_POST['offset'], $_POST['num_pages']);
+    case 'redirect_home';
         
-    //     if (!empty($selSlide)) {
-    //         echo json_encode($selSlide);
-    //     }
-    //     else {
-    //         echo "error";
-    //     }
-    // break;
+        //echo json_encode($_POST['filters_home']);
+        //break;
+        
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> redirect_home($_POST['filters_home'], $_POST['offset'], $_POST['num_pages']);
+        
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+    break;
 
     case 'list_vivienda_array':
         try {

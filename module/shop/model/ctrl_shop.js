@@ -5,10 +5,14 @@ function loadViviendas() {
     var verificate_filters_search = localStorage.getItem('filters_search') || null;//de false a null
     
     
-
+    
+    pagination();
+    
     if (verificate_filters_home !=  null) {//un unico filters
+        console.log(verificate_filters_home);
+        console.log("verificate_filters_home");
         
-        load_viviendas_filters_home();
+        //load_viviendas_filters_home();
     
     }else if(verificate_filters_shop !=  null){
         
@@ -353,6 +357,8 @@ function remove_filters() {
 
     localStorage.removeItem('filters_shop');
     localStorage.removeItem('filters_search');
+    localStorage.removeItem('filters_home');
+
     localStorage.removeItem('filter_operacion');
     localStorage.removeItem('filter_ciudad');
     localStorage.removeItem('filter_tipo');
@@ -366,28 +372,16 @@ function remove_filters() {
 
 function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset = 0) {
     
-    //localStorage.removeItem('filters_home')
-    
-    // console.log(url);
-    // console.log(type);
-    // console.log(JSON);
-    //  console.log("---- DATA PARSEADA ----");
-    //  console.log(data);
-    //  console.log("---- DATA PARSEADA ----");
-    // console.log(num_pages);
-    // console.log(offset);
-
+   
     //ajaxPromise(url, type, JSON, data)
     //ajaxPromise(url, type, JSON, data, num_pages, offset)
     //ajaxPromise(url, 'POST', 'JSON', { 'filters_shop': filters_shop, 'filters_search': filters_search, 'filters_home': filters_home , 'num_pages': num_pages, 'offset': offset })
 
-    /*let obj = {
-        'filtros' : data, // Array
-        'num_pages' : num_pages, // Int
-        'offset' : offset, // Int
-    };*/
+    
 
-    ajaxPromise(url, type, JSON, {'filters_shop': data ,'num_pages': num_pages, 'offset': offset})
+    //'filters_search': data ?????????
+    //, 'filters_home' : data ??????
+    ajaxPromise(url, type, JSON, {'filters_shop': data , 'filters_home' : data ,'num_pages': num_pages, 'offset': offset})
         .then(function(data) {
 
             console.log("RETURN CONSULTA");
@@ -529,15 +523,16 @@ function loadDetails(id_vivienda) {
     });
 }
 
-function load_viviendas_filters_home() {
+function load_viviendas_filters_home(num_pages = 3 , offset = 0) {
     var filters_home = JSON.parse(localStorage.getItem('filters_home'));
-    //console.log(filtros);
     //alert("filtros");
     // return false;
+    
+    console.log(filters_home);
+    console.log('filters_home');
 
 
-
-    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=redirect_home', 'POST', 'JSON', { 'filters_home': filters_home })
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=redirect_home', 'POST', 'JSON', { 'filters_home': filters_home }, num_pages, offset)
 
         .then(function(shop) {
             //console.log(shop);
@@ -641,20 +636,27 @@ function pagination() {
     //     ...filters_home,
     //     ...filters_shop
     // };
+
+    console.log(filters_home);
+    console.log("filters home pagination");
+
+
     var url;
-    // console.log("filters all count", filters);
     if (filters_search) {//Todo ifs
          url = "module/shop/ctrl/ctrl_shop.php?op=count_search";
     }
     if (filters_home) {
+
          url = "module/shop/ctrl/ctrl_shop.php?op=count_home";
     }
     if (filters_shop) {
+
          url = "module/shop/ctrl/ctrl_shop.php?op=count_shop";
     }
-    else{
+    if (!filters_search && !filters_home && !filters_shop) {
         url = "module/shop/ctrl/ctrl_shop.php?op=count_all";
-    } 
+    }
+    //console.log("consulta", filters_home);
    
 
     ajaxPromise(url, 'POST', 'JSON', {'filters_search': filters_search, 'filters_home': filters_home, 'filters_shop': filters_shop})
@@ -687,11 +689,17 @@ function pagination() {
                         
                         
                         if (filters_shop != null) {
-                            console.log("HOLA IF PAGINATION");
+                            console.log("HOLA IF PAGINATION SHOP");
                             console.log(offset);
                             console.log('offset');
                             //ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter",'POST','JSON',{filters_shop : filters_shop, num_pages : 3, offset:  offset} );
-                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', {'filters_shop' : filters_shop }, num_pages = 3 , offset )
+                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', {'filters_shop' : filters_shop }, num_pages = 3 , offset );
+                        }
+                        if (filters_home != null) {
+                            console.log("HOLA IF PAGINATION HOME");
+                            console.log(filters_home);
+                            console.log('filters_home CHANGE PAG');
+                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=redirect_home", 'POST', 'JSON', {'filters_home' : filters_home }, num_pages = 3 , offset );
 
                         } else {
                             console.log("HOLA ELSE PAGINATION");
@@ -714,6 +722,6 @@ $(document).ready(function() {
     loadViviendas();
     filter_button();
     clicks();
-    load_viviendas_filters_home();
+    //load_viviendas_filters_home();
     pagination();
 }); 
