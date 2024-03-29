@@ -213,15 +213,12 @@ class DAOShop{
 
         $retrArray = array();
         if ($res -> num_rows > 0) {
-			//echo "---------------------------------------------- num rows es > 0 ----------------------------------------------";
             while ($row = mysqli_fetch_assoc($res)) {
 				$retrArray[] = $row;
             }
         }else{
 			
-			//echo "---------------------------------------------- num rows es <= 0 ----------------------------------------------";
 		}
-		//return "Tus muertos pisaos";
         return $retrArray;
     }
 	
@@ -233,18 +230,35 @@ class DAOShop{
 		WHERE v.id_innovacion = i.id_innovacion
 		AND v.id_ciudad = c.id_ciudad ";
 		
-		
-		for ($i = 0; $i < count($filters_search); $i++) {
-			if (!empty($filters_search[$i]['id_operacion'][0])) {
-				$consulta .= " AND v.id_operacion = " . ($filters_search[$i]['id_operacion'][0]);
-			}
-			elseif (!empty($filters_search[$i]['id_innovacion'][0])) {
-				$consulta .= " AND v.id_innovacion = " . ($filters_search[$i]['id_innovacion'][0]);
-			}
-			elseif (!empty($filters_search[$i]['ciudad'][0])) {
-				$consulta .= " AND c.name_ciudad = '" . $filters_search[$i]['ciudad'][0] . "'";
+		foreach ($filters_search as &$value) {
+			foreach ($value as $value_parsed) {
+				if (!empty($value_parsed[0]['id_operacion'][0])) {
+					$consulta .= " AND v.id_operacion = " . ($value_parsed[0]['id_operacion'][0]);
+				}
+				elseif (!empty($value_parsed[0]['id_innovacion'][0])) {
+					$consulta .= " AND v.id_innovacion = " . ($value_parsed[0]['id_innovacion'][0]);
+				}
+				elseif (!empty($value_parsed[0]['ciudad'][0])) {
+					$consulta .= " AND c.name_ciudad = '" . $value_parsed[0]['ciudad'][0] . "'";
+				}
 			}
 		}
+
+
+
+
+		// for ($i = 0; $i < count($filters_search); $i++) {
+		// 	if (!empty($filters_search[$i]['id_operacion'][0])) {
+		// 		$consulta .= " AND v.id_operacion = " . ($filters_search[$i]['id_operacion'][0]);
+		// 	}
+		// 	elseif (!empty($filters_search[$i]['id_innovacion'][0])) {
+		// 		$consulta .= " AND v.id_innovacion = " . ($filters_search[$i]['id_innovacion'][0]);
+		// 	}
+		// 	elseif (!empty($filters_search[$i]['ciudad'][0])) {
+		// 		$consulta .= " AND c.name_ciudad = '" . $filters_search[$i]['ciudad'][0] . "'";
+		// 	}
+		// }
+
 		$consulta.= " LIMIT $offset, $num_pages";
 		//return $consulta;
 

@@ -9,10 +9,13 @@ function loadViviendas() {
     pagination();
     
     if (verificate_filters_home !=  null) {//un unico filters
-        console.log(verificate_filters_home);
-        console.log("verificate_filters_home");
         
-        //load_viviendas_filters_home();
+
+        var filters_home=JSON.parse(verificate_filters_home);
+
+        ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=redirect_home", 'POST', 'JSON', {'filters_home' : filters_home });
+
+        
     
     }else if(verificate_filters_shop !=  null){
         
@@ -381,7 +384,7 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
 
     //'filters_search': data ?????????
     //, 'filters_home' : data ??????
-    ajaxPromise(url, type, JSON, {'filters_shop': data , 'filters_home' : data ,'num_pages': num_pages, 'offset': offset})
+    ajaxPromise(url, type, JSON, {'filters_shop': data , 'filters_home' : data , 'filters_search' : data, 'num_pages': num_pages, 'offset': offset})
         .then(function(data) {
 
             console.log("RETURN CONSULTA");
@@ -523,60 +526,7 @@ function loadDetails(id_vivienda) {
     });
 }
 
-function load_viviendas_filters_home(num_pages = 3 , offset = 0) {
-    var filters_home = JSON.parse(localStorage.getItem('filters_home'));
-    //alert("filtros");
-    // return false;
-    
-    console.log(filters_home);
-    console.log('filters_home');
 
-
-    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=redirect_home', 'POST', 'JSON', { 'filters_home': filters_home }, num_pages, offset)
-
-        .then(function(shop) {
-            //console.log(shop);
-            //return false;
-            //alert(".then");
-            $("#content_shop_viviendas").empty();
-            for (row in shop) {
-                //$('<div></div>').appendTo('#containerShop')
-                $('<div></div>').attr({ 'id': shop[row].id_vivienda, 'class': 'list_content_shop' }).appendTo('#content_shop_viviendas')
-                .html(
-                    "<div class='list_product'>" +
-                    "<div class='img-container'>" +
-                    "<img src= '" + shop[row].img_vivienda + "'" + "</img>" +
-                    "</div>" +
-                    "<div class='product-info'>" +
-                    "<div class='product-content'>" +
-                    "<h1><b>" + shop[row].precio + "\u20AC " + "</b></h1>" +
-                    "<p>Up-to-date maintenance and revisions</p>" +
-                    "<ul>" +
-                    "<li> <i id='col-ico' class='fa-solid fa-bath'></i>&nbsp;" + shop[row].aseos + " aseos" + "</li>" +
-                    "<li> <i id='col-ico' class='fa-solid fa-trowel'></i>&nbsp;" + shop[row].estado + "</li>" +
-                    "<li> <i id='col-ico' class='fa-solid fa-bed'></i>&nbsp;" + shop[row].num_habs + " habitaciones" + "</li>" +
-                    "</ul>" +
-                    "<div class='buttons'>" +
-                    "<button id='" + shop[row].id_vivienda + "' class='more_info_list button add' >More Info</button>" +
-                    "<button class='button buy' >Buy</button>" +
-                    "<span class='button' id='price'>" + shop[row].precio + '€' + "</span>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>"
-                )
-            }
-            mapBox_all(shop);
-        }).catch(function() {
-            // window.location.href = "index.php?modules=exception&op=503&error=fail_salto&type=503";
-        });
-        //borrar caché????
-        //
-        //
-        //
-        //
-        localStorage.removeItem('filters_home');
-}
 
 function mapBox_all(data) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
@@ -700,6 +650,13 @@ function pagination() {
                             console.log(filters_home);
                             console.log('filters_home CHANGE PAG');
                             ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=redirect_home", 'POST', 'JSON', {'filters_home' : filters_home }, num_pages = 3 , offset );
+
+                        } 
+                        if (filters_search != null) {
+                            console.log("HOLA IF PAGINATION HOME");
+                            console.log(filters_search);
+                            console.log('filters_shop CHANGE PAG');
+                            ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=search", 'POST', 'JSON', {'filters_search' : filters_search }, num_pages = 3 , offset );
 
                         } else {
                             console.log("HOLA ELSE PAGINATION");
