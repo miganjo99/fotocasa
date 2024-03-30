@@ -40,7 +40,7 @@
         }
 
         function search_innovacion($operacion){
-            $select="SELECT i.*
+            $select="SELECT DISTINCT i.*
             FROM vivienda v, innovacion i
             WHERE i.id_innovacion = v.id_innovacion AND v.id_operacion = '$operacion'";
 

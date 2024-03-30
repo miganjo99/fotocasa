@@ -587,8 +587,8 @@ function pagination() {
     //     ...filters_shop
     // };
 
-    console.log(filters_home);
-    console.log("filters home pagination");
+    console.log(filters_search);
+    console.log("filters search pagination");
 
 
     var url;

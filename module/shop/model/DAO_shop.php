@@ -225,6 +225,13 @@ class DAOShop{
 	function search($filters_search, $offset, $num_pages){
        
 		
+
+		//return $filters_search;
+
+
+
+
+
         $consulta = "SELECT v.*
 		FROM vivienda v, ciudad c, innovacion i
 		WHERE v.id_innovacion = i.id_innovacion
@@ -232,14 +239,15 @@ class DAOShop{
 		
 		foreach ($filters_search as &$value) {
 			foreach ($value as $value_parsed) {
-				if (!empty($value_parsed[0]['id_operacion'][0])) {
-					$consulta .= " AND v.id_operacion = " . ($value_parsed[0]['id_operacion'][0]);
+				//return $value_parsed['id_operacion'][0];
+				if (!empty($value_parsed['id_operacion'][0])) {
+					$consulta .= " AND v.id_operacion = " . ($value_parsed['id_operacion'][0]);
 				}
-				elseif (!empty($value_parsed[0]['id_innovacion'][0])) {
-					$consulta .= " AND v.id_innovacion = " . ($value_parsed[0]['id_innovacion'][0]);
+				elseif (!empty($value_parsed['id_innovacion'][0])) {
+					$consulta .= " AND v.id_innovacion = " . ($value_parsed['id_innovacion'][0]);
 				}
-				elseif (!empty($value_parsed[0]['ciudad'][0])) {
-					$consulta .= " AND c.name_ciudad = '" . $value_parsed[0]['ciudad'][0] . "'";
+				elseif (!empty($value_parsed['ciudad'][0])) {
+					$consulta .= " AND c.name_ciudad = '" . $value_parsed['ciudad'][0] . "'";
 				}
 			}
 		}
