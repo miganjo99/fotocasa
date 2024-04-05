@@ -228,10 +228,6 @@ class DAOShop{
 
 		//return $filters_search;
 
-
-
-
-
         $consulta = "SELECT v.*
 		FROM vivienda v, ciudad c, innovacion i
 		WHERE v.id_innovacion = i.id_innovacion
@@ -251,21 +247,6 @@ class DAOShop{
 				}
 			}
 		}
-
-
-
-
-		// for ($i = 0; $i < count($filters_search); $i++) {
-		// 	if (!empty($filters_search[$i]['id_operacion'][0])) {
-		// 		$consulta .= " AND v.id_operacion = " . ($filters_search[$i]['id_operacion'][0]);
-		// 	}
-		// 	elseif (!empty($filters_search[$i]['id_innovacion'][0])) {
-		// 		$consulta .= " AND v.id_innovacion = " . ($filters_search[$i]['id_innovacion'][0]);
-		// 	}
-		// 	elseif (!empty($filters_search[$i]['ciudad'][0])) {
-		// 		$consulta .= " AND c.name_ciudad = '" . $filters_search[$i]['ciudad'][0] . "'";
-		// 	}
-		// }
 
 		$consulta.= " LIMIT $offset, $num_pages";
 		//return $consulta;
@@ -529,7 +510,47 @@ class DAOShop{
         return $retrArray;
 
 	}
-	
+	function count_viviendas_related($related){
+		$sql = "SELECT COUNT(*) AS n_prod
+				FROM vivienda v 
+				WHERE v.id_ciudad = '$related'";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		$retrArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			while ($row = mysqli_fetch_assoc($res)) {
+				$retrArray[] = $row;
+			}
+		}
+		return $retrArray;
+	}
+
+
+	function viviendas_related($type, $loaded, $items){
+		$sql = "SELECT * 
+				FROM vivienda v, ciudad c
+				WHERE v.id_ciudad = c.id_ciudad 
+				AND v.id_ciudad = '$type'
+				LIMIT $loaded, $items";
+
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+
+		
+		$retrArray = array();
+		if (mysqli_num_rows($res) > 0) {
+			while ($row = mysqli_fetch_assoc($res)) {
+				$retrArray[] = $row;
+			}
+		}
+		return $retrArray;
+	}
+
+
 
 
 	function filtrosdinamicos(){

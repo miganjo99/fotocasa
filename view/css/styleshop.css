@@ -1,3 +1,55 @@
+
+
+/* SCROLL VIVIENDAS  */
+
+
+/* Estilos para el contenedor principal */
+.title_content {
+  display: flex; /* Usa flexbox para disposición horizontal */
+  flex-wrap: wrap; /* Envuelve los elementos cuando no caben en una línea */
+}
+
+/* Estilos para cada elemento de vivienda */
+.more_info_list1 {
+  flex: 1 0 30%; /* Establece el tamaño de cada elemento al 30% del contenedor, con flex-grow: 1 para que crezcan si hay espacio */
+  margin: 10px; /* Margen entre cada elemento */
+  box-sizing: border-box; /* Incluye el borde y el relleno en el ancho y alto del elemento */
+  border: 1px solid #ccc; /* Borde para cada elemento */
+  padding: 10px; /* Relleno dentro del elemento */
+}
+
+/* Estilos para las imágenes */
+.more_info_list1 img {
+  max-width: 100%; /* Asegura que la imagen no se desborde del contenedor */
+  height: auto; /* Mantiene la proporción de aspecto de la imagen */
+}
+
+/* Estilos para los botones y el precio */
+.more_info_list1 .buttons {
+  margin-top: 10px; /* Margen superior para los botones */
+}
+
+/* Estilos para el botón de carga más */
+.more_viviendas_button {
+  width: 100%; /* Asegura que el botón de carga más ocupe todo el ancho */
+  text-align: center; /* Centra el botón */
+  margin-top: 20px; /* Margen superior */
+}
+
+
+/* END SCROLL VIVIENDAS  */
+
+
+
+
+
+
+
+
+
+
+
+
 #autocom{
   margin: 10px;
   border-radius: 5px;
@@ -328,13 +380,12 @@ a {
   flex-grow: 1;
   padding: 20px;
 }
-#map {
+/* #map {
  
   width: 600px;
   height: auto;
   position: fixed;
-  /* position: sticky;
-  flex: 1; */
+  
   right: 95px;
   top: 250px;
   bottom: 40px;
@@ -342,13 +393,30 @@ a {
   background-color: white;
   border-radius: 5%;
     
+} */
+
+
+.container_vivs {
+  display: flex;
+  justify-content: space-between;
 }
 
-#map img{
-  width: 220px;
-  margin-bottom: 10px;
+.shop_and_map_container {
+  position: relative;
+  width: calc(100% - 100px); /* Ajusta según el tamaño del mapa */
 }
 
+#map {
+  width: 600px;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  border-radius: 5%;
+  overflow: auto; /* Evita que el contenido desborde y cause problemas de visualización */
+}
 
 
 /* CSS DETAILS */

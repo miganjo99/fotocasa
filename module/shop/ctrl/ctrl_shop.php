@@ -305,6 +305,32 @@ switch ($_GET['op']) {
         }
         break;
 
+    case 'count_viviendas_related';    
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> count_viviendas_related($_POST['related']);
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+    break;
+
+    case 'viviendas_related';    
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> viviendas_related($_POST['type'],$_POST['loaded'],$_POST['items']);
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+    break;
+
+    
+
+
+
 
     default;
         //include("module/exceptions/views/pages/error404.php");
