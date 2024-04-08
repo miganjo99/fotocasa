@@ -15,6 +15,9 @@
 			case "ctrl_shop";
 				include("module/shop/ctrl/".$_GET['page'].".php");
 			break;
+			case "ctrl_login";
+				include("module/login/ctrl/".$_GET['page'].".php");
+			break;
 
 
 			case "services";

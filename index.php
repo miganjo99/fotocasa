@@ -4,7 +4,12 @@
 
 	}else if ((isset($_GET['page'])) && ($_GET['page']==="ctrl_shop") ){
 		include("view/inc/top_page_shop.php");
-	}else{
+	}
+	else if ((isset($_GET['page'])) && ($_GET['page']==="ctrl_login") ){
+		include("view/inc/top_page_login.php");
+	}
+	
+	else{
 		include("view/inc/top_page_home.php");
 
 	}

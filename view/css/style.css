@@ -1,3 +1,8 @@
+.navbar-inverse {
+  bottom: 700px;
+}
+
+
 /* Estilos para el texto del h5 en el carrusel de innovación */
 .carousel__elements_innovacion h5.tipo_name_innovacion {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente elegante y legible */
