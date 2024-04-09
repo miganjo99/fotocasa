@@ -25,7 +25,7 @@
         }
 
         function select_user($username){
-			$sql = "SELECT `username`, `password`, `email`, `type_user`, `avatar` FROM `users` WHERE username='$username'";
+			$sql = "SELECT * FROM users u WHERE u.username='$username'";
 			$conexion = connect::con();
             $res = mysqli_query($conexion, $sql)->fetch_object();
             connect::close($conexion);

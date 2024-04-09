@@ -4,6 +4,11 @@ function register() {
 
         ajaxPromise('module/login/ctrl/ctrl_login.php?op=register', 'POST', 'JSON', data)
             .then(function(result) {
+
+                console.log("REGISTER:");
+                console.log(result);
+
+
                 if (result == "error_email") {
                     document.getElementById('error_email_reg').innerHTML = "El email ya esta en uso, asegurate de no tener ya una cuenta"
                 } else if (result == "error_user") {

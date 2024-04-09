@@ -32,8 +32,8 @@
 	
 	<script src="module/shop/model/ctrl_shop.js"></script>
 	<script src="module/search/model/crtl_search.js"></script>
-	<script src="module/login/model/crtl_login.js"></script>
-	<script src="module/login/model/crtl_register.js"></script>
+	<script src="module/login/model/ctrl_login.js"></script>
+	<script src="module/login/model/ctrl_register.js"></script>
 
 	<script src="view/js/promises.js"></script>
 

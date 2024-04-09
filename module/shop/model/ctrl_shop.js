@@ -38,6 +38,11 @@ function loadViviendas() {
         var filters_search=JSON.parse(verificate_filters_search);
         console.log("filters_search:",filters_search);
         ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=search", 'POST', 'JSON', { 'filters_search': filters_search });
+
+        // setTimeout(() => {
+        //     highlightFilters();
+            
+        //   }, "1000");
           
     }
     else {
@@ -320,8 +325,11 @@ function highlightFilters() {
     
     
     var all_filters = JSON.parse(localStorage.getItem('filters_shop'));
+    //var filters_search = JSON.parse(localStorage.getItem('filters_search'));
     
-    console.log("all_filters", all_filters);
+    //console.log("all_filters", all_filters);
+
+    //console.log("filters search highlight", filters_search);
     
     for (var i = 0; i < all_filters.length; i++) {
         var filter = all_filters[i];
@@ -345,6 +353,10 @@ function highlightFilters() {
         if (nombre === 'id_categoria') {
             console.log('id_categoria', valor);
             $('#filter_categoria').val(valor);
+        }
+        if (nombre === 'id_innovacion') {
+            console.log('id_innovacion', valor);
+            $('#filter_innovacion').val(valor);
         }
         if (nombre === 'id_orientacion') {
             $('input[name="orientacion"][value="' + valor + '"]').prop('checked', true);
@@ -641,6 +653,9 @@ function pagination() {
                         //console.log("aaaaaaaaaaaaaaaaaa filters_shop aaaaaaaaaaaaaa",filters_shop);
                         localStorage.setItem('Pag_actual', pageNum);
 
+                        $('button').removeClass('active');// borrar el ultimo pagina marcada
+
+                        $(this).addClass('active');//marcar la pagina correcta
                         
                         if (filters_shop != null) {
                             console.log("HOLA IF PAGINATION SHOP");
@@ -674,6 +689,7 @@ function pagination() {
 
             var pag_actual = localStorage.getItem('move') ? Math.floor(JSON.parse(localStorage.getItem('move'))[1] / 3) + 1 : 1;
             $('#page_' + pag_actual).addClass('active'); 
+
 
         })
 }

@@ -1,8 +1,21 @@
 function login() {
     if (validate_login() != 0) {
-        var data = $('#login__form').serialize();
+        // $('#login__form').serialize();
+        var data = [];    
+        data.push ({name: 'username_log', value : document.getElementById('username_log').value});
+        data.push ({name: 'passwd_log', value : document.getElementById('passwd_log').value});
+
+        //data.document.getElementById('passwd_log').value;
+        //console.log(data);
+        //console.log("data login");
+        
         ajaxPromise('module/login/ctrl/ctrl_login.php?op=login', 'POST', 'JSON', data)
             .then(function(result) {
+               
+                console.log(result);
+                console.log("result logiiiiiiiiiiiiiin");
+
+
                 if (result == "error_user") {
                     document.getElementById('error_username_log').innerHTML = "El usario no existe,asegurase de que lo a escrito correctamente"
                 } else if (result == "error_passwd") {
