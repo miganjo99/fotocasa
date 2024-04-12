@@ -6,8 +6,9 @@ function login() {
         data.push ({name: 'passwd_log', value : document.getElementById('passwd_log').value});
 
         //data.document.getElementById('passwd_log').value;
-        //console.log(data);
-        //console.log("data login");
+        //data = JSON.parse(data);
+        console.log(data);
+        console.log("data login");
         
         ajaxPromise('module/login/ctrl/ctrl_login.php?op=login', 'POST', 'JSON', data)
             .then(function(result) {
@@ -15,19 +16,22 @@ function login() {
                 console.log(result);
                 console.log("result logiiiiiiiiiiiiiin");
 
-
+                //alert("result");
                 if (result == "error_user") {
+                    
                     document.getElementById('error_username_log').innerHTML = "El usario no existe,asegurase de que lo a escrito correctamente"
                 } else if (result == "error_passwd") {
+
                     document.getElementById('error_passwd_log').innerHTML = "La contraseña es incorrecta"
                 } else {
                     localStorage.setItem("token", result);
                     toastr.success("Loged succesfully");
+                    
 
                     if (localStorage.getItem('redirect_like')) {
-                        setTimeout(' window.location.href = "index.php?module=ctrl_shop&op=list"; ', 1000);
+                        setTimeout(' window.location.href = "index.php?module=ctrl_shop&op=list"; ', 7000);
                     } else {
-                        setTimeout(' window.location.href = "index.php?module=ctrl_home&op=list"; ', 1000);
+                        setTimeout(' window.location.href = "index.php?module=ctrl_home&op=list"; ', 4000);
                     }
                 }
             }).catch(function(textStatus) {

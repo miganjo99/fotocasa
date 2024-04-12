@@ -58,8 +58,10 @@
 	<script src="view/plugins/bootstrap.js"></script>
 	<!-- CUSTOM SCRIPTS  -->
 	<script src="view/js/custom.js"></script>
-	<script src="view/plugins/Glider/glider.js"></script>	
-
+	<script src="view/plugins/Glider/glider.js"></script>
+	<script src="view/js/main.js"></script>
+	
+	
 </head>
 
 <body>

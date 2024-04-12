@@ -45,7 +45,8 @@ function button_register() {
 function validate_register() {
     var username_exp = /^(?=.{5,}$)(?=.*[a-zA-Z0-9]).*$/;
     var mail_exp = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-    var pssswd_exp = /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/;
+    var pssswd_exp = /^(?=.{6,}$)(?=.*[a-z]).*$/;
+   // var pssswd_exp = /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/;
     var error = false;
 
     if (document.getElementById('username_reg').value.length === 0) {

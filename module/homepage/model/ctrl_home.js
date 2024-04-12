@@ -174,7 +174,7 @@ function clicks(){
         //alert("click carroussel");
         localStorage.removeItem('filters_home')
        
-        localStorage.setItem('filters_home', JSON.stringify(filters_home)); 
+        localStorage.setItem('filters_home', JSON.stringify(filters_home)); //guardar en filters_shop
             setTimeout(function(){ 
             window.location.href = 'index.php?page=ctrl_shop&op=list';
             }, 1000);  

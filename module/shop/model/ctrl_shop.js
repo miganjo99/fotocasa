@@ -21,12 +21,10 @@ function loadViviendas() {
         
 
         var filters_shop=JSON.parse(verificate_filters_shop);
-        //var filter=JSON.parse(verificate_filters_shop);
-        console.log("Json parseado");
-        console.log(filters_shop);
+       
+
         ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filters_shop': filters_shop  });
-        //ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filter", 'POST', 'JSON', { 'filter': filter , 'num_pages' : num_pages, 'offset' : offset  });
-        ////////////////////////////////////////////////////////////////////////////, 'num_pages' : num_pages, 'offset' : offset
+       
         
         setTimeout(() => {
             highlightFilters();
@@ -36,13 +34,13 @@ function loadViviendas() {
     }else if(verificate_filters_search !=  null){
         
         var filters_search=JSON.parse(verificate_filters_search);
-        console.log("filters_search:",filters_search);
+      
         ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=search", 'POST', 'JSON', { 'filters_search': filters_search });
 
-        // setTimeout(() => {
-        //     highlightFilters();
+        setTimeout(() => {
+            highlightFilters();
             
-        //   }, "1000");
+          }, "1000");
           
     }
     else {
@@ -325,11 +323,9 @@ function highlightFilters() {
     
     
     var all_filters = JSON.parse(localStorage.getItem('filters_shop'));
-    //var filters_search = JSON.parse(localStorage.getItem('filters_search'));
     
-    //console.log("all_filters", all_filters);
+    console.log("all_filters", all_filters);
 
-    //console.log("filters search highlight", filters_search);
     
     for (var i = 0; i < all_filters.length; i++) {
         var filter = all_filters[i];

@@ -75,7 +75,7 @@ function autocomplete() {
                 $('#search_viv').empty();
                 $('#search_viv').fadeIn(10000000);
                 for (row in data) {
-                    $('<div style="color: coral;"></div>').appendTo('#search_viv').html(data[row].name_ciudad).attr({ 'class': 'searchElement', 'id': data[row].name_ciudad });
+                    $('<div></div>').appendTo('#search_viv').html(data[row].name_ciudad).attr({ 'class': 'searchElement', 'id': data[row].name_ciudad });
                 }
                 $(document).on('click', '.searchElement', function () {
                     $('#autocom').val(this.getAttribute('id'));
