@@ -143,6 +143,7 @@ input[type='radio'],
 
 
 .filters_container {
+  margin-top: 90px;
   margin-left: 20px;
   /* position: fixed;
   z-index: 5; */
@@ -526,7 +527,11 @@ a {
   text-decoration: none;
 }
 
-
+.navbar-inverse {
+  background-color: #222;
+  border-color: #080808;
+  height: fit-content;
+}
 
 
 

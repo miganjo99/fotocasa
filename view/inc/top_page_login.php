@@ -30,6 +30,7 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	
+	<script src="view/js/main.js"></script>
 	<script src="module/shop/model/ctrl_shop.js"></script>
 	<script src="module/search/model/crtl_search.js"></script>
 	<script src="module/login/model/ctrl_login.js"></script>
@@ -50,7 +51,6 @@
 	<!-- CUSTOM SCRIPTS  -->
 	<script src="view/js/custom.js"></script>
 	<script src="view/plugins/Glider/glider.js"></script>
-	<script src="view/js/main.js"></script>
 	
 
 </head>

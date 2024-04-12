@@ -514,5 +514,9 @@ select.search_innovacion, select.search_operacion{
   
 }
 
-
+.navbar-inverse {
+  background-color: #222;
+  border-color: #080808;
+  height: fit-content;
+}
 

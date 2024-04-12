@@ -97,9 +97,9 @@ switch ($_GET['op']) {
 
         $json = decode_token($_POST['token']);
 
-        echo json_encode($json);
-        exit;
-        break;
+        // echo json_encode($json);
+        // exit;
+        // break;
 
         $daoLog = new DAOLogin();
         $rdo = $daoLog->select_data_user($json['username']);

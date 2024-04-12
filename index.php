@@ -23,12 +23,7 @@
     	<?php
     	    include("view/inc/header.html");
     	?>        
-    </div>  
-    <div id="menu">
-		<?php
-		    include("view/inc/menu.php");
-		?>
-    </div>	
+    </div>    	
     <div id="pages">
     	<?php 
 		    include("view/inc/pages.php"); 

@@ -26,7 +26,7 @@ function load_menu() {
     var token = localStorage.getItem('token');
     console.log(token);
     console.log("token load menu");
-    alert("HOLA");
+    //alert("HOLA");
 
     if (token) {
         ajaxPromise('module/login/ctrl/ctrl_login.php?op=data_user', 'POST', 'JSON', { 'token': token })
@@ -36,24 +36,24 @@ function load_menu() {
                 console.log("data menu logeado ");
 
 
-                // if (data.type_user == "client") {
-                //     console.log("Client loged");
-                //     $('.opc_CRUD').empty();
-                //     $('.opc_exceptions').empty();
-                // } else {
-                //     console.log("Admin loged");
-                //     $('.opc_CRUD').show();
-                //     $('.opc_exceptions').show();
-                // }
-                // $('.log-icon').empty();
-                // $('#user_info').empty();
-                // $('<img src="' + data.avatar + '"alt="Robot">').appendTo('.log-icon');
-                // $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
-                //     .html(
-                //         '<a id="logout"><i id="icon-logout" class="fa-solid fa-right-from-bracket"></i></a>' +
-                //         '<a>' + data.username + '<a/>'
+                if (data.type_user == "client") {
+                    console.log("Client loged");
+                    $('.opc_CRUD').empty();
+                    $('.opc_exceptions').empty();
+                } else {
+                    console.log("Admin loged");
+                    $('.opc_CRUD').show();
+                    $('.opc_exceptions').show();
+                }
+                $('.log-icon').empty();
+                $('#user_info').empty();
+                $('<img src="' + data.avatar + '"alt="Robot">').appendTo('.log-icon');
+                $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
+                    .html(
+                        '<a id="logout"><i id="icon-logout" class="fa-solid fa-right-from-bracket"></i></a>' +
+                        '<a>' + data.username + '<a/>'
 
-                //     )
+                    )
 
             }).catch(function() {
                 console.log("Error al cargar los datos del user");
