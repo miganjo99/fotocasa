@@ -533,5 +533,47 @@ a {
   height: fit-content;
 }
 
+.log-icon img{
+  width: 90px;
+}
 
+.navbar-collapse .nav{
+  margin-top: -65px;
 
+}
+
+.navbar-collapse .nav #logout_div #logout{
+  font-size: 13px;
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+.navbar-collapse .nav #logout_div #logout:before {
+  height: 0%;
+  width: 2px;
+}
+.navbar-collapse .nav #logout_div #logout:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+#search_viv{
+  color: #E8EAEE;
+  margin-left: 500px;
+  
+  }
+  

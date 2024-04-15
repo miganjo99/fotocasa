@@ -50,7 +50,7 @@ function load_menu() {
                 $('<img src="' + data.avatar + '"alt="Robot">').appendTo('.log-icon');
                 $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
                     .html(
-                        '<a id="logout"><i id="icon-logout" class="fa-solid fa-right-from-bracket"></i></a>' +
+                        //'<a id="logout"><i id="icon-logout" class="fa-solid fa-right-from-bracket"></i></a>' +
                         '<a>' + data.username + '<a/>'
 
                     )
@@ -64,6 +64,8 @@ function load_menu() {
         $('.opc_exceptions').empty();
         $('#user_info').hide();
         $('.log-icon').empty();
+        $('#log-icon').empty();
+        $('#logout').hide();
         $('<a href="index.php?module=ctrl_login&op=login-register_view"><i id="col-ico" class="fa-solid fa-user fa-2xl"></i></a>').appendTo('.log-icon');
     }
 }

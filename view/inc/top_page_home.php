@@ -54,7 +54,8 @@
 	<script src="view/js/promises.js"></script>
 
 	<!-- <script src="view/plugins/jquery-1.10.2.js"></script> -->
-	
+	<!-- FONT AWESOME -->
+	<script src="https://kit.fontawesome.com/596716e4fd.js" crossorigin="anonymous"></script>
 	<!-- BOOTSTRAP SCRIPTS  -->
 	<script src="view/plugins/bootstrap.js"></script>
 	<!-- CUSTOM SCRIPTS  -->
