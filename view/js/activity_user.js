@@ -1,7 +1,11 @@
 function protecturl() {
     var token = localStorage.getItem('token');
+    console.log(token);
+    console.log("token_protecturl");
+
     ajaxPromise('module/login/ctrl/ctrl_login.php?op=controluser', 'POST', 'JSON', { 'token': token })
         .then(function(data) {
+            console.log(data);
             if (data == "Correct_User") {
                 console.log("CORRECTO-->El usario coincide con la session");
             } else if (data == "Wrong_User") {
@@ -20,9 +24,14 @@ function control_activity() {
     if (token) {
         ajaxPromise('module/login/ctrl/ctrl_login.php?op=actividad', 'POST', 'JSON')
             .then(function(response) {
+                console.log(response);
+                console.log("response");
+
                 if (response == "inactivo") {
+                    toastr.warning("Caducó la sesión");
                     console.log("usuario INACTIVO");
-                    logout();
+                    //logout();
+                    setTimeout('logout(); ', 1500);
                 } else {
                     console.log("usuario ACTIVO")
                 }
@@ -47,6 +56,7 @@ function refresh_token() {
 function refresh_cookie() {
     ajaxPromise('module/login/ctrl/ctrl_login.php?op=refresh_cookie', 'POST', 'JSON')
         .then(function(response) {
+            //console.log(response);
             console.log("Refresh cookie correctly");
         });
 }
@@ -58,8 +68,12 @@ function logout_auto() {
 }
 
 $(document).ready(function() {
-    setInterval(function() { control_activity() }, 600000); //10min= 600000
+    //setInterval(function() { control_activity() }, 600000); //10min= 600000
+    //setInterval(function() { control_activity() }, 60000); //60seg= 60000
+    setInterval(function() { control_activity() }, 30000); //30seg= 30000
     protecturl();
-    setInterval(function() { refresh_token() }, 600000);
-    setInterval(function() { refresh_cookie() }, 600000);
+    //setInterval(function() { refresh_token() }, 600000);
+    setInterval(function() { refresh_token() }, 15000);
+    //setInterval(function() { refresh_cookie() }, 600000);
+    setInterval(function() { refresh_cookie() }, 10000);
 });

@@ -3,9 +3,9 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
 include($path . "module/login/model/DAO_login.php");
  include($path . "model/middleware_auth.php");
  @session_start();
-if (isset($_SESSION["tiempo"])) {  
-    $_SESSION["tiempo"] = time(); //Devuelve la fecha actual
-}
+// if (isset($_SESSION["tiempo"])) {  
+//     $_SESSION["tiempo"] = time(); //Devuelve la fecha actual
+// }//NO TRACKEAR EN EL CTRL_LOGIN PQ SINO ACTUALIZA TODO EL TIEMPO EL $SESSION
 
 switch ($_GET['op']) {
     case 'login-register_view';
@@ -69,8 +69,8 @@ switch ($_GET['op']) {
 
                     
                     $token= create_token($rdo["username"]);
-                    // $_SESSION['username'] = $rdo['username']; //Guardamos el usario 
-                    // $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
+                    $_SESSION['username'] = $rdo['username']; //Guardamos el usario 
+                    $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
                     echo json_encode($token);
                     exit;
                 } else {
@@ -108,11 +108,19 @@ switch ($_GET['op']) {
         break;
 
     case 'actividad':
+
+        // echo json_encode($_SESSION["tiempo"]); //= 1713376073
+        // echo json_encode(time()); //= 1713376099
+        //  exit();
+
         if (!isset($_SESSION["tiempo"])) {
             echo json_encode("inactivo");
             exit();
         } else {
-            if ((time() - $_SESSION["tiempo"]) >= 1800) { //1800s=30min
+            //if ((time() - $_SESSION["tiempo"]) >= 1800) { //1800=30min//Aqui pones el tiempo que quieres que dure las sesion
+            //if ((time() - $_SESSION["tiempo"]) >= 100) { //100=30seg//Aqui pones el tiempo que quieres que dure las sesion
+            if ((time() - $_SESSION["tiempo"]) >= 50) { //100=30seg//Aqui pones el tiempo que quieres que dure las sesion
+                //1713374920
                 echo json_encode("inactivo");
                 exit();
             } else {

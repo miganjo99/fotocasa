@@ -31,7 +31,7 @@ function login() {
                     if (localStorage.getItem('redirect_like')) {
                         setTimeout(' window.location.href = "index.php?module=ctrl_shop&op=list"; ', 7000);
                     } else {
-                        setTimeout(' window.location.href = "index.php?module=ctrl_home&op=list"; ', 2000);
+                        setTimeout(' window.location.href = "index.php?module=ctrl_home&op=list"; ', 1500);
                     }
                 }
             }).catch(function(textStatus) {
