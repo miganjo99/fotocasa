@@ -1,7 +1,10 @@
 <?php
     $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
     include($path . "module/homepage/model/DAO_home.php");
-
+    @session_start();
+    if (isset($_SESSION["tiempo"])) {  
+        $_SESSION["tiempo"] = time(); //Devuelve la fecha actual
+    }
 
    
     switch ($_GET['op']) {

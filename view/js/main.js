@@ -47,6 +47,7 @@ function load_menu() {
                 }
                 $('.log-icon').empty();
                 $('#user_info').empty();
+                $('#login-register_view').empty();
                 $('<img src="' + data.avatar + '"alt="Robot">').appendTo('.log-icon');
                 $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
                     .html(

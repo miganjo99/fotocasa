@@ -500,6 +500,7 @@ select.search_innovacion, select.search_operacion{
   height: auto;
   margin: 5px;
   border-radius: 5px;
+  margin-top: 35px;
   align-items:baseline;
 }
 
@@ -521,10 +522,11 @@ select.search_innovacion, select.search_operacion{
 }
 
 .log-icon img{
-  width: 90px;
+  width: 70px;
+  margin-top: -20px;
 }
 .navbar-collapse .nav{
-  margin-top: -65px;
+  margin-top: -42px;
 
 }
 
@@ -568,3 +570,12 @@ color: #E8EAEE;
 margin-left: 500px;
 
 }
+.navbar-inverse {
+  background-color: #222;
+  border-color: #080808;
+  height: 110px;
+}
+.navbar-header .navbar-brand{
+  margin-top: 20px;
+  margin-left: -200px;
+  }

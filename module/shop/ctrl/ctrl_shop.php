@@ -1,6 +1,10 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
 include($path . "module/shop/model/DAO_shop.php");
+@session_start();
+if (isset($_SESSION["tiempo"])) {  
+    $_SESSION["tiempo"] = time(); //Devuelve la fecha actual
+}
 
 // $data = 'hola crtl shop php';
 // die('<script>console.log('.json_encode( $data ) .');</script>');

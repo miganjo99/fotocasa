@@ -534,11 +534,11 @@ a {
 }
 
 .log-icon img{
-  width: 90px;
+  width: 70px;
+  margin-top: -20px;
 }
-
 .navbar-collapse .nav{
-  margin-top: -65px;
+  margin-top: -42px;
 
 }
 
@@ -576,4 +576,21 @@ a {
   margin-left: 500px;
   
   }
-  
+  .navbar-inverse {
+    background-color: #222;
+    border-color: #080808;
+    height: 110px;
+}
+
+select.search_innovacion, select.search_operacion{
+  width: 150px;
+  height: auto;
+  margin: 5px;
+  border-radius: 5px;
+  margin-top: 35px;
+  align-items:baseline;
+}
+.navbar-brand{
+margin-top: 20px;
+
+}

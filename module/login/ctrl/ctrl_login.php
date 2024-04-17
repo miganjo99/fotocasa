@@ -3,9 +3,9 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
 include($path . "module/login/model/DAO_login.php");
  include($path . "model/middleware_auth.php");
  @session_start();
-//if (isset($_SESSION["tiempo"])) {  
-    //$_SESSION["tiempo"] = time(); //Devuelve la fecha actual
-//}
+if (isset($_SESSION["tiempo"])) {  
+    $_SESSION["tiempo"] = time(); //Devuelve la fecha actual
+}
 
 switch ($_GET['op']) {
     case 'login-register_view';
@@ -107,49 +107,49 @@ switch ($_GET['op']) {
         exit;
         break;
 
-    // case 'actividad':
-    //     if (!isset($_SESSION["tiempo"])) {
-    //         echo json_encode("inactivo");
-    //         exit();
-    //     } else {
-    //         if ((time() - $_SESSION["tiempo"]) >= 1800) { //1800s=30min
-    //             echo json_encode("inactivo");
-    //             exit();
-    //         } else {
-    //             echo json_encode("activo");
-    //             exit();
-    //         }
-    //     }
-    //     break;
+    case 'actividad':
+        if (!isset($_SESSION["tiempo"])) {
+            echo json_encode("inactivo");
+            exit();
+        } else {
+            if ((time() - $_SESSION["tiempo"]) >= 1800) { //1800s=30min
+                echo json_encode("inactivo");
+                exit();
+            } else {
+                echo json_encode("activo");
+                exit();
+            }
+        }
+        break;
 
-    // case 'controluser':
-    //     $token_dec = decode_token($_POST['token']);
+    case 'controluser':
+        $token_dec = decode_token($_POST['token']);
 
-    //     if ($token_dec['exp'] < time()) {
-    //         echo json_encode("Wrong_User");
-    //         exit();
-    //     }
+        if ($token_dec['exp'] < time()) {
+            echo json_encode("Wrong_User");
+            exit();
+        }
 
-    //     if (isset($_SESSION['username']) && ($_SESSION['username']) == $token_dec['username']) {
-    //         echo json_encode("Correct_User");
-    //         exit();
-    //     } else {
-    //         echo json_encode("Wrong_User");
-    //         exit();
-    //     }
-    //     break;
+        if (isset($_SESSION['username']) && ($_SESSION['username']) == $token_dec['username']) {
+            echo json_encode("Correct_User");
+            exit();
+        } else {
+            echo json_encode("Wrong_User");
+            exit();
+        }
+        break;
 
-    // case 'refresh_token':
-    //     $old_token = decode_token($_POST['token']);
-    //     $new_token = create_token($old_token['username']);
-    //     echo json_encode($new_token);
-    //     break;
+    case 'refresh_token':
+        $old_token = decode_token($_POST['token']);
+        $new_token = create_token($old_token['username']);
+        echo json_encode($new_token);
+        break;
 
-    // case 'refresh_cookie':
-    //     session_regenerate_id();
-    //     echo json_encode("Done");
-    //     exit;
-    //     break;
+    case 'refresh_cookie':
+        session_regenerate_id();
+        echo json_encode("Done");
+        exit;
+        break;
 
     default;
         include("module/exceptions/views/pages/error404.php");

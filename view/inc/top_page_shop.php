@@ -44,6 +44,7 @@
 
 	
 	<script src="view/js/main.js"></script>
+	<script src="view/js/activity_user.js"></script>
 	<script src="module/shop/model/ctrl_shop.js"></script>
 	<script src="module/search/model/crtl_search.js"></script>
 

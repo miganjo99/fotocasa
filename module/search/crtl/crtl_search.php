@@ -1,6 +1,10 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
 include($path . "module/search/model/DAO_search.php");
+@session_start();
+if (isset($_SESSION["tiempo"])) {  
+    $_SESSION["tiempo"] = time(); //Devuelve la fecha actual
+}
 
 switch ($_GET['op']) {
     case 'search_operacion';
