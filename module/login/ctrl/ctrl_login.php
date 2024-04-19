@@ -68,10 +68,15 @@ switch ($_GET['op']) {
                     //echo json_encode("correct_passwd");
 
                     
-                    $token= create_token($rdo["username"]);
+                    //$token= create_token($rdo["username"]);
+                    
+
+                    $acces_token= create_acces_token($rdo["username"]);
+                    $refresh_token= create_refresh_token($rdo["username"]);
+
                     $_SESSION['username'] = $rdo['username']; //Guardamos el usario 
                     $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
-                    echo json_encode($token);
+                    echo json_encode($acces_token);
                     exit;
                 } else {
                     echo json_encode("error_passwd");
@@ -95,7 +100,7 @@ switch ($_GET['op']) {
     case 'data_user':
 
 
-        $json = decode_token($_POST['token']);
+        $json = decode_token($_POST['acces_token']);
 
         // echo json_encode($json);
         // exit;
@@ -131,13 +136,27 @@ switch ($_GET['op']) {
         break;
 
     case 'controluser':
-        $token_dec = decode_token($_POST['token']);
+        //$token_dec = decode_token($_POST['token']);
 
-        if ($token_dec['exp'] < time()) {
+        $token_acc = decode_token($_POST['acces_token']);
+        $token_ref = decode_token($_POST['refresh_token']);
+        
+        // if ($token_dec['exp'] < time()) {
+        //     echo json_encode("Wrong_User");
+        //     exit();
+        // }
+        if ($token_acc['exp'] < time()) {
             echo json_encode("Wrong_User");
             exit();
         }
 
+        if ($token_acc['exp'] > time() && $token_ref['exp'] < time()) {
+            $old_token = decode_token($_POST['acces_token']);
+            $new_token = create_token($old_token['username']);
+            echo json_encode($new_token);            
+            exit();
+        }
+        
         if (isset($_SESSION['username']) && ($_SESSION['username']) == $token_dec['username']) {
             echo json_encode("Correct_User");
             exit();
@@ -147,11 +166,11 @@ switch ($_GET['op']) {
         }
         break;
 
-    case 'refresh_token':
-        $old_token = decode_token($_POST['token']);
-        $new_token = create_token($old_token['username']);
-        echo json_encode($new_token);
-        break;
+    // case 'refresh_token':
+    //     $old_token = decode_token($_POST['token']);
+    //     $new_token = create_token($old_token['username']);
+    //     echo json_encode($new_token);
+    // break;
 
     case 'refresh_cookie':
         session_regenerate_id();

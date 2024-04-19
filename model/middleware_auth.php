@@ -32,3 +32,38 @@ function create_token($username){
     $token = $JWT->encode($header, $payload, $secret);
     return $token;
 }
+
+
+function create_acces_token($username){
+     $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/model/jwt.ini');
+     $header = $jwt['header'];
+     $secret = $jwt['secret'];//secret a piñon
+    //return $username;
+
+
+    $payload = '{"iat":"' . time() . '","exp":"' . time() + (600) . '","username":"' . $username . '"}';
+
+    //return $payload;
+    //echo json_encode("************************************");
+
+    $JWT = new JWT;
+    $token = $JWT->encode($header, $payload, $secret);
+    return $token;
+}
+
+function create_refresh_token($username){
+     $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/model/jwt.ini');
+     $header = $jwt['header'];
+     $secret = $jwt['secret'];//secret a piñon
+    //return $username;
+
+
+    $payload = '{"iat":"' . time() . '","exp":"' . time() + (3000) . '","username":"' . $username . '"}';
+
+    //return $payload;
+    //echo json_encode("************************************");
+
+    $JWT = new JWT;
+    $token = $JWT->encode($header, $payload, $secret);
+    return $token;
+}

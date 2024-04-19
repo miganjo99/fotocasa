@@ -1,9 +1,9 @@
 function protecturl() {
-    var token = localStorage.getItem('token');
-    console.log(token);
-    console.log("token_protecturl");
+    var token = localStorage.getItem('acces_token');
+    // console.log(token);
+    // console.log("token_protecturl");
 
-    ajaxPromise('module/login/ctrl/ctrl_login.php?op=controluser', 'POST', 'JSON', { 'token': token })
+    ajaxPromise('module/login/ctrl/ctrl_login.php?op=controluser', 'POST', 'JSON', { 'acces_token': token })
         .then(function(data) {
             console.log(data);
             if (data == "Correct_User") {
@@ -18,14 +18,15 @@ function protecturl() {
 }
 
 function control_activity() {
-    var token = localStorage.getItem('token');
-    console.log(token);
-    console.log("token_control_activity");
+    //var token = localStorage.getItem('token');
+    var token = localStorage.getItem('acces_token');
+    // console.log(token);
+    // console.log("token_control_activity");
     if (token) {
         ajaxPromise('module/login/ctrl/ctrl_login.php?op=actividad', 'POST', 'JSON')
             .then(function(response) {
-                console.log(response);
-                console.log("response");
+                // console.log(response);
+                // console.log("response");
 
                 if (response == "inactivo") {
                     toastr.warning("Caducó la sesión");
@@ -37,17 +38,18 @@ function control_activity() {
                 }
             });
     } else {
-        console.log("No hay usario logeado");
+        console.log("No hay usuario logeado");
     }
 }
 
 function refresh_token() {
-    var token = localStorage.getItem('token');
+    var token = localStorage.getItem('refresh_token');
+    //var token = localStorage.getItem('refresh_token');
     if (token) {
-        ajaxPromise('module/login/ctrl/ctrl_login.php?op=refresh_token', 'POST', 'JSON', { 'token': token })
+        ajaxPromise('module/login/ctrl/ctrl_login.php?op=refresh_token', 'POST', 'JSON', { 'refresh_token': token })
             .then(function(data_token) {
                 console.log("Refresh token correctly");
-                localStorage.setItem("token", data_token);
+                localStorage.setItem("refresh_token", data_token);
                 load_menu();
             });
     }
@@ -61,11 +63,11 @@ function refresh_cookie() {
         });
 }
 
-function logout_auto() {
-    localStorage.removeItem('token');
-    toastr.warning("Se ha cerrado la cuenta por seguridad!!");
-    setTimeout('window.location.href = "index.php?module=ctrl_login&op=login-register_view";', 2000);
-}
+// function logout_auto() {
+//     localStorage.removeItem('token');
+//     toastr.warning("Se ha cerrado la cuenta por seguridad!!");
+//     setTimeout('window.location.href = "index.php?module=ctrl_login&op=login-register_view";', 2000);
+// }
 
 $(document).ready(function() {
     //setInterval(function() { control_activity() }, 600000); //10min= 600000

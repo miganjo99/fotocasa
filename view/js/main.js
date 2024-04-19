@@ -23,13 +23,14 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
 
 //================LOAD-HEADER================
 function load_menu() {
-    var token = localStorage.getItem('token');
+    //var token = localStorage.getItem('token');
+    var token = localStorage.getItem('acces_token');
     console.log(token);
     console.log("token load menu");
     //alert("HOLA");
 
     if (token) {
-        ajaxPromise('module/login/ctrl/ctrl_login.php?op=data_user', 'POST', 'JSON', { 'token': token })
+        ajaxPromise('module/login/ctrl/ctrl_login.php?op=data_user', 'POST', 'JSON', { 'acces_token': token })
             .then(function(data) {
 
                 console.log(data);
@@ -85,7 +86,9 @@ function click_logout() {
 function logout() {
     ajaxPromise('module/login/ctrl/ctrl_login.php?op=logout', 'POST', 'JSON')
         .then(function(data) {
-            localStorage.removeItem('token');
+            //localStorage.removeItem('token');
+            localStorage.removeItem('acces_token');
+            localStorage.removeItem('refresh_token');
             window.location.href = "index.php?module=ctrl_home&op=list";
         }).catch(function() {
             console.log('Something has occured');

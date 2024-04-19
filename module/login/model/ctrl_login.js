@@ -24,7 +24,7 @@ function login() {
 
                     document.getElementById('error_passwd_log').innerHTML = "La contraseña es incorrecta"
                 } else {
-                    localStorage.setItem("token", result);
+                    localStorage.setItem("acces_token", result);
                     toastr.success("Loged succesfully");
                     
 
