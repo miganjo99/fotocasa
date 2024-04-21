@@ -1,46 +1,42 @@
 function login() {
-    if (validate_login() != 0) {
-        // $('#login__form').serialize();
-        var data = [];    
-        data.push ({name: 'username_log', value : document.getElementById('username_log').value});
-        data.push ({name: 'passwd_log', value : document.getElementById('passwd_log').value});
+    if (validate_login() !== 0) {
+        var data = [];
+        data.push({ name: 'username_log', value: document.getElementById('username_log').value });
+        data.push({ name: 'passwd_log', value: document.getElementById('passwd_log').value });
 
-        //data.document.getElementById('passwd_log').value;
-        //data = JSON.parse(data);
-        console.log(data);
-        console.log("data login");
-        
+        console.log("Datos de inicio de sesión:", data);
+
         ajaxPromise('module/login/ctrl/ctrl_login.php?op=login', 'POST', 'JSON', data)
             .then(function(result) {
-               
-                console.log(result);
-                console.log("result logiiiiiiiiiiiiiin");
+                console.log("Resultado del inicio de sesión:", result);
 
-                //alert("result");
-                if (result == "error_user") {
-                    
-                    document.getElementById('error_username_log').innerHTML = "El usario no existe,asegurase de que lo a escrito correctamente"
-                } else if (result == "error_passwd") {
+                if (result.status === "error_user") {
+                    document.getElementById('error_username_log').innerHTML = "El usuario no existe, asegúrese de que lo ha escrito correctamente";
+                } else if (result.status === "error_passwd") {
+                    document.getElementById('error_passwd_log').innerHTML = "La contraseña es incorrecta";
+                } else if (result.status === "success") {
+                    // Guardar ambos tokens en localStorage
+                    localStorage.setItem("acces_token", result.acces_token);
+                    localStorage.setItem("refresh_token", result.refresh_token);
 
-                    document.getElementById('error_passwd_log').innerHTML = "La contraseña es incorrecta"
-                } else {
-                    localStorage.setItem("acces_token", result);
-                    toastr.success("Loged succesfully");
-                    
+                    toastr.success("Inicio de sesión exitoso");
 
-                    if (localStorage.getItem('redirect_like')) {
-                        setTimeout(' window.location.href = "index.php?module=ctrl_shop&op=list"; ', 7000);
-                    } else {
-                        setTimeout(' window.location.href = "index.php?module=ctrl_home&op=list"; ', 1500);
-                    }
+                    // if (localStorage.getItem('redirect_like')) {
+                    //     //  setTimeout(' window.location.href = "index.php?module=ctrl_shop&op=list"; ', 7000);
+                    // }
+
+                    setTimeout(' window.location.href = "index.php?module=ctrl_home&op=list"; ', 1500);
+
                 }
-            }).catch(function(textStatus) {
-                if (console && console.log) {
-                    console.log("La solicitud ha fallado: " + textStatus);
-                }
+            })
+            .catch(function(textStatus) {
+                console.log("La solicitud ha fallado:", textStatus);
             });
     }
 }
+
+
+
 
 function key_login() {
     $("#login").keypress(function(e) {

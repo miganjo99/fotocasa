@@ -55,40 +55,36 @@ switch ($_GET['op']) {
         try {
             $daoLog = new DAOLogin();
             $rdo = $daoLog->select_user($_POST['username_log']);
-
-            // echo json_decode($_POST['passwd_log']) ;
-            // echo json_decode($_POST['username_log']) ;
-            // echo json_decode($rdo);
-
+    
             if ($rdo == "error_user") {
-                echo json_encode("error_user");
+                echo json_encode(["status" => "error_user"]);
                 exit;
             } else {
-                if (password_verify($_POST['passwd_log'], $rdo['password'])) {//passwd_log=pass del formulario, password= pass de bbdd
-                    //echo json_encode("correct_passwd");
-
-                    
-                    //$token= create_token($rdo["username"]);
-                    
-
-                    $acces_token= create_acces_token($rdo["username"]);
-                    $refresh_token= create_refresh_token($rdo["username"]);
-
-                    $_SESSION['username'] = $rdo['username']; //Guardamos el usario 
-                    $_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
-                    echo json_encode($acces_token);
+                if (password_verify($_POST['passwd_log'], $rdo['password'])) {
+                    $acces_token = create_acces_token($rdo["username"]);
+                    $refresh_token = create_refresh_token($rdo["username"]);
+    
+                    $_SESSION['username'] = $rdo['username']; 
+                    $_SESSION['tiempo'] = time(); 
+    
+                    // Devuelve ambos tokens como parte de un objeto JSON
+                    echo json_encode([
+                        "status" => "success",
+                        "acces_token" => $acces_token,
+                        "refresh_token" => $refresh_token
+                    ]);
                     exit;
                 } else {
-                    echo json_encode("error_passwd");
+                    echo json_encode(["status" => "error_passwd"]);
                     exit;
                 }
             }
         } catch (Exception $e) {
-            echo json_encode("error");
+            echo json_encode(["status" => "error", "message" => $e->getMessage()]);
             exit;
         }
         break;
-
+    
     case 'logout':
         unset($_SESSION['username']);
         unset($_SESSION['tiempo']);
@@ -124,7 +120,7 @@ switch ($_GET['op']) {
         } else {
             //if ((time() - $_SESSION["tiempo"]) >= 1800) { //1800=30min//Aqui pones el tiempo que quieres que dure las sesion
             //if ((time() - $_SESSION["tiempo"]) >= 100) { //100=30seg//Aqui pones el tiempo que quieres que dure las sesion
-            if ((time() - $_SESSION["tiempo"]) >= 50) { //100=30seg//Aqui pones el tiempo que quieres que dure las sesion
+            if ((time() - $_SESSION["tiempo"]) >= 100) { //100=30seg//Aqui pones el tiempo que quieres que dure las sesion
                 //1713374920
                 echo json_encode("inactivo");
                 exit();
@@ -141,6 +137,10 @@ switch ($_GET['op']) {
         $token_acc = decode_token($_POST['acces_token']);
         $token_ref = decode_token($_POST['refresh_token']);
         
+
+        //  echo json_encode($_POST['refresh_token']);
+        //  exit();
+
         // if ($token_dec['exp'] < time()) {
         //     echo json_encode("Wrong_User");
         //     exit();
@@ -150,14 +150,15 @@ switch ($_GET['op']) {
             exit();
         }
 
-        if ($token_acc['exp'] > time() && $token_ref['exp'] < time()) {
+        if ($token_acc['exp'] >= time() && $token_ref['exp'] < time()) {
             $old_token = decode_token($_POST['acces_token']);
             $new_token = create_token($old_token['username']);
-            echo json_encode($new_token);            
+            //echo json_encode($new_token);            
+            echo json_encode("Correct_User");            
             exit();
         }
         
-        if (isset($_SESSION['username']) && ($_SESSION['username']) == $token_dec['username']) {
+        if (isset($_SESSION['username']) && ($_SESSION['username']) == $token_acc['username']) {
             echo json_encode("Correct_User");
             exit();
         } else {

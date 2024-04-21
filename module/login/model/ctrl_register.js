@@ -15,7 +15,6 @@ function register() {
                     document.getElementById('error_username_reg').innerHTML = "El usuario ya esta en uso, intentalo con otro"
                 } else {
                     toastr.success("Registery succesfully");
-                    //reload();
                     setTimeout(' window.location.href = "index.php?module=ctrl_login&op=login-register_view"; ', 1000);
                 }
             }).catch(function(textStatus) {
