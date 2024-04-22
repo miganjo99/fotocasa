@@ -63,7 +63,7 @@ switch ($_GET['op']) {
                 if (password_verify($_POST['passwd_log'], $rdo['password'])) {
                     $acces_token = create_acces_token($rdo["username"]);
                     $refresh_token = create_refresh_token($rdo["username"]);
-    
+                    //Se puede guardar en sessionstorage y luego recuperar y guardar en localstorage?
                     $_SESSION['username'] = $rdo['username']; 
                     $_SESSION['tiempo'] = time(); 
     
@@ -138,8 +138,8 @@ switch ($_GET['op']) {
         $token_ref = decode_token($_POST['refresh_token']);
         
 
-        //  echo json_encode($_POST['refresh_token']);
-        //  exit();
+        //  echo json_encode($token_ref['exp']);
+        //   exit();
 
         // if ($token_dec['exp'] < time()) {
         //     echo json_encode("Wrong_User");
@@ -152,9 +152,9 @@ switch ($_GET['op']) {
 
         if ($token_acc['exp'] >= time() && $token_ref['exp'] < time()) {
             $old_token = decode_token($_POST['acces_token']);
-            $new_token = create_token($old_token['username']);
-            //echo json_encode($new_token);            
-            echo json_encode("Correct_User");            
+            $new_token = create_acces_token($old_token['username']);
+            echo json_encode($new_token);            
+            //echo json_encode("Correct_User");             
             exit();
         }
         

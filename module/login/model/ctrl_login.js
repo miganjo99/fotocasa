@@ -10,11 +10,15 @@ function login() {
             .then(function(result) {
                 console.log("Resultado del inicio de sesión:", result);
 
-                if (result.status === "error_user") {
+                if (result.status == "error_user") {
+                    
                     document.getElementById('error_username_log').innerHTML = "El usuario no existe, asegúrese de que lo ha escrito correctamente";
-                } else if (result.status === "error_passwd") {
+
+                } else if (result.status == "error_passwd") {
+
                     document.getElementById('error_passwd_log').innerHTML = "La contraseña es incorrecta";
-                } else if (result.status === "success") {
+
+                } else if (result.status == "success") {
                     // Guardar ambos tokens en localStorage
                     localStorage.setItem("acces_token", result.acces_token);
                     localStorage.setItem("refresh_token", result.refresh_token);

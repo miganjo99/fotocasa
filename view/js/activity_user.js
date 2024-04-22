@@ -3,22 +3,27 @@ function protecturl() {
     var token_ref = localStorage.getItem('refresh_token');
      console.log(token_acc);
      console.log(token_ref);
-    // console.log("token_protecturl");
+     console.log("token_protecturl");
 
     ajaxPromise('module/login/ctrl/ctrl_login.php?op=controluser', 'POST', 'JSON', { 'acces_token': token_acc, 'refresh_token': token_ref })
         .then(function(data) {
             console.log(data);
+            console.log("*********************************************************");
             if (data == "Correct_User") {
                 console.log("CORRECTO-->El usario coincide con la session");
                 console.log(data);
                 console.log("data refresh token controluser");
 
 
-
             } else if (data == "Wrong_User") {
                 console.log("INCORRCTO--> Estan intentando acceder a una cuenta");
                 //logout_auto();
                 logout();
+            } else if (data.length > 20){
+                console.log(data);
+                console.log("data.length");
+                localStorage.setItem("acces_token", data);
+
             }
         })
         .catch(function() { console.log("ANONYMOUS_user") });
@@ -77,14 +82,14 @@ function refresh_cookie() {
 // }
 
 $(document).ready(function() {
-    //setInterval(function() { control_activity() }, 600000); //10min= 600000
-    //setInterval(function() { control_activity() }, 60000); //60seg= 60000
+    
     setInterval(function() { control_activity() }, 30000); //30seg= 30000
+    //setInterval(function() { control_activity() }, 1000); //30seg= 30000
     protecturl();
 
     //setInterval(function() { refresh_token() }, 15000);
 
 
-    //setInterval(function() { refresh_cookie() }, 600000);
-    setInterval(function() { refresh_cookie() }, 10000);
+    //setInterval(function() { refresh_cookie() }, 10000);
+    setInterval(function() { refresh_cookie() }, 600000);
 });

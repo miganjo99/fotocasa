@@ -456,14 +456,15 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
 function clicks() {
     
     $(document).on("click", ".more_info_list", function() {
-        var id_vivienda = this.getAttribute('id');
-        //console.log(id_vivienda);
-        //alert("button more info");
-       
+        var id_vivienda = this.getAttribute('id');      
         localStorage.setItem('id', id_vivienda);
-        //console.log(localStorage.getItem('id'));
-
         loadDetails(id_vivienda);
+    });
+
+    $(document).on("click", ".details__heart", function() {
+        var id_vivienda = this.getAttribute('id');
+        localStorage.setItem('id', id_vivienda);
+        likes(id_vivienda);
     });
 }
 
@@ -537,7 +538,20 @@ function loadDetails(id_vivienda) {
     });
 }
 
+function likes(id_vivienda){
 
+    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=likes&id=' + id_vivienda, 'GET', 'JSON')
+    .then(function(data) {
+
+
+
+    }).catch(function() {
+
+
+    });
+
+
+}
 
 function mapBox_all(data) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
@@ -732,11 +746,11 @@ function viviendas_related(offset = 0, related, total_items) {
                             "<li> <i id='col-ico' class='fa-solid fa-trowel'></i>&nbsp;" + data[row].estado + "</li>" +
                             "<li> <i id='col-ico' class='fa-solid fa-bed'></i>&nbsp;" + data[row].num_habs + " habitaciones" + "</li>" +
                             "</ul>" +
-                            "<div class='buttons'>" +
-                            "<button id='" + data[row].id_vivienda + "' class='more_info_list1 button add' >More Info</button>" +
-                            "<button class='button buy' >Buy</button>" +
-                            "<span class='button' id='price'>" + data[row].precio + '€' + "</span>" +
-                            "</div>" +
+                            //"<div class='buttons'>" +
+                            //"<button id='" + data[row].id_vivienda + "' class='more_info_list1 button add' >More Info</button>" +
+                            //"<button class='button buy' >Buy</button>" +
+                            //"<span class='button' id='price'>" + data[row].precio + '€' + "</span>" +
+                            //"</div>" +
                             "</div>" +
                             "</div>" +
                             "</div>"

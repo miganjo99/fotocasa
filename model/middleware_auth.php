@@ -1,7 +1,7 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . "/crud/crud_MVC/model/JWT.php");
 
-function decode_token($token){
+function decode_token($acces_token){
     $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/model/jwt.ini');
     $secret = $jwt['secret'];
 
@@ -10,7 +10,7 @@ function decode_token($token){
     $JWT = new JWT;
 
     //$secret="elcocomalote";
-    $token_dec = $JWT->decode($token, $secret);
+    $token_dec = $JWT->decode($acces_token, $secret);
     $rt_token = json_decode($token_dec, TRUE);
     return $rt_token;
    
