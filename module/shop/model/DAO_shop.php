@@ -221,6 +221,37 @@ class DAOShop{
 		}
         return $retrArray;
     }
+	function likes($acces_token, $id_vivienda){
+
+
+		$token = decode_token($_POST['acces_token']);
+		$token = $token['username'];
+		return $token;
+
+		// if 
+
+        $consulta = "SELECT id_user
+					 FROM users
+					 WHERE username = $token"
+		$consulta2= ""
+
+
+	
+
+        // $conexion = connect::con();
+        // $res = mysqli_query($conexion, $consulta);
+        // connect::close($conexion);
+
+        // $retrArray = array();
+        // if ($res -> num_rows > 0) {
+        //     while ($row = mysqli_fetch_assoc($res)) {
+		// 		$retrArray[] = $row;
+        //     }
+        // }else{
+			
+		// }
+        // return $retrArray;
+    }
 	
 	function search($filters_search, $offset, $num_pages){
        

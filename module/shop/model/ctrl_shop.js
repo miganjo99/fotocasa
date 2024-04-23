@@ -431,8 +431,8 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
                             "</ul>" +
                             "<div class='buttons'>" +
                             "<button id='" + data[row].id_vivienda + "' class='more_info_list button add' >More Info</button>" +
-                            "<button class='button buy' >Buy</button>" +
                             "<span class='button' id='price'>" + data[row].precio + '€' + "</span>" +
+                            "<a class='details__heart' id='" + data[row].id_vivienda + "'><i id=" + data[row].id_vivienda + " class='fa-solid fa-heart fa-lg'></i></a>" +
                             "</div>" +
                             "</div>" +
                             "</div>" +
@@ -461,9 +461,11 @@ function clicks() {
         loadDetails(id_vivienda);
     });
 
+
     $(document).on("click", ".details__heart", function() {
+        //alert("click like");
         var id_vivienda = this.getAttribute('id');
-        localStorage.setItem('id', id_vivienda);
+        //localStorage.setItem('id', id_vivienda);
         likes(id_vivienda);
     });
 }
@@ -540,16 +542,28 @@ function loadDetails(id_vivienda) {
 
 function likes(id_vivienda){
 
-    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=likes&id=' + id_vivienda, 'GET', 'JSON')
-    .then(function(data) {
+    console.log(id_vivienda);
+    let acces_token = localStorage.getItem("acces_token");
+    console.log(acces_token);
 
+    if(acces_token != null){
+        console.log("Hay token like");
+        ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=likes', 'POST', 'JSON',{ "acces_token" : acces_token, "id_vivienda" : id_vivienda})
+        .then(function(data) {
+            
+            console.log(data);
+            console.log("data_likes");
+            
+        }).catch(function() {
+            
+            
+        });
+        
+    }else{
 
-
-    }).catch(function() {
-
-
-    });
-
+        toastr.warning("Inicia sesión si desea realizar esa operación");
+        setTimeout(' window.location.href = "index.php?page=ctrl_login&op=login-register_view"; ', 2000);        
+    }
 
 }
 

@@ -15,8 +15,8 @@ function register() {
                     document.getElementById('error_username_reg').innerHTML = "El usuario ya esta en uso, intentalo con otro"
                 } else {
                     toastr.success("Registery succesfully");
-                    setTimeout(' window.location.href = "index.php?module=ctrl_login&op=login-register_view"; ', 1000);
-                }
+                    setTimeout(' window.location.href = "index.php?page=ctrl_login&op=login-register_view"; ', 1000);
+                }                                       //"index.php?page=ctrl_login&op=login-register_view"
             }).catch(function(textStatus) {
                 if (console && console.log) {
                     console.log("La solicitud ha fallado: " + textStatus);

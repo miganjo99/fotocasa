@@ -1,6 +1,8 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
 include($path . "module/shop/model/DAO_shop.php");
+include($path . "model/middleware_auth.php");
+
 @session_start();
 if (isset($_SESSION["tiempo"])) {  
     $_SESSION["tiempo"] = time(); //Devuelve la fecha actual
@@ -139,6 +141,25 @@ switch ($_GET['op']) {
             echo "error";
         }
     break;
+    
+    
+    case 'likes';
+
+        $homeQuery = new DAOShop();
+        $selSlide = $homeQuery -> likes($_POST['acces_token'], $_POST['id_vivienda']);
+        
+        if (!empty($selSlide)) {
+            echo json_encode($selSlide);
+        }
+        else {
+            echo "error";
+        }
+    break;
+    
+    
+
+
+
 
     case 'filter_ult';
         
