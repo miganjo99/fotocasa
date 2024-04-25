@@ -1,9 +1,9 @@
 function protecturl() {
     var token_acc = localStorage.getItem('acces_token');
     var token_ref = localStorage.getItem('refresh_token');
-     console.log(token_acc);
-     console.log(token_ref);
-     console.log("token_protecturl");
+    //  console.log(token_acc);
+    //  console.log(token_ref);
+    //  console.log("token_protecturl");
 
     ajaxPromise('module/login/ctrl/ctrl_login.php?op=controluser', 'POST', 'JSON', { 'acces_token': token_acc, 'refresh_token': token_ref })
         .then(function(data) {

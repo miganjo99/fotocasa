@@ -221,6 +221,8 @@ class DAOShop{
 		}
         return $retrArray;
     }
+
+
 	function likes($acces_token, $id_vivienda){
 
 
@@ -230,10 +232,11 @@ class DAOShop{
 
 		// if 
 
-        $consulta = "SELECT id_user
-					 FROM users
-					 WHERE username = $token"
-		$consulta2= ""
+		// $consulta= CALL likes($token, $id_vivienda)
+        // $consulta = "SELECT id_user
+		// 			 FROM users
+		// 			 WHERE username = $token"
+		// $consulta2= ""
 
 
 	
@@ -252,7 +255,28 @@ class DAOShop{
 		// }
         // return $retrArray;
     }
+
+
 	
+	function mis_likes($username) {
+        $consulta = "SELECT id_vivienda
+                     FROM likes l
+                     JOIN users u ON l.id_user = u.id_user
+                     WHERE u.username = '$username'";
+
+        $conexion = connect::con(); 
+        $res = mysqli_query($conexion, $consulta); 
+        $resultArray = [];
+
+        while ($row = mysqli_fetch_assoc($res)) {
+            $resultArray[] = $row;
+        }
+
+        connect::close($conexion); 
+        return $resultArray; 
+    }
+
+
 	function search($filters_search, $offset, $num_pages){
        
 		

@@ -157,7 +157,20 @@ switch ($_GET['op']) {
     break;
     
     
-
+    
+    case 'mis_likes':
+        $token = decode_token($_POST['acces_token']);
+    
+        $homeQuery = new DAOShop();
+        $likes = $homeQuery->mis_likes($token['username']);
+    
+       
+        if (!empty($likes)) {
+            echo json_encode($likes); 
+        } else {
+            echo json_encode(["message" => "Este usuario no tiene likes"]); 
+        }
+    break;
 
 
 

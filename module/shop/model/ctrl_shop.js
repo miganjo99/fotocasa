@@ -3,10 +3,22 @@ function loadViviendas() {
     var verificate_filters_home = localStorage.getItem('filters_home') || null;//de false a null
     var verificate_filters_shop = localStorage.getItem('filters_shop') || null;//de false a null
     var verificate_filters_search = localStorage.getItem('filters_search') || null;//de false a null
+
+
+    // var verificate_acces_token = localStorage.getItem('acces_token') || null;//de false a null
     
     
-    
+   
+
     pagination();
+
+    // if (verificate_acces_token !=  null) {//un unico filters
+    //     console.log("go mis likes");
+    //     mis_likes();     
+    // }
+
+
+
     
     if (verificate_filters_home !=  null) {//un unico filters
         
@@ -401,6 +413,12 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
             $('#content_shop_viviendas').empty();
             $('.date_vivienda' && '.date_img').empty();
             //  $('.date_img_array').empty();
+            //mis_likes();
+            var verificate_acces_token = localStorage.getItem('acces_token') || null;
+
+            if (verificate_acces_token !=  null) {//un unico filters
+                mis_likes();     
+            }
 
             //Mejora para que cuando no hayan resultados en los filtros aplicados
             
@@ -431,8 +449,12 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
                             "</ul>" +
                             "<div class='buttons'>" +
                             "<button id='" + data[row].id_vivienda + "' class='more_info_list button add' >More Info</button>" +
-                            "<span class='button' id='price'>" + data[row].precio + '€' + "</span>" +
-                            "<a class='details__heart' id='" + data[row].id_vivienda + "'><i id=" + data[row].id_vivienda + " class='fa-solid fa-heart fa-lg'></i></a>" +
+                            // "<span class='button' id='price'>" + data[row].precio + '€' + "</span>" +
+
+
+                            "<a class='details__heart' id='" + data[row].id_vivienda + "'><i id=" + data[row].id_vivienda + " class='fa-regular fa-heart fa-lg'></i></a>" +
+                            //"<a class='fa-regular fa-heart fa-lg' id='" + data[row].id_vivienda + "'></a>" +
+
                             "</div>" +
                             "</div>" +
                             "</div>" +
@@ -453,19 +475,32 @@ function ajaxForSearch(url, type, JSON, data=undefined, num_pages = 3 , offset =
         
 }
 
+
+
 function clicks() {
     
     $(document).on("click", ".more_info_list", function() {
+        
+        
         var id_vivienda = this.getAttribute('id');      
         localStorage.setItem('id', id_vivienda);
         loadDetails(id_vivienda);
     });
-
-
+    
+    
     $(document).on("click", ".details__heart", function() {
         //alert("click like");
+
+
         var id_vivienda = this.getAttribute('id');
+
+        // localStorage.setItem("like",id_vivienda);
+        // $('#' + id_vivienda +'.details__heart').empty();
+        // $('#' + id_vivienda +'.details__heart').toggleClass('fa-solid fa-heart fa-lg');
+        
         //localStorage.setItem('id', id_vivienda);
+        localStorage.setItem("like",id_vivienda);
+
         likes(id_vivienda);
     });
 }
@@ -540,17 +575,36 @@ function loadDetails(id_vivienda) {
     });
 }
 
+
+
+
+
+
 function likes(id_vivienda){
 
     console.log(id_vivienda);
     let acces_token = localStorage.getItem("acces_token");
-    console.log(acces_token);
+    //console.log(acces_token);
 
     if(acces_token != null){
         console.log("Hay token like");
         ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=likes', 'POST', 'JSON',{ "acces_token" : acces_token, "id_vivienda" : id_vivienda})
         .then(function(data) {
             
+            var like = localStorage.getItem("like");
+            if(!like){
+
+                $('#' + id_vivienda +'.details__heart').empty();
+                localStorage.removeItem("like");
+            }else{
+                $('#' + id_vivienda +'.details__heart').toggleClass('fa-solid fa-heart fa-lg');
+                localStorage.setItem("like");
+            }
+
+
+            //hacer un bucle donde pinte el corazon de las viviendas que tengan like en bbdd 
+
+
             console.log(data);
             console.log("data_likes");
             
@@ -567,13 +621,45 @@ function likes(id_vivienda){
 
 }
 
+
+function mis_likes() {
+    var acces_token = localStorage.getItem('acces_token');
+
+    console.log("Token de acceso:", acces_token);
+
+    if (acces_token != null) {
+        ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=mis_likes', 'POST', 'JSON', {'acces_token': acces_token})
+            .then(function(data) {
+                console.log("Datos recibidos:", data);
+
+                
+                data.forEach(function(item) {
+                    $('#' + item.id_vivienda + ' .details__heart').addClass('fa-solid fa-heart fa-lg');
+                });
+                
+            })
+            .catch(function(error) {
+                console.error("Error al obtener los likes:", error);
+
+                toastr.error("Ocurrió un error al obtener tus likes. Por favor, intenta más tarde.");
+            });
+    } else {
+        toastr.warning("Debes iniciar sesión para ver tus likes.");
+        setTimeout(function() {
+            window.location.href = "index.php?page=ctrl_login&op=login-register_view";
+        }, 2000);
+    }
+}
+
+
+
 function mapBox_all(data) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [-0.61667, 38.83966492354664], // starting position [lng, lat]
-        zoom: 4.5 // starting zoom
+        zoom: 6.5 // starting zoom
     });
 
     for (row in data) {
@@ -626,24 +712,23 @@ function pagination() {
     //     ...filters_shop
     // };
 
-    console.log(filters_search);
-    console.log("filters search pagination");
+    //console.log(filters_search);
+    //console.log("filters search pagination");
 
 
     var url;
     if (filters_search) {//Todo ifs
-         url = "module/shop/ctrl/ctrl_shop.php?op=count_search";
+    url = "module/shop/ctrl/ctrl_shop.php?op=count_search";
     }
     if (filters_home) {
-
-         url = "module/shop/ctrl/ctrl_shop.php?op=count_home";
+    url = "module/shop/ctrl/ctrl_shop.php?op=count_home";
     }
     if (filters_shop) {
 
-         url = "module/shop/ctrl/ctrl_shop.php?op=count_shop";
+    url = "module/shop/ctrl/ctrl_shop.php?op=count_shop";
     }
     if (!filters_search && !filters_home && !filters_shop) {
-        url = "module/shop/ctrl/ctrl_shop.php?op=count_all";
+    url = "module/shop/ctrl/ctrl_shop.php?op=count_all";
     }
     //console.log("consulta", filters_home);
    

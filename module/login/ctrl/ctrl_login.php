@@ -1,7 +1,7 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'] . '/crud/crud_MVC/';
 include($path . "module/login/model/DAO_login.php");
- include($path . "model/middleware_auth.php");
+include($path . "model/middleware_auth.php");
  @session_start();
 // if (isset($_SESSION["tiempo"])) {  
 //     $_SESSION["tiempo"] = time(); //Devuelve la fecha actual
@@ -120,7 +120,7 @@ switch ($_GET['op']) {
         } else {
             //if ((time() - $_SESSION["tiempo"]) >= 1800) { //1800=30min//Aqui pones el tiempo que quieres que dure las sesion
             //if ((time() - $_SESSION["tiempo"]) >= 100) { //100=30seg//Aqui pones el tiempo que quieres que dure las sesion
-            if ((time() - $_SESSION["tiempo"]) >= 100) { //100=30seg//Aqui pones el tiempo que quieres que dure las sesion
+            if ((time() - $_SESSION["tiempo"]) >= 400) { //100=30seg//Aqui pones el tiempo que quieres que dure las sesion
                 //1713374920
                 echo json_encode("inactivo");
                 exit();
@@ -138,13 +138,6 @@ switch ($_GET['op']) {
         $token_ref = decode_token($_POST['refresh_token']);
         
 
-        //  echo json_encode($token_ref['exp']);
-        //   exit();
-
-        // if ($token_dec['exp'] < time()) {
-        //     echo json_encode("Wrong_User");
-        //     exit();
-        // }
         if ($token_acc['exp'] < time()) {
             echo json_encode("Wrong_User");
             exit();

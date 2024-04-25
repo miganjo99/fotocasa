@@ -24,7 +24,7 @@ function login() {
                     localStorage.setItem("refresh_token", result.refresh_token);
 
                     toastr.success("Inicio de sesión exitoso");
-
+                    
                     // if (localStorage.getItem('redirect_like')) {
                     //     //  setTimeout(' window.location.href = "index.php?module=ctrl_shop&op=list"; ', 7000);
                     // }

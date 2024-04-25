@@ -1,4 +1,15 @@
 
+
+
+.mapboxgl-popup-content img{
+ width: 200px;
+ height: auto;
+ align-items: center;
+ margin: 10px;
+}
+
+
+
 #search-btn{
   
   appearance: none;
