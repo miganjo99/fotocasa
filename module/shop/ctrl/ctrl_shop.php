@@ -143,17 +143,15 @@ switch ($_GET['op']) {
     break;
     
     
-    case 'likes';
-
-        $homeQuery = new DAOShop();
-        $selSlide = $homeQuery -> likes($_POST['acces_token'], $_POST['id_vivienda']);
+    case 'likes':
+        $token = decode_token($_POST['acces_token']);
         
-        if (!empty($selSlide)) {
-            echo json_encode($selSlide);
-        }
-        else {
-            echo "error";
-        }
+    
+        $homeQuery = new DAOShop();
+        $result = $homeQuery->likes($token['username'], $_POST['id_vivienda']);
+    
+        echo json_encode(["result" => $result]);
+
     break;
     
     

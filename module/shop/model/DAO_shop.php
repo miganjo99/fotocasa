@@ -223,38 +223,23 @@ class DAOShop{
     }
 
 
-	function likes($acces_token, $id_vivienda){
+	function likes($username, $id_vivienda) {
 
-
-		$token = decode_token($_POST['acces_token']);
-		$token = $token['username'];
-		return $token;
-
-		// if 
-
-		// $consulta= CALL likes($token, $id_vivienda)
-        // $consulta = "SELECT id_user
-		// 			 FROM users
-		// 			 WHERE username = $token"
-		// $consulta2= ""
-
-
+		$consulta = "CALL procedure_like('$username', $id_vivienda)";
 	
-
-        // $conexion = connect::con();
-        // $res = mysqli_query($conexion, $consulta);
-        // connect::close($conexion);
-
-        // $retrArray = array();
-        // if ($res -> num_rows > 0) {
-        //     while ($row = mysqli_fetch_assoc($res)) {
-		// 		$retrArray[] = $row;
-        //     }
-        // }else{
-			
-		// }
-        // return $retrArray;
-    }
+		$conexion = connect::con();
+		$res = mysqli_query($conexion, $consulta);
+		
+		$result = null;
+		if ($res) {
+			$row = mysqli_fetch_assoc($res);
+			$result = $row['result'];
+		}
+	
+		connect::close($conexion);
+	
+		return $result;
+	}
 
 
 	
