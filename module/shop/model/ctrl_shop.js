@@ -661,9 +661,8 @@ function mis_likes_details(id_vivienda) {
                 
             })
             .catch(function(error) {
-                console.error("Error al obtener los likes:", error);
+                console.error(error);
 
-                toastr.error("Ocurrió un error al obtener tus likes. Por favor, intenta más tarde.");
             });
     } else {
         toastr.warning("Debes iniciar sesión para ver tus likes.");
