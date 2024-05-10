@@ -569,7 +569,6 @@ function loadDetails(id_vivienda) {
     });
 }
 
-
 function likes(id_vivienda) {
     let acces_token = localStorage.getItem("acces_token");
 
@@ -604,7 +603,6 @@ function likes(id_vivienda) {
     }
 }
 
-
 function mis_likes() {
     var acces_token = localStorage.getItem('acces_token');
 
@@ -634,6 +632,7 @@ function mis_likes() {
         }, 2000);
     }
 }
+
 function mis_likes_details(id_vivienda) {
     var acces_token = localStorage.getItem('acces_token');
 

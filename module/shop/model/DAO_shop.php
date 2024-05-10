@@ -590,9 +590,6 @@ class DAOShop{
 		return $retrArray;
 	}
 
-
-
-
 	function filtrosdinamicos(){
 		
 		$sql = "SELECT *

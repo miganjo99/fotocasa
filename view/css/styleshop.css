@@ -525,6 +525,7 @@ a {
   bottom: 0;
   background-color: white;
   border-radius: 5%;
+  
   overflow: auto; /* Evita que el contenido desborde y cause problemas de visualización */
 }
 

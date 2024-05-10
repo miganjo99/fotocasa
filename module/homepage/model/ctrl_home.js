@@ -77,7 +77,8 @@ function loadCategorias() {
    //.catch(function() {
    //     window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
    // });
-}   
+}
+   
 function loadOperacion() {
     ajaxPromise('module/homepage/ctrl/ctrl_home.php?op=homePageOperacion','GET', 'JSON')
     .then(function(data) {
